@@ -1,0 +1,1 @@
+AnRDFBrowser is an RDF Browser developed in Angular 2 MVC Framework. It supports i18n features and content negotiation. You can use your own endpoint or a remote one. It can be used as deployment ultility for linked data out of the box
