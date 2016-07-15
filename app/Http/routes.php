@@ -21,7 +21,7 @@ Route::get('resource', 'ResourceController@noResource')->name('noResource');
 
 Route::get('page/{section}', 'ResourceController@page')->name('page')->where(['section' => '.*']);
 
-Route::get('data/{section}', 'ResourceController@data')->name('data')->where(['section' => '.*']);
+Route::get('data/{section}', 'DataController@data')->name('data')->where(['section' => '.*']);
 
 Route::get('browser', 'ResourceController@browser')->name('browser');
 
