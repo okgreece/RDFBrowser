@@ -23,7 +23,7 @@ class DataController extends Controller
         
         $content = $result->serialise($format);
         
-        DataController::createFile($content, $MIME);
+        DataController::createFile($content, $MIME, $resource);
         
         exit;
     }
@@ -52,11 +52,17 @@ class DataController extends Controller
         return $type;
     }
     
-    public function createFile($content, $MIME){
+    public function createFile($content, $MIME, $resource){
         
         $length = strlen($content);
         
+        $extension = \EasyRdf_Format::getFormat($MIME)->getDefaultExtension();
+        
         header('Connection: Keep-Alive');
+        
+        header('Content-Description: File Transfer');
+        
+        header('Content-Disposition: inline; filename='.$resource.'.'.$extension);
         
         header('Accept-Ranges: bytes');
         
