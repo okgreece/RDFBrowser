@@ -17,16 +17,6 @@ class DataController extends Controller
         
         $uri = $request->getSchemeAndHttpHost() . '/resource' . '/' . $resource;
         
-        $uri2 = "http://localhost/resource/1";
-        
-        if($uri!==$uri2){
-            Log::info('Log message', array('context' => $uri));
-            $uri = $uri2;
-        }
-        else{
-            Log::info('Log message', array('context' => $uri));
-        }
-        
         $result = $sparql->query('Describe <'. $uri .'>');
         
         $MIME = DataController::getContentType($request);
