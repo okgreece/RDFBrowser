@@ -14,8 +14,20 @@ class DataController extends Controller
     public function data(Request $request, $resource) {
         
         $sparql = new \EasyRdf_Sparql_Client('http://localhost:8890/sparql');
-               
-        $result = $sparql->query('Describe <http://localhost:8000/resource/1>');
+        
+        $uri = $request->getSchemeAndHttpHost() . '/resource' . '/' . $resource;
+        
+        $uri2 = "http://localhost/resource/1";
+        
+        if($uri!==$uri2){
+            Log::info('Log message', array('context' => $uri));
+            $uri = $uri2;
+        }
+        else{
+            Log::info('Log message', array('context' => $uri));
+        }
+        
+        $result = $sparql->query('Describe <'. $uri .'>');
         
         $MIME = DataController::getContentType($request);
         

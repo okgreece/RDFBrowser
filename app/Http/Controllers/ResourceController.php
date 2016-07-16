@@ -21,6 +21,8 @@ class ResourceController extends Controller {
         $type = $mediaType->getValue(); 
         
         $resource = $request->fullUrl();
+        Log::info('Log message', array('context' => $resource));
+        Log::info('Log message', array('context' => $type));
         
         if ($type === 'text/html') {
             return redirect()->route('page', ['section' => $section], '303')->with('url', $resource);
@@ -28,8 +30,6 @@ class ResourceController extends Controller {
         } else {
             Log::info('Log message', array('context' => 'It got on data')); 
             return redirect()->route('data', ['section' => $section], '303')->with('url', $resource);
-            
-            
         }
     }
 
@@ -51,7 +51,7 @@ class ResourceController extends Controller {
         }
         //$url = 'http://localhost/resource/1';
         //Log::info('Log message', array('context' => 'I am on page start'));
-        $graph = \EasyRdf_Graph::newAndLoad($url);
+        $graph = \EasyRdf_Graph::newAndLoad($url,'jsonld');
          //Log::info('Log message', array('context' => 'I am on page end'));
         echo $graph->dump('html');
     }
