@@ -1,0 +1,21 @@
+{
+  "name": "bower.json",
+  "description": "new bower",
+  "main": "bower.json",
+  "authors": [
+    "s.karampatakis <s.karampatakis@gmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "ne"
+  ],
+  "homepage": "http://okfn.gr",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

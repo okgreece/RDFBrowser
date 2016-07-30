@@ -153,7 +153,18 @@ return [
         //my additions
         //debug Bar
         Barryvdh\Debugbar\ServiceProvider::class,
+        
+        //JWT - auth
+        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
 
+        //CRUD
+        Appzcoder\CrudGenerator\CrudGeneratorServiceProvider::class,
+        
+        //HTML FORMS
+        Collective\Html\HtmlServiceProvider::class,
+        
+        //language detector
+        Vluzrmos\LanguageDetector\Providers\LanguageDetectorServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -212,6 +223,12 @@ return [
         //my Aliases
         //Debug Bar
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
+        //JWT Auth
+        'JWTAuth'   => Tymon\JWTAuthFacades\JWTAuth::class,
+        'JWTFactory' => Tymon\JWTAuthFacades\JWTFactory::class,
+        //HTML FORMS
+        'Form' => Collective\Html\FormFacade::class,
+        'HTML' => Collective\Html\HtmlFacade::class,
     ],
 
 ];

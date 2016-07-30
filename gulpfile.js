@@ -1,5 +1,7 @@
 var elixir = require('laravel-elixir');
-
+require('./tasks/angular.task.js');
+require('./tasks/bower.task.js');
+require('laravel-elixir-livereload');
 /*
  |--------------------------------------------------------------------------
  | Elixir Asset Management
@@ -11,6 +13,20 @@ var elixir = require('laravel-elixir');
  |
  */
 
-elixir(function(mix) {
-    mix.sass('app.scss');
+elixir(function (mix) {
+    mix
+        .sass('app.scss')
+        .bower()
+        .angular('./angular/ng2-admin/src/')
+        .less('./angular/ng2-admin/src/**/*.less', 'public/css')
+        .copy('./angular/ng2-admin/src/app/**/*.html', 'public/views/app/')
+        .copy('./angular/ng2-admin/src/directives/**/*.html', 'public/views/directives/')
+        .copy('./angular/ng2-admin/src/dialogs/**/*.html', 'public/views/dialogs/')
+        .livereload([
+            'public/js/vendor.js',
+            'public/js/app.js',
+            'public/css/vendor.css',
+            'public/css/app.css',
+            'public/views/**/*.html'
+        ], {liveCSS: true});
 });

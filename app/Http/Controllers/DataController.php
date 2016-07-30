@@ -13,7 +13,7 @@ class DataController extends Controller
     
     public function data(Request $request, $resource) {
         
-        $sparql = new \EasyRdf_Sparql_Client('http://localhost:8890/sparql');
+        $sparql = new \EasyRdf_Sparql_Client('http://155.207.126.5:8890/sparql');
         
         $uri = $request->getSchemeAndHttpHost() . '/resource' . '/' . $resource;
         

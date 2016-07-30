@@ -10,7 +10,12 @@
         "barryvdh/laravel-debugbar": "^2.2",
         "easyrdf/easyrdf": "^0.9.1",
         "ml/json-ld": "^1.0",
-        "willdurand/negotiation": "^2.0"
+        "willdurand/negotiation": "^2.0",
+        "tymon/jwt-auth": "^0.5.9",
+        "appzcoder/crud-generator": "^1.1",
+        "laravelcollective/html": "^5.2",
+        "twbs/bootstrap": "^3.3",
+        "vluzrmos/language-detector": "^1.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
