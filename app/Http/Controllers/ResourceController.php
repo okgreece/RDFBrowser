@@ -60,6 +60,7 @@ class ResourceController extends Controller {
         $label = ResourceController::label($graph, $uri);
         return view('welcome',
                 [
+                    'resource' => $resource,
                     'graph' => $graph,
                     'label'=> $label,
                     'uri' => $uri,

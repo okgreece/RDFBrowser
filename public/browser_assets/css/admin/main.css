@@ -128,10 +128,12 @@ a:after {
 	background-color: #34495e;
 	padding-top: 50px;
 	padding-bottom: 50px;
+        color: white;
 }
 
-#dumps h1 {
-	color: white;
+#dumps h3 {
+    color: white;
+    text-align: center;
 }
 
 #footerwrap {

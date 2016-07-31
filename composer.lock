@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d0ed9dd41b975677a202842a5dda6bb5",
-    "content-hash": "c84d18dd87064c2d3147dfd16beb0b0c",
+    "hash": "dbcfd9e84730940342ea316db1256706",
+    "content-hash": "1d448a40efb427686c6355be342945c8",
     "packages": [
         {
             "name": "appzcoder/crud-generator",
@@ -1417,6 +1417,46 @@
                 "shell"
             ],
             "time": "2016-03-09 05:03:14"
+        },
+        {
+            "name": "ralouphie/mimey",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/ralouphie/mimey.git",
+                "reference": "53b0bc18ff9cdcf5cd922642ed4dee98194e7e7f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/ralouphie/mimey/zipball/53b0bc18ff9cdcf5cd922642ed4dee98194e7e7f",
+                "reference": "53b0bc18ff9cdcf5cd922642ed4dee98194e7e7f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "~3.7.0",
+                "satooshi/php-coveralls": ">=1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Mimey\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Ralph Khattar",
+                    "email": "ralph.khattar@gmail.com"
+                }
+            ],
+            "description": "PHP package for converting file extensions to MIME types and vice versa.",
+            "time": "2016-06-21 04:03:11"
         },
         {
             "name": "swiftmailer/swiftmailer",

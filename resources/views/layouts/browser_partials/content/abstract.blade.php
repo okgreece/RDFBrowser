@@ -1,8 +1,3 @@
-<?php 
-
-
-?>
-
 <section id="abstract" name="abstract">
 
     <div class="container">
