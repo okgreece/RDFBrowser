@@ -10,14 +10,11 @@ return [
     | The following language lines are used as footer content. 
     |
     */
-    'start' => 'Top',
-    'abstract' => 'Abstract',
-    'external' => 'External Links',
-    'properties' => 'Properties',
-    'dumps' => 'Dumps',
-    'login' => 'Login',
-    'register' => 'Register',
-    
+
+    'type' => 'A resource of type: ',
+    'graph' => ', from Named Graph: ',
+    'dataSpace' => ', within Data Space: ',
+    'abstractNA' => 'Could not found an abstract for this resource.',
     
 
 ];

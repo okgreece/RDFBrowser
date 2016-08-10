@@ -13,7 +13,7 @@
             <ul class="nav navbar-nav">
                 <li><a href="#headerwrap" class="page-scroll"><?php echo trans('theme/browser/navbar.start');?></a></li>
                 <li><a href="#abstract" class="page-scroll"><?php echo trans('theme/browser/navbar.abstract');?></a></li>
-                <li><a href="#type" class="page-scroll"><?php echo trans('theme/browser/navbar.type');?></a></li>
+                <li><a href="#properties" class="page-scroll"><?php echo trans('theme/browser/navbar.properties');?></a></li>
                 <li><a href="#external" class="page-scroll"><?php echo trans('theme/browser/navbar.external');?></a></li>
                 <li><a href="#dumps" class="page-scroll"><?php echo trans('theme/browser/navbar.dumps');?></a></li>
             </ul>

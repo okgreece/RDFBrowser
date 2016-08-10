@@ -55,7 +55,8 @@ class ResourceController extends Controller {
         $graph = \EasyRdf_Graph::newAndLoad($uri, 'jsonld');
         //Log::info('Log message', array('context' => 'I am on page end'));
         //echo $graph->dump('html');
-        $types = $graph->typesAsResources($uri); 
+        $types = $graph->typesAsResources($uri);
+        $namedGraph = ResourceController::getNamedGraph($uri);
         $abstract = ResourceController::resourceAbstract($graph, $uri);
         $label = ResourceController::label($graph, $uri);
         return view('welcome',
@@ -64,6 +65,7 @@ class ResourceController extends Controller {
                     'graph' => $graph,
                     'label'=> $label,
                     'uri' => $uri,
+                    'namedGraph' => $namedGraph,
                     'abstract' => $abstract,
                     'types' => $types,
                 ]);
@@ -103,22 +105,32 @@ class ResourceController extends Controller {
             
         );
         $locale = Cookie::get('locale');
-        $abstract = $graph->get($uri, new \EasyRdf_Resource($abstract_properties[0]), $locale);
-        if (!$abstract) {
+        $abstract = $graph->getLiteral($uri, new \EasyRdf_Resource($abstract_properties[0]), $locale);
+        if (!isset($abstract)) {
             //get default label in English. This should be configurable on .env
-            $abstract = $graph->get($uri, new \EasyRdf_Resource($abstract_properties[0]), 'en');
-            if (!$abstract) {
+            $abstract = $graph->getLiteral($uri, new \EasyRdf_Resource($abstract_properties[0]), 'en');
+            if (!isset($abstract)) {
                 //if no english label found try a label in any language
-                $abstract = $graph->get($uri, new \EasyRdf_Resource($abstract_properties[0]));
-                if (!$abstract) {
+                $abstract = $graph->getLiteral($uri, new \EasyRdf_Resource($abstract_properties[0]));
+                if (!isset($abstract)) {
                     //if no label found use the resource uri as label
-                    $abstract = 'Cannot found a reliable abstract';
+                    $abstract = trans('theme/browser/header.abstractNA');
                 }
             }
         }
         
         return $abstract;
         
+    }
+    
+    public function getNamedGraph($resource) {
+
+
+        $sparql = new \EasyRdf_Sparql_Client('http://155.207.126.5:8890/sparql');
+
+        $result = $sparql->query('select distinct ?g where {Graph ?g {<'.$resource.'> ?p ?o}}');
+
+        return $result[0]->g;
     }
 
 }

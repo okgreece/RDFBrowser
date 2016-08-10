@@ -13,18 +13,8 @@
     @include('layouts.browser_partials.navbar')
 @show
 
-@section('label')
-    @include('layouts.browser_partials.content.label')
-@show
-
-@section('abstract')
-    @include('layouts.browser_partials.content.abstract')
-@show
-
-@section('type')
-    @include('layouts.browser_partials.content.type')
-@show
-
+@include('layouts.browser_partials.header')
+<?php echo $graph->dump() ?>
 @section('external')
     @include('layouts.browser_partials.content.external')
 @show

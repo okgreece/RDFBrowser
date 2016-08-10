@@ -104,12 +104,19 @@ a:after {
 
 #abstract{
     padding-top: 50px;
+    color: white;
+    font-size: x-large;
+    text-align: justify;
+    text-indent: 50px;
+    letter-spacing: 3px;
 }
 
 
 #type {
-	padding-top: 50px;
-	border-top: #bdc3c7 solid 5px;
+    border-top: #bdc3c7 solid 5px;
+    color: white;
+    
+    font-size: large;
 }
 
 #external {
