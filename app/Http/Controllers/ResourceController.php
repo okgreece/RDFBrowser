@@ -56,6 +56,7 @@ class ResourceController extends Controller {
         $resources = ResourceController::getAllResources($graph, $uri);
         $reverseResources = ResourceController::getAllReverseResources($graph, $uri);
         $images = ResourceController::getAllImages($graph, $uri);
+        $map = ResourceController::getGEO($graph, $uri);
         return view('welcome', [
             'resource' => $resource,
             'graph' => $graph,
@@ -68,6 +69,7 @@ class ResourceController extends Controller {
             'resources' => $resources,
             'reverseResources' => $reverseResources,
             'images' => $images,
+            'map' => $map,
         ]);
     }
 
@@ -224,17 +226,19 @@ class ResourceController extends Controller {
         return $images;
     }
     public function getGEO(\EasyRdf_Graph $graph, $uri) {
-        $extractors = array(
-            "foaf:depiction",
-        );
-        $images = array();
-        foreach ($image_properties as $property) {
-            $image = $graph->getResource($uri, new \EasyRdf_Resource($property));
-            if (isset($image)) {
-                array_push($images, $image);
-            }
-        }
-        return $images;
+        $extractors = \App\GeoExtractor::where('enabled','1')->get();
+        $data = ResourceController::dualExtractor($extractors[0]);
+//        $images = array();
+//        foreach ($image_properties as $property) {
+//            $image = $graph->getResource($uri, new \EasyRdf_Resource($property));
+//            if (isset($image)) {
+//                array_push($images, $image);
+//            }
+//        }
+        return $data;
+    }
+    public function dualExtractor(\App\GeoExtractor $extractor){
+        return '[51.505, -0.09]';
     }
 
 }

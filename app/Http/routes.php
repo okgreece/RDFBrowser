@@ -38,3 +38,6 @@ Route::get('page/{section}', 'ResourceController@page')->name('page')->where(['s
 Route::get('data/{section}', 'DataController@data')->name('data')->where(['section' => '.*']);
 
 Route::get('browser', 'BrowserController@browser')->name('browser');
+
+Route::resource('geo-extractor', 'GeoExtractorController');
+Route::resource('geo-extractor', 'GeoExtractorController');

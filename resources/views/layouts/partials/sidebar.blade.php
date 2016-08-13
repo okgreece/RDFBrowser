@@ -31,11 +31,10 @@
 
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu">
-            
-            </script>
             <li class="header">Main Menu</li>
             <!-- Optionally, you can add icons to the links -->
-            
+            <li><a  href="{{ route('dashboard')  }}"><i class='fa fa-dashboard'></i><span>Dashboard</span></a></li>
+            <li><a  href="{{ route('geo-extractor.index')  }}"><i class='fa fa-dashboard'></i><span>GEO Extractors</span></a></li>
 <!--            <li class="treeview">
                 <a href="#"><i class='fa fa-link'></i> <span>Multilevel</span> <i class="fa fa-angle-left pull-right"></i></a>
                 <ul class="treeview-menu">
