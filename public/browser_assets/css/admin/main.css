@@ -1,6 +1,7 @@
 
 body {
   background-color: #f2f2f2;
+  background: #F5F4EF url('../../images/bg-body.jpg');
     font-family: "Lato";
     font-weight: 300;
     font-size: 16px;
@@ -118,6 +119,39 @@ a:after {
     
     font-size: large;
 }
+#properties{
+    padding-top: 50px;
+    text-align: justify;
+    margin: auto;
+}
+
+#resources{
+    padding-top: 50px;
+}
+
+#reverseResources{
+    padding-top: 50px;
+}
+
+.string{
+    display: inline;
+}
+
+.boolean{
+    font-weight: 800;
+}
+
+.booleanFalse{
+    color:red;
+}
+.booleanTrue{
+    color:green;
+}
+
+.property{
+    text-align: left;
+    vertical-align: top;
+}
 
 #external {
 	padding-top: 50px;
@@ -173,6 +207,11 @@ a:after {
 	color: white
 }
 
+.carousel-image{
+    max-height: 500px;
+    margin:auto;
+}
+
 .dont-break-out {
 
   /* These are technically the same, but use both */
@@ -191,4 +230,8 @@ a:after {
   -webkit-hyphens: auto;
   hyphens: auto;
 
+}
+
+.fixedHeader-floating{
+ padding-top: 50px;   
 }

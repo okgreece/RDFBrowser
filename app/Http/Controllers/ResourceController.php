@@ -3,12 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Routing\Redirector;
-use App\Http\Requests;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Cookie;
-
 
 class ResourceController extends Controller {
 
@@ -36,101 +32,196 @@ class ResourceController extends Controller {
 
     public function noResource() {
         $type = "You have not provided a valid resource. Please try again";
-        dd($type);
+        return $type;
     }
 
     public function browser(Request $request) {
         $uri = $request->input('uri');
+
+        return $uri;
     }
 
     public function page(Request $request, $resource) {
         //get the url
         $uri = $request->session()->get('uri');
-
         if (!isset($uri)) {
             $uri = $request->getSchemeAndHttpHost() . '/resource' . '/' . $resource;
         }
-        //$uri = 'http://localhost/resource/1';
-        //Log::info('Log message', array('context' => 'I am on page start'));
         $graph = \EasyRdf_Graph::newAndLoad($uri, 'jsonld');
-        //Log::info('Log message', array('context' => 'I am on page end'));
-        //echo $graph->dump('html');
         $types = $graph->typesAsResources($uri);
         $namedGraph = ResourceController::getNamedGraph($uri);
         $abstract = ResourceController::resourceAbstract($graph, $uri);
         $label = ResourceController::label($graph, $uri);
-        return view('welcome',
-                [
-                    'resource' => $resource,
-                    'graph' => $graph,
-                    'label'=> $label,
-                    'uri' => $uri,
-                    'namedGraph' => $namedGraph,
-                    'abstract' => $abstract,
-                    'types' => $types,
-                ]);
+        $literals = ResourceController::getAllLiterals($graph, $uri);
+        $resources = ResourceController::getAllResources($graph, $uri);
+        $reverseResources = ResourceController::getAllReverseResources($graph, $uri);
+        $images = ResourceController::getAllImages($graph, $uri);
+        return view('welcome', [
+            'resource' => $resource,
+            'graph' => $graph,
+            'label' => $label,
+            'uri' => $uri,
+            'namedGraph' => $namedGraph,
+            'abstract' => $abstract,
+            'types' => $types,
+            'literals' => $literals,
+            'resources' => $resources,
+            'reverseResources' => $reverseResources,
+            'images' => $images,
+        ]);
     }
-    /*function to get the label of a resource based on 4 rules by priority:
-     *1)Get the browser locale setting and request this language
-     *2)Get the label for the default language set
-     *3)Get any label in any language
-     *4)Return the IRI as a string to use for label
+
+    /* function to get the label of a resource based on 4 rules by priority:
+     * 1)Get the browser locale setting and request this language
+     * 2)Get the label for the default language set
+     * 3)Get any label in any language
+     * 4)Return the IRI as a string to use for label
      * 
-    */
+     */
+
     public function label(\EasyRdf_Graph $graph, $uri) {
         //get the locale from browser settings
         $locale = Cookie::get('locale');
         //try to get the label
         $label = $graph->label($uri, $locale);
         //if this fails try alternatives
-        if (!$label) {
+        if (!isset($label)) {
             //get default label in English. This should be configurable on .env
             $label = $graph->label($uri, 'en');
-            if (!$label) {
-                //if no english label found try a label in any language
-                $label = $graph->label($uri);
-                if (!$label) {
-                    //if no label found use the resource uri as label
-                    $label = $uri;
-                }
-            }
+        }
+        if (!isset($label)) {
+        //if no english label found try a label in any language
+            $label = $graph->label($uri);
+        }
+        if (!isset($label)) {
+        //if no label found use the resource uri as label
+            $label = $uri;
         }
         return $label;
     }
-    
-    public function resourceAbstract(\EasyRdf_Graph $graph, $uri){
-        $abstract_properties = array(
-            "rdfs:comment",
-            "http://dbpedia.org/ontology/abstract",
-            
-        );
+    //maybe should change this method later on. double foreach 
+    //1st on language, 2nd on property
+    public function resourceAbstract(\EasyRdf_Graph $graph, $uri) {
+        $abstract_properties = [
+            ['order' => 1, 'property' => "rdfs:comment"],
+            ['order' => 2, 'property' => "http://dbpedia.org/ontology/abstract"],
+        ];
+        // sort alphabetically by name
+        $order = array();
+        foreach ($abstract_properties as $key => $row) {
+            $order[$key] = $row['order'];
+        }
+        array_multisort($order, SORT_ASC, $abstract_properties);
+        $abstract = null;
         $locale = Cookie::get('locale');
-        $abstract = $graph->getLiteral($uri, new \EasyRdf_Resource($abstract_properties[0]), $locale);
-        if (!isset($abstract)) {
-            //get default label in English. This should be configurable on .env
-            $abstract = $graph->getLiteral($uri, new \EasyRdf_Resource($abstract_properties[0]), 'en');
-            if (!isset($abstract)) {
-                //if no english label found try a label in any language
-                $abstract = $graph->getLiteral($uri, new \EasyRdf_Resource($abstract_properties[0]));
-                if (!isset($abstract)) {
-                    //if no label found use the resource uri as label
-                    $abstract = trans('theme/browser/header.abstractNA');
-                }
+        foreach ($abstract_properties as $property) {
+            if(!$abstract){
+                $abstract = $graph->getLiteral($uri, new \EasyRdf_Resource($property['property']), $locale);
+            }
+            else{
+                break;
+            }
+            if (!$abstract) {
+                //get default label in English. This should be configurable on .env
+                $abstract = $graph->getLiteral($uri, new \EasyRdf_Resource($property['property']), 'en');
+                
+            }
+            if (!$abstract) {
+                 //if no english label found try a label in any language
+                $abstract = $graph->getLiteral($uri, new \EasyRdf_Resource($property['property']));
+                               
             }
         }
-        
         return $abstract;
-        
     }
-    
+
     public function getNamedGraph($resource) {
 
 
         $sparql = new \EasyRdf_Sparql_Client('http://155.207.126.5:8890/sparql');
 
-        $result = $sparql->query('select distinct ?g where {Graph ?g {<'.$resource.'> ?p ?o}}');
+        $result = $sparql->query('select distinct ?g where {Graph ?g {<' . $resource . '> ?p ?o}}');
 
         return $result[0]->g;
+    }
+
+    public function getAllLiterals(\EasyRdf_Graph $graph, $resource) {
+        $properties = $graph->propertyUris($resource);
+        $literals = array();
+        $element = array();
+        foreach ($properties as $property) {
+            try {
+                $literalValues = $graph->allLiterals($resource, new \EasyRdf_Resource($property));
+                if (!empty($literalValues)) {
+                    $element = ['property' => $property,
+                        'values' => $literalValues];
+                    array_push($literals, $element);
+                }
+            } catch (\Exception $ex) {
+                $element = ['property' => $property,
+                    'values' => "Fault found: "];
+                array_push($literals, $element);
+            }
+        }
+        return $literals;
+    }
+
+    public function getAllResources(\EasyRdf_Graph $graph, $resource) {
+        $properties = $graph->propertyUris($resource);
+        $resources = array();
+        $element = array();
+        foreach ($properties as $property) {
+            try {
+                $resourceValues = $graph->allResources($resource, new \EasyRdf_Resource($property));
+                if (!empty($resourceValues)) {
+                    $element = ['property' => $property,
+                        'values' => $resourceValues];
+                    array_push($resources, $element);
+                }
+            } catch (\Exception $ex) {
+                $element = ['property' => $property,
+                    'values' => "Fault found: "];
+                array_push($resources, $element);
+            }
+        }
+        return $resources;
+    }
+
+    public function getAllReverseResources(\EasyRdf_Graph $graph, $resource) {
+        $properties = $graph->reversePropertyUris($resource);
+
+        $resources = array();
+        $element = array();
+        foreach ($properties as $property) {
+            try {
+                $reverseProperty = '^' . $property;
+                $resourceValues = $graph->allResources($resource, new \EasyRdf_Resource($reverseProperty));
+                if (!empty($resourceValues)) {
+                    $element = ['property' => $property,
+                        'values' => $resourceValues];
+                    array_push($resources, $element);
+                }
+            } catch (\Exception $ex) {
+                $element = ['property' => $reverseProperty,
+                    'values' => "Fault found: " . $ex];
+                array_push($resources, $element);
+            }
+        }
+        return $resources;
+    }
+
+    public function getAllImages(\EasyRdf_Graph $graph, $uri) {
+        $image_properties = array(
+            "foaf:depiction",
+        );
+        $images = array();
+        foreach ($image_properties as $property) {
+            $image = $graph->getResource($uri, new \EasyRdf_Resource($property));
+            if (isset($image)) {
+                array_push($images, $image);
+            }
+        }
+        return $images;
     }
 
 }

@@ -12,7 +12,8 @@ return [
     */
     'start' => 'Top',
     'abstract' => 'Abstract',
-    'external' => 'External Links',
+    'resources' => 'Resources',
+    'reverseResources' => 'Reverse Resources',
     'properties' => 'Properties',
     'dumps' => 'Dumps',
     'login' => 'Login',

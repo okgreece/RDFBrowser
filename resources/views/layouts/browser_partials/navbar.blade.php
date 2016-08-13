@@ -11,21 +11,31 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li><a href="#headerwrap" class="page-scroll"><?php echo trans('theme/browser/navbar.start');?></a></li>
-                <li><a href="#abstract" class="page-scroll"><?php echo trans('theme/browser/navbar.abstract');?></a></li>
-                <li><a href="#properties" class="page-scroll"><?php echo trans('theme/browser/navbar.properties');?></a></li>
-                <li><a href="#external" class="page-scroll"><?php echo trans('theme/browser/navbar.external');?></a></li>
-                <li><a href="#dumps" class="page-scroll"><?php echo trans('theme/browser/navbar.dumps');?></a></li>
+                <li><a href="#headerwrap" class="page-scroll"><?php echo trans('theme/browser/navbar.start'); ?></a></li>
+                <li><a href="#abstract" class="page-scroll"><?php echo trans('theme/browser/navbar.abstract'); ?></a></li>
+                <li><a href="#properties" class="page-scroll"><?php echo trans('theme/browser/navbar.properties'); ?></a></li>
+                <li><a href="#resources" class="page-scroll"><?php echo trans('theme/browser/navbar.resources'); ?></a></li>
+                <li><a href="#reverseResources" class="page-scroll"><?php echo trans('theme/browser/navbar.reverseResources'); ?></a></li>
+                <li><a href="#dumps" class="page-scroll"><?php echo trans('theme/browser/navbar.dumps'); ?></a></li>
+                
             </ul>
+
+
+
             <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <div id="filter_global" class="input-group-lg">
+                        <input type="text" class="global_filter form-control" placeholder="Global Search" id="global_filter">
+                    </div>
+                </li>
                 @if (Auth::guest())
-                <li><a href="{{ url('/login') }}"><?php echo trans('theme/browser/navbar.login');?></a></li>
-                <li><a href="{{ url('/register') }}"><?php echo trans('theme/browser/navbar.register');?></a></li>
+                <li><a href="{{ url('/login') }}"><?php echo trans('theme/browser/navbar.login'); ?></a></li>
+                <li><a href="{{ url('/register') }}"><?php echo trans('theme/browser/navbar.register'); ?></a></li>
                 @else
                 <!-- User Account Menu -->
                 <li>
                     <a href="{{ url('/admin') }}">
-                          <span class="hidden-xs">{{ Auth::user()->name }}</span>
+                        <span class="hidden-xs">{{ Auth::user()->name }}</span>
                     </a>
                 </li>
                 @endif

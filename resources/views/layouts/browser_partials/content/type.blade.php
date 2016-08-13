@@ -8,16 +8,12 @@
     //iterate array
     $tempTypeLabel = "";
     foreach ($types as $key => $value) {
-        if($value->shorten()){
-            $tempTypeLabel = $value->shorten();
-        }
-        else{
-            $tempTypeLabel = $value;
-        }
+        
+        $tempTypeLabel = ($value->shorten() ?: $value);
         if ($key == $lastArrayKey) {
-            echo ' <a href="' . $value . '">' . $tempTypeLabel . '</a>';
+            echo ' <a class="dont-break-out" href="' . $value . '"><span>' . $tempTypeLabel . '</span></a>';
         } else {
-            echo ' <a href="' . $value . '">' . $tempTypeLabel . '</a>' . ',';
+            echo ' <a class="dont-break-out" href="' . $value . '"><span>' . $tempTypeLabel . '</span></a>' . ',';
         }
     }
     echo trans('theme/browser/header.graph');

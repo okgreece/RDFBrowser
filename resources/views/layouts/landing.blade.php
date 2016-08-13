@@ -1,41 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 
-@section('htmlheader')
+    @section('htmlheader')
     @include('layouts.browser_partials.htmlheader')
     @section('scripts')
-        @include('layouts.browser_partials.scripts')
+    @include('layouts.browser_partials.scripts')
     @show
-@show
+    @show
+    
 
-<body data-spy="scroll" data-offset="0" data-target="#navigation">
-@section('navbar')
-    @include('layouts.browser_partials.navbar')
-@show
+    <body data-spy="scroll" data-offset="0" data-target="#navigation">
+        @section('navbar')
+        @include('layouts.browser_partials.navbar')
+        @show
 
-@include('layouts.browser_partials.header')
-<?php echo $graph->dump() ?>
-@section('external')
-    @include('layouts.browser_partials.content.external')
-@show
+        @include('layouts.browser_partials.header')
 
-@section('dumps')
-    @include('layouts.browser_partials.content.dumps')
-@show
+        @include('layouts.browser_partials.content.literals')
 
-@section('footer')
-    @include('layouts.browser_partials.footer')
-@show
+        @include('layouts.browser_partials.content.resources')
 
-<script>
-    $(document).on('click','.navbar-collapse.in',function(e) {
+        @include('layouts.browser_partials.content.reverseResources')
 
-    if( $(e.target).is('a') && ( $(e.target).attr('class') != 'dropdown-toggle' ) ) {
-        $(this).collapse('hide');
-    }
+        @section('dumps')
+        @include('layouts.browser_partials.content.dumps')
+        @show
 
-});
-</script>
+        @section('footer')
+        @include('layouts.browser_partials.footer')
+        @show
 
-</body>
+        <script>
+            $(document).on('click', '.navbar-collapse.in', function (e) {
+
+                if ($(e.target).is('a') && ($(e.target).attr('class') != 'dropdown-toggle')) {
+                    $(this).collapse('hide');
+                }
+
+            });
+        </script>
+
+    </body>
 </html>
