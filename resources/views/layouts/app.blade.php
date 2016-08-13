@@ -47,7 +47,7 @@ desired effect
         <!-- Main content -->
         <section class="content">
             <!-- Your Page Content Here -->
-            @yield('main-content')
+            @yield('content')
         </section><!-- /.content -->
 <script>
   var host   = 'ws://{{$_SERVER["HTTP_HOST"]}}:8889';  

@@ -6,9 +6,7 @@
     @section('scripts')
     @include('layouts.browser_partials.scripts')
     @show
-    @show
     
-
     <body data-spy="scroll" data-offset="0" data-target="#navigation">
         @section('navbar')
         @include('layouts.browser_partials.navbar')

@@ -19,6 +19,8 @@
 
 <!--    Leaflet-->
  <script src="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
+<!--    Lightbox-->
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/4.0.1/ekko-lightbox.min.js"></script> 
 
 <script>
 function filterGlobal() {

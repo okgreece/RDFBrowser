@@ -112,6 +112,9 @@ a:after {
     letter-spacing: 3px;
 }
 
+#mapid { 
+    height: 180px; 
+}
 
 #type {
     border-top: #bdc3c7 solid 5px;
@@ -208,8 +211,21 @@ a:after {
 }
 
 .carousel-image{
-    max-height: 500px;
+    max-height: 300px;
     margin:auto;
+}
+
+.modal-content{
+    background-color:transparent;
+}
+
+button.close{
+    color:white;
+    opacity: 1;
+}
+
+.modal-header{
+    border-bottom: none;
 }
 
 .dont-break-out {

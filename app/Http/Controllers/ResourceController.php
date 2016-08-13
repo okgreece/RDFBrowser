@@ -45,7 +45,7 @@ class ResourceController extends Controller {
         //get the url
         $uri = $request->session()->get('uri');
         if (!isset($uri)) {
-            $uri = $request->getSchemeAndHttpHost() . '/resource' . '/' . $resource;
+            $uri = $request->getSchemeAndHttpHost() . '/resource' . '/' . urldecode($resource);
         }
         $graph = \EasyRdf_Graph::newAndLoad($uri, 'jsonld');
         $types = $graph->typesAsResources($uri);
@@ -115,18 +115,18 @@ class ResourceController extends Controller {
         $abstract = null;
         $locale = Cookie::get('locale');
         foreach ($abstract_properties as $property) {
-            if(!$abstract){
+            if($abstract == null){
                 $abstract = $graph->getLiteral($uri, new \EasyRdf_Resource($property['property']), $locale);
             }
             else{
                 break;
             }
-            if (!$abstract) {
+            if ($abstract == null) {
                 //get default label in English. This should be configurable on .env
                 $abstract = $graph->getLiteral($uri, new \EasyRdf_Resource($property['property']), 'en');
                 
             }
-            if (!$abstract) {
+            if ($abstract == null) {
                  //if no english label found try a label in any language
                 $abstract = $graph->getLiteral($uri, new \EasyRdf_Resource($property['property']));
                                
@@ -212,6 +212,19 @@ class ResourceController extends Controller {
 
     public function getAllImages(\EasyRdf_Graph $graph, $uri) {
         $image_properties = array(
+            "foaf:depiction",
+        );
+        $images = array();
+        foreach ($image_properties as $property) {
+            $image = $graph->getResource($uri, new \EasyRdf_Resource($property));
+            if (isset($image)) {
+                array_push($images, $image);
+            }
+        }
+        return $images;
+    }
+    public function getGEO(\EasyRdf_Graph $graph, $uri) {
+        $extractors = array(
             "foaf:depiction",
         );
         $images = array();

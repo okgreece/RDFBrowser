@@ -1,4 +1,9 @@
-@if(!empty($images))
+<script>
+    $(document).delegate('*[data-toggle="lightbox"]', 'click', function (event) {
+        event.preventDefault();
+        $(this).ekkoLightbox();
+    });
+</script>
 <section id="images" name="images">
     <div  class="container">
         <div class="row">
@@ -21,32 +26,30 @@
                             @else
                             <div class="item">
                                 @endif
-                                <img class="carousel-image" src="{{ $images[$i] }}" alt="">
+                                <a href="{{ $images[$i] }}" data-toggle="lightbox" data-gallery="images"><img class="carousel-image" src="{{ $images[$i] }}" alt=""></a>
+                                @endfor
                             </div>
-                            @endfor
                         </div>
                     </div>
                 </div>
+                @if(count($images)!=1))
+                <!-- Controls -->
+                <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
+                    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
+                    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+                @endif
             </div>
-            @if(count($images)!=1))
-            <!-- Controls -->
-            <a class="left carousel-control" href="#carousel-example-generic" role="button" data-slide="prev">
-                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="right carousel-control" href="#carousel-example-generic" role="button" data-slide="next">
-                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
-            @endif
-        </div>
-</section>
-@endif
+            </section>
 
-@if(count($images)!=1))
-<script>
-    $('.carousel').carousel({
-        interval: 3500
-    })
-</script>
-@endif
+            @if(count($images)!=1))
+            <script>
+                $('.carousel').carousel({
+                    interval: 3500
+                })
+            </script>
+            @endif

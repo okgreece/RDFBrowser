@@ -21,6 +21,8 @@ Route::get('/admin', 'AdminController@adminPanel')->name('admin');
 Route::get('/dashboard', 'AdminController@adminPanel')->name('dashboard');
 
 //Route::when('resource/*', 'resource');
+Route::resource('geo-extractor', 'GeoExtractorController');
+
 });
 
 Route::get('/login', 'Auth\LogInController@login')->name('login');
@@ -36,5 +38,3 @@ Route::get('page/{section}', 'ResourceController@page')->name('page')->where(['s
 Route::get('data/{section}', 'DataController@data')->name('data')->where(['section' => '.*']);
 
 Route::get('browser', 'BrowserController@browser')->name('browser');
-
-Route::resource('posts', 'PostsController');
