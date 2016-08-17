@@ -17,7 +17,8 @@
         "twbs/bootstrap": "^3.3",
         "vluzrmos/language-detector": "^1.0",
         "ralouphie/mimey": "^1.0",
-        "components/flag-icon-css": "^2.3"
+        "components/flag-icon-css": "^2.3",
+        "orangehill/iseed": "^2.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

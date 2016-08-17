@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="{{Cookie::get('locale')}}">
+<?php App::setLocale(Cookie::get('locale'));?>
     @section('htmlheader')
     @include('layouts.browser_partials.htmlheader')
     @section('scripts')

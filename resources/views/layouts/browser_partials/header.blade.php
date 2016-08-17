@@ -14,12 +14,16 @@
 @show
 @endif
 
+@if(!empty($type))
 @section('type')
     @include('layouts.browser_partials.content.type')
 @show
+@endif
 
+@if(!empty($abstract))
 @section('abstract')
     @include('layouts.browser_partials.content.abstract')
 @show
+@endif
 
 </section>

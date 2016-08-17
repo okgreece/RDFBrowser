@@ -3,8 +3,8 @@
         <table id="resourcesT" class="display" cellspacing="0" width="100%">
             <thead>
                 <tr>            
-                    <th>Property</th>
-                    <th>Value</th>
+                    <th>{{ trans('theme/browser/datatable.property')}}</th>
+                    <th>{{ trans('theme/browser/datatable.value')}}</th>
                 </tr>
             </thead>    
             <tbody>

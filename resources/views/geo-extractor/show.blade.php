@@ -22,9 +22,46 @@
         <table class="table table-bordered table-striped table-hover">
             <tbody>
                 <tr>
-                    <th>ID</th><td>{{ $geoextractor->id }}</td>
+                    <th>Order</th>
+                    <td>{{ $geoextractor->order }}</td>
                 </tr>
-                <tr><th> Title </th><td> {{ $geoextractor->title }} </td></tr><tr><th> Type </th><td> {{ $geoextractor->type }} </td></tr><tr><th> Generic </th><td> {{ $geoextractor->generic }} </td></tr>
+                <tr>
+                    <th> Title </th>
+                    <td> {{ $geoextractor->title }} </td>
+                </tr>
+                <tr>
+                    <th> Type </th>
+                    <td> {{ $geoextractor->type }} </td>
+                </tr>
+                <tr>
+                    <th> Generic </th>
+                    <td> {{ $geoextractor->generic }} </td>
+                </tr>
+                <tr>
+                    <th> Generic Format</th>
+                    <td> {{ $geoextractor->genericFormat }} </td>
+                </tr>
+                <tr>
+                    <th> Latitude Property </th>
+                    <td> {{ $geoextractor->lat }} </td>
+                </tr>
+                <tr>
+                    <th> Latitude Format </th>
+                    <td> {{ $geoextractor->latitudeFormat }} </td>
+                </tr>
+                <tr>
+                    <th> Longitude Property </th>
+                    <td> {{ $geoextractor->long }} </td>
+                </tr>
+                <tr>
+                    <th> Longtitude Format </th>
+                    <td> {{ $geoextractor->longtitudeFormat }} </td>
+                </tr>
+                <tr>
+                    <th> Enabled </th>
+                    <td> {{ $geoextractor->enabled ? 'True' : 'False' }} </td>
+                </tr>
+                
             </tbody>
         </table>
     </div>

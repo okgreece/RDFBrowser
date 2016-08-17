@@ -25,7 +25,7 @@
             <ul class="nav navbar-nav navbar-right">
                 <li>
                     <div id="filter_global" class="input-group-lg">
-                        <input type="text" class="global_filter form-control" placeholder="Global Search" id="global_filter">
+                        <input type="text" class="global_filter form-control" placeholder="{{trans('theme/browser/navbar.global-search')}}" id="global_filter">
                     </div>
                 </li>
                 @if (Auth::guest())

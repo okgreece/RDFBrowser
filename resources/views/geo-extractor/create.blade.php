@@ -1,14 +1,18 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="box box-primary">
+    <div class="container">
+        <div class="box-header">
+            <h1>Create New GeoExtractor</h1>
+            <hr/>
 
-    <h1>Create New GeoExtractor</h1>
-    <hr/>
+        </div>
 
-    {!! Form::open(['url' => '/geo-extractor', 'class' => 'form-horizontal']) !!}
+        <div class="box-body">
+            {!! Form::open(['url' => '/geo-extractor', 'class' => 'form-horizontal']) !!}
 
-                <div class="form-group {{ $errors->has('title') ? 'has-error' : ''}}">
+            <div class="form-group {{ $errors->has('title') ? 'has-error' : ''}}">
                 {!! Form::label('title', 'Title', ['class' => 'col-sm-3 control-label']) !!}
                 <div class="col-sm-6">
                     {!! Form::text('title', null, ['class' => 'form-control', 'required' => 'required']) !!}
@@ -18,7 +22,7 @@
             <div class="form-group {{ $errors->has('type') ? 'has-error' : ''}}">
                 {!! Form::label('type', 'Type', ['class' => 'col-sm-3 control-label']) !!}
                 <div class="col-sm-6">
-                    {!! Form::text('type', null, ['class' => 'form-control', 'required' => 'required']) !!}
+                    {!! Form::select('type', ['dual' => 'dual', 'single' => 'single'],'dual', ['class' => 'form-control', 'required' => 'required']) !!}
                     {!! $errors->first('type', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
@@ -67,12 +71,12 @@
             <div class="form-group {{ $errors->has('enabled') ? 'has-error' : ''}}">
                 {!! Form::label('enabled', 'Enabled', ['class' => 'col-sm-3 control-label']) !!}
                 <div class="col-sm-6">
-                                <div class="checkbox">
-                <label>{!! Form::radio('enabled', '1') !!} Yes</label>
-            </div>
-            <div class="checkbox">
-                <label>{!! Form::radio('enabled', '0', true) !!} No</label>
-            </div>
+                    <div class="checkbox">
+                        <label>{!! Form::radio('enabled', '1') !!} Yes</label>
+                    </div>
+                    <div class="checkbox">
+                        <label>{!! Form::radio('enabled', '0', true) !!} No</label>
+                    </div>
                     {!! $errors->first('enabled', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
@@ -85,20 +89,21 @@
             </div>
 
 
-    <div class="form-group">
-        <div class="col-sm-offset-3 col-sm-3">
-            {!! Form::submit('Create', ['class' => 'btn btn-primary form-control']) !!}
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-3">
+                    {!! Form::submit('Create', ['class' => 'btn btn-primary form-control']) !!}
+                </div>
+            </div>
+            {!! Form::close() !!}
+
+            @if ($errors->any())
+            <ul class="alert alert-danger">
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+            @endif
         </div>
     </div>
-    {!! Form::close() !!}
-
-    @if ($errors->any())
-        <ul class="alert alert-danger">
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    @endif
-
 </div>
 @endsection

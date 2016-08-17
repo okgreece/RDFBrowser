@@ -35,6 +35,9 @@ $(document).ready(function () {
         fixedHeader: {header: true},
         pageLength: 50,
         lengthChange: false,
+        language: {
+                url: "../browser_assets/plugins/datatables/i18n/{{Cookie::get('locale')}}.json"
+            }
     });
 
     $('input.global_filter').on('keyup click', function () {

@@ -18,7 +18,7 @@ return [
     'dumps' => 'Dumps',
     'login' => 'Login',
     'register' => 'Register',
-    
+    'global-search' => 'Global Search',
     
 
 ];

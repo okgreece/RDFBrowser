@@ -112,6 +112,10 @@ a:after {
     letter-spacing: 3px;
 }
 
+#map{
+    padding-top:50px;
+}
+
 #mapid { 
     height: 180px; 
 }

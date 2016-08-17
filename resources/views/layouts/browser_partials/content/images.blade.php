@@ -9,6 +9,7 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2">
                 <div id="carousel-example-generic" class="carousel slide">
+                    @if(count($images)>1)
                     <ol class="carousel-indicators">
                         @for($i = 0; $i < count($images); $i++ )
                         @if($i == 0)
@@ -19,6 +20,7 @@
 
                         @endfor
                     </ol>
+                    @endif
                     <div class="carousel-inner">
                         @for($i = 0; $i < count($images); $i++ )
                         @if($i == 0)

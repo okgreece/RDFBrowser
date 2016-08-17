@@ -165,6 +165,9 @@ return [
         
         //language detector
         Vluzrmos\LanguageDetector\Providers\LanguageDetectorServiceProvider::class,
+        
+        //Inverse seeder
+       // Orangehill\Iseed\IseedServiceProvider::class,
 
         /*
          * Application Service Providers...

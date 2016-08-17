@@ -15,6 +15,9 @@ return [
     'graph' => ', from Named Graph: ',
     'dataSpace' => ', within Data Space: ',
     'abstractNA' => 'Could not found an abstract for this resource.',
+    'noResource.header' => 'Unknown Resource',
+    'noResource.abstract' => 'The resource you requested (:resource) does not exist in our knowledge'
+                    . ' graph, or something is broken. Please check for typos!' 
     
 
 ];

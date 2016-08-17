@@ -1,17 +1,22 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="box box-primary">
+    <div class="container">
+        <div class="box-header">
+            <h1>Edit GeoExtractor {{ $geoextractor->id }}</h1>
+            <hr/>
 
-    <h1>Edit GeoExtractor {{ $geoextractor->id }}</h1>
+        </div>
 
-    {!! Form::model($geoextractor, [
-        'method' => 'PATCH',
-        'url' => ['/geo-extractor', $geoextractor->id],
-        'class' => 'form-horizontal'
-    ]) !!}
+        <div class="box-body">
+            {!! Form::model($geoextractor, [
+            'method' => 'PATCH',
+            'url' => ['/geo-extractor', $geoextractor->id],
+            'class' => 'form-horizontal'
+            ]) !!}
 
-                <div class="form-group {{ $errors->has('title') ? 'has-error' : ''}}">
+            <div class="form-group {{ $errors->has('title') ? 'has-error' : ''}}">
                 {!! Form::label('title', 'Title', ['class' => 'col-sm-3 control-label']) !!}
                 <div class="col-sm-6">
                     {!! Form::text('title', null, ['class' => 'form-control', 'required' => 'required']) !!}
@@ -21,7 +26,7 @@
             <div class="form-group {{ $errors->has('type') ? 'has-error' : ''}}">
                 {!! Form::label('type', 'Type', ['class' => 'col-sm-3 control-label']) !!}
                 <div class="col-sm-6">
-                    {!! Form::text('type', null, ['class' => 'form-control', 'required' => 'required']) !!}
+                    {!! Form::select('type', ['dual' => 'dual', 'single' => 'single'],'dual', ['class' => 'form-control', 'required' => 'required']) !!}
                     {!! $errors->first('type', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
@@ -70,12 +75,12 @@
             <div class="form-group {{ $errors->has('enabled') ? 'has-error' : ''}}">
                 {!! Form::label('enabled', 'Enabled', ['class' => 'col-sm-3 control-label']) !!}
                 <div class="col-sm-6">
-                                <div class="checkbox">
-                <label>{!! Form::radio('enabled', '1') !!} Yes</label>
-            </div>
-            <div class="checkbox">
-                <label>{!! Form::radio('enabled', '0', true) !!} No</label>
-            </div>
+                    <div class="checkbox">
+                        <label>{!! Form::radio('enabled', '1') !!} Yes</label>
+                    </div>
+                    <div class="checkbox">
+                        <label>{!! Form::radio('enabled', '0', true) !!} No</label>
+                    </div>
                     {!! $errors->first('enabled', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
@@ -88,20 +93,26 @@
             </div>
 
 
-    <div class="form-group">
-        <div class="col-sm-offset-3 col-sm-3">
-            {!! Form::submit('Update', ['class' => 'btn btn-primary form-control']) !!}
-        </div>
-    </div>
-    {!! Form::close() !!}
+            <div class="form-group">
+                <div class="col-sm-offset-3 col-sm-3">
+                    {!! Form::submit('Update', ['class' => 'btn btn-primary form-control']) !!}
+                </div>
 
-    @if ($errors->any())
-        <ul class="alert alert-danger">
-            @foreach ($errors->all() as $error)
+            </div>
+            {!! Form::close() !!}
+
+            @if ($errors->any())
+            <ul class="alert alert-danger">
+                @foreach ($errors->all() as $error)
                 <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    @endif
+                @endforeach
+            </ul>
+            @endif
+        </div>
+        <div class="col-sm-offset-3 col-sm-3">
+            <button class="btn btn-danger">Cancel</button>
+        </div>    
+    </div>
 
 </div>
 @endsection

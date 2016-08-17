@@ -48,29 +48,35 @@ class ResourceController extends Controller {
             $uri = $request->getSchemeAndHttpHost() . '/resource' . '/' . urldecode($resource);
         }
         $graph = \EasyRdf_Graph::newAndLoad($uri, 'jsonld');
-        $types = $graph->typesAsResources($uri);
-        $namedGraph = ResourceController::getNamedGraph($uri);
-        $abstract = ResourceController::resourceAbstract($graph, $uri);
         $label = ResourceController::label($graph, $uri);
-        $literals = ResourceController::getAllLiterals($graph, $uri);
-        $resources = ResourceController::getAllResources($graph, $uri);
-        $reverseResources = ResourceController::getAllReverseResources($graph, $uri);
-        $images = ResourceController::getAllImages($graph, $uri);
-        $map = ResourceController::getGEO($graph, $uri);
-        return view('welcome', [
-            'resource' => $resource,
-            'graph' => $graph,
-            'label' => $label,
-            'uri' => $uri,
-            'namedGraph' => $namedGraph,
-            'abstract' => $abstract,
-            'types' => $types,
-            'literals' => $literals,
-            'resources' => $resources,
-            'reverseResources' => $reverseResources,
-            'images' => $images,
-            'map' => $map,
-        ]);
+        if (!empty($graph->resources())) {
+            $types = $graph->typesAsResources($uri);
+            $namedGraph = ResourceController::getNamedGraph($uri);
+            $abstract = ResourceController::resourceAbstract($graph, $uri);
+            $literals = ResourceController::getAllLiterals($graph, $uri);
+            $resources = ResourceController::getAllResources($graph, $uri);
+            $reverseResources = ResourceController::getAllReverseResources($graph, $uri);
+            $images = ResourceController::getAllImages($graph, $uri);
+            $map = ResourceController::getGEO($graph, $uri);
+            return view('index', [
+                'resource' => $resource,
+                'graph' => $graph,
+                'label' => $label,
+                'uri' => $uri,
+                'namedGraph' => $namedGraph,
+                'abstract' => $abstract,
+                'types' => $types,
+                'literals' => $literals,
+                'resources' => $resources,
+                'reverseResources' => $reverseResources,
+                'images' => $images,
+                'map' => $map,
+            ]);
+        } else {
+            return view('errors.noResource', [
+                'label'=> $label,
+            ]);
+        }
     }
 
     /* function to get the label of a resource based on 4 rules by priority:
@@ -92,15 +98,16 @@ class ResourceController extends Controller {
             $label = $graph->label($uri, 'en');
         }
         if (!isset($label)) {
-        //if no english label found try a label in any language
+            //if no english label found try a label in any language
             $label = $graph->label($uri);
         }
         if (!isset($label)) {
-        //if no label found use the resource uri as label
+            //if no label found use the resource uri as label
             $label = $uri;
         }
         return $label;
     }
+
     //maybe should change this method later on. double foreach 
     //1st on language, 2nd on property
     public function resourceAbstract(\EasyRdf_Graph $graph, $uri) {
@@ -117,21 +124,18 @@ class ResourceController extends Controller {
         $abstract = null;
         $locale = Cookie::get('locale');
         foreach ($abstract_properties as $property) {
-            if($abstract == null){
+            if ($abstract == null) {
                 $abstract = $graph->getLiteral($uri, new \EasyRdf_Resource($property['property']), $locale);
-            }
-            else{
+            } else {
                 break;
             }
             if ($abstract == null) {
                 //get default label in English. This should be configurable on .env
                 $abstract = $graph->getLiteral($uri, new \EasyRdf_Resource($property['property']), 'en');
-                
             }
             if ($abstract == null) {
-                 //if no english label found try a label in any language
+                //if no english label found try a label in any language
                 $abstract = $graph->getLiteral($uri, new \EasyRdf_Resource($property['property']));
-                               
             }
         }
         return $abstract;
@@ -225,20 +229,52 @@ class ResourceController extends Controller {
         }
         return $images;
     }
+
     public function getGEO(\EasyRdf_Graph $graph, $uri) {
-        $extractors = \App\GeoExtractor::where('enabled','1')->get();
-        $data = ResourceController::dualExtractor($extractors[0]);
-//        $images = array();
-//        foreach ($image_properties as $property) {
-//            $image = $graph->getResource($uri, new \EasyRdf_Resource($property));
-//            if (isset($image)) {
-//                array_push($images, $image);
-//            }
-//        }
+        $extractors = \App\GeoExtractor::where('enabled', '1')->orderBy('order', 'asc')->get();
+
+        foreach ($extractors as $extractor) {
+            if ($extractor->type == 'dual') {
+                $data = ResourceController::dualExtractor($graph, $uri, $extractor);
+            } else {
+                $data = ResourceController::singleExtractor($graph, $uri, $extractor);
+            }
+
+            if ($data != null) {
+                break;
+            }
+        }
         return $data;
     }
-    public function dualExtractor(\App\GeoExtractor $extractor){
-        return '[51.505, -0.09]';
+
+    public function dualExtractor(\EasyRdf_Graph $graph, $resource, \App\GeoExtractor $extractor) {
+        $latitudeProperty = new \EasyRdf_Resource($extractor->lat);
+        $latitude = $graph->get($resource, $latitudeProperty);
+
+        $longtitudeProperty = new \EasyRdf_Resource($extractor->long);
+        $longtitude = $graph->get($resource, $longtitudeProperty);
+        if ($latitude != null && $longtitude != null) {
+            $data = '[' . $latitude . ', ' . $longtitude . ']';
+        } else {
+            $data = null;
+        }
+        return $data;
+    }
+
+    public function singleExtractor(\EasyRdf_Graph $graph, $resource, \App\GeoExtractor $extractor) {
+        $geoProperty = new \EasyRdf_Resource($extractor->generic);
+        $geo = $graph->get($resource, $geoProperty);
+        $regex = $extractor->genericFormat;
+        $matches = [];
+        preg_match($regex, $geo->getValue(), $matches);
+        $latitude = $matches[$extractor->lat];
+        $longtitude = $matches[$extractor->long];
+        if ($latitude != null && $longtitude != null) {
+            $data = '[' . $latitude . ', ' . $longtitude . ']';
+        } else {
+            $data = null;
+        }
+        return $data;
     }
 
 }
