@@ -4,7 +4,7 @@
 <div class="box box-primary">
     <div class="container">
         <div class="box-header">
-            <h1>Edit rdfnamespace {{ $rdfnamespace->id }}</h1>
+            <h1>Edit RDF Namespace {{ $rdfnamespace->id }}</h1>
         </div>
         <div class="box-body">
             {!! Form::model($rdfnamespace, [
@@ -39,7 +39,6 @@
                     {!! $errors->first('added', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
-
 
             <div class="form-group">
                 <center>

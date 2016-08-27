@@ -12,7 +12,7 @@
                 foreach ($literals as $literal) {
                     try {
                         echo '<tr>';
-                        echo '<td class="property"><a href="' . ($rewrite ? '/browser?uri='. $literal["property"] : $literal["property"])  . '">' . ((new \EasyRdf_Resource($literal["property"]))->shorten()?: $literal["property"]) . '</a></td>';
+                        echo '<td class="property"><a href="' . ($rewrite ? '/browser?uri='. $literal["property"] : $literal["property"])  . '">' . ((new \EasyRdf_Resource($literal["property"]))->shorten()?: \App\BrowserTrait::uknownNamespace($literal["property"])) . '</a></td>';
                         echo '<td class="value"><ul>';
                         foreach ($literal["values"] as $value) {
                             echo '<li>';

@@ -3,7 +3,7 @@
 @section('content')
 <div class="container box">
 
-    <h1>rdfnamespace {{ $rdfnamespace->id }}
+    <h1>RDF Namespace {{ $rdfnamespace->id }}
         <a href="{{ url('rdfnamespace/' . $rdfnamespace->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit rdfnamespace"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
         {!! Form::open([
             'method'=>'DELETE',
@@ -21,10 +21,8 @@
     <div class="table-responsive">
         <table class="table table-bordered table-striped table-hover">
             <tbody>
-                <tr>
-                    <th>ID</th><td>{{ $rdfnamespace->id }}</td>
-                </tr>
-                <tr><th> Prefix </th><td> {{ $rdfnamespace->prefix }} </td></tr><tr><th> Uri </th><td> {{ $rdfnamespace->uri }} </td></tr><tr><th> Added </th><td> {{ $rdfnamespace->added }} </td></tr>
+                
+                <tr><th> Prefix </th><td> {{ $rdfnamespace->prefix }} </td></tr><tr><th> IRI </th><td> {{ $rdfnamespace->uri }} </td></tr><tr><th> Added </th><td> {{ $rdfnamespace->added }} </td></tr>
             </tbody>
         </table>
     </div>

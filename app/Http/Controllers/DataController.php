@@ -5,8 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 class DataController extends Controller {
+    
+    use \App\BrowserTrait;
 
     public function data(Request $request, $resource) {
+        
+        $this->setNamespaces();
         
         $endpoint = \App\Endpoint::all();
 

@@ -3,12 +3,12 @@
 @section('content')
 <div class="container box">
 
-    <h1>Rdfnamespace <a href="{{ url('/rdfnamespace/create') }}" class="btn btn-primary btn-xs" title="Add New rdfnamespace"><span class="glyphicon glyphicon-plus" aria-hidden="true"/></a></h1>
+    <h1>RDF Namespaces <a href="{{ url('/rdfnamespace/create') }}" class="btn btn-primary btn-xs" title="Add New rdfnamespace"><span class="glyphicon glyphicon-plus" aria-hidden="true"/></a></h1>
     <div class="table">
         <table class="table table-bordered table-striped table-hover">
             <thead>
                 <tr>
-                    <th>S.No</th><th> Prefix </th><th> Uri </th><th> Added </th><th>Actions</th>
+                    <th> Prefix </th><th> IRI </th><th> Added </th><th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -16,7 +16,6 @@
             @foreach($rdfnamespace as $item)
                 {{-- */$x++;/* --}}
                 <tr>
-                    <td>{{ $x }}</td>
                     <td>{{ $item->prefix }}</td><td>{{ $item->uri }}</td><td>{{ $item->added }}</td>
                     <td>
                         <a href="{{ url('/rdfnamespace/' . $item->id) }}" class="btn btn-success btn-xs" title="View rdfnamespace"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a>

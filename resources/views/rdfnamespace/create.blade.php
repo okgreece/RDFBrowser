@@ -4,7 +4,7 @@
 <div class="box box-primary">
     <div class="container">
         <div class="box-header">
-            <h1>Create New rdfnamespace</h1>
+            <h1>Create New RDF Namespace</h1>
             <hr/>
         </div>
         <div class="box-body">
@@ -37,7 +37,7 @@
                     {!! $errors->first('added', '<p class="help-block">:message</p>') !!}
                 </div>
             </div>
-
+            
 
             <div class="form-group">
                 <center>

@@ -12,7 +12,7 @@ class BrowserController extends Controller
     
     public function browser(Request $request) {
         $uri = $request->input('uri');
-
+        $this->setNamespaces();
         $graph = \EasyRdf_Graph::newAndLoad($uri);
         $label = $this->label($graph, $uri);
         if (!empty($graph->resources())) {

@@ -6,6 +6,37 @@ use Illuminate\Support\Facades\Cookie;
 
 trait BrowserTrait
 {
+    /*
+     * Currently this works because of a hack in easyrdf library
+     * I have created an issue but untill this get resolved we continue
+     * using the hack on Namespace.php. I have commented out the lines where get
+     * method checks for \W preg_match. When hyphens are included on the prefix,
+     * these lines cause this method to fail when serializing graphs into files
+     */
+    public static function setNamespaces(){
+        $namespaces = \App\rdfnamespace::where('added','=','1')->get();
+        foreach ($namespaces as $namespace){
+            \EasyRdf_Namespace::set($namespace->prefix, $namespace->uri);
+        }
+        return 0;
+    }
+    
+    public static function uknownNamespace($uri){
+        $tempnamespace = new \EasyRdf_Resource($uri);
+        $local = $tempnamespace->localName();
+        
+        $namespace = mb_substr($uri, 0, -mb_strlen($local));
+        $existing = \App\rdfnamespace::where('uri', '=', $namespace)->get();
+        if($existing->isEmpty()){
+            \App\rdfnamespace::create(['prefix'=>'null',
+                                    'uri'=>$namespace,
+                                    'added'=> 0
+                                    ]);
+        }
+        return $uri;
+    }
+    
+    
     /* function to get the label of a resource based on 4 rules by priority:
      * 1)Get the browser locale setting and request this language
      * 2)Get the label for the default language set

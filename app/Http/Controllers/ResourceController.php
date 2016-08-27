@@ -42,6 +42,9 @@ class ResourceController extends Controller {
         if (!isset($uri)) {
             $uri = $request->getSchemeAndHttpHost() . '/resource' . '/' . urldecode($resource);
         }
+        
+        $this->setNamespaces();
+                
         $graph = \EasyRdf_Graph::newAndLoad($uri);
         $label = $this->label($graph, $uri);
         if (!empty($graph->resources())) {
