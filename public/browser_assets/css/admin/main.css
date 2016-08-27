@@ -30,6 +30,18 @@ p {
     text-align: center;
 }
 
+li.more{
+    list-style: none;
+    cursor: pointer;
+    background-color: gray;
+    color: white;
+    font-weight:bolder;
+    text-align: center;
+}
+li.more:hover{
+    background-color: green;
+}
+
 /* Links */
 a {
     color: #3bc492;

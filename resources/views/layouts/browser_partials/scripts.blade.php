@@ -18,9 +18,9 @@
 <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/fixedheader/3.1.2/js/dataTables.fixedHeader.min.js"></script>
 
 <!--    Leaflet-->
- <script src="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
+<script src="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
 <!--    Lightbox-->
- <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/4.0.1/ekko-lightbox.min.js"></script> 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/4.0.1/ekko-lightbox.min.js"></script> 
 
 <script>
 function filterGlobal() {
@@ -36,12 +36,30 @@ $(document).ready(function () {
         pageLength: 50,
         lengthChange: false,
         language: {
-                url: "../browser_assets/plugins/datatables/i18n/{{Cookie::get('locale')}}.json"
-            }
+            url: "../browser_assets/plugins/datatables/i18n/{{Cookie::get('locale')}}.json"
+        }
     });
 
     $('input.global_filter').on('keyup click', function () {
         filterGlobal();
     });
+    $('ul.term-list').each(function () {
+        var listLength = $(this).find('li').length;
+        if ( listLength > 3) {
+            $('li', this).eq(2).nextAll().hide().addClass('toggleable');
+            $(this).append('<li class="more">{{trans('theme/browser/datatable.more')}}('+listLength+')</li>');
+        }
+        $(this).on('click', '.more', listLength, toggleShow);
+    });
 });
+
+
+
+    function toggleShow(listLength) {
+        var opened = $(this).hasClass('less');
+        var more = '{!!trans('theme/browser/datatable.more')!!}(' + listLength.data+')';
+        var less = '{!!trans('theme/browser/datatable.less')!!}';
+        $(this).text(opened ? more : less).toggleClass('less', !opened);
+        $(this).siblings('li.toggleable').slideToggle();
+    }
 </script>

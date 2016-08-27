@@ -38,6 +38,7 @@
                         <ul class="treeview-menu">
                             <li><a href="{{ route('label-extractor.index')}}"><i class="fa fa-circle-o"></i> Label Extractor</a></li>
                             <li><a href="{{ route('abstract-extractor.index')}}"><i class="fa fa-circle-o"></i> Abstract Extractor</a></li>
+                            <li><a href="{{ route('image-extractor.index')}}"><i class="fa fa-circle-o"></i> Image Extractor</a></li>
                         </ul>
                     </li>
                     

@@ -4,7 +4,7 @@
 <div class="box box-primary">
     <div class="container">
         <div class="box-header">
-            <h1>Edit AbstractExtractor {{ $abstractextractor->id }}</h1>
+            <h1>Edit Abstract Extractor {{ $abstractextractor->id }}</h1>
         </div>
         <div class="box-body">
             {!! Form::model($abstractextractor, [

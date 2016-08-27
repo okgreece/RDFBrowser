@@ -28,6 +28,8 @@ Route::resource('rdfnamespace', 'rdfnamespaceController');
 Route::resource('abstract-extractor', 'AbstractExtractorController');
 
 Route::resource('label-extractor', 'LabelExtractorController');
+
+Route::resource('image-extractor', 'ImageExtractorController');
 });
 
 Route::get('/login', 'Auth\LogInController@login')->name('login');

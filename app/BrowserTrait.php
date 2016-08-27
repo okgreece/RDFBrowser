@@ -45,52 +45,81 @@ trait BrowserTrait
      * 
      */
     public static function label(\EasyRdf_Graph $graph, $uri) {
-        //get the locale from browser settings
+        $label_properties = 
+                \App\LabelExtractor::where('enabled','=', '1')
+                ->orderBy('priority','asc')
+                ->get();
+        $label = null;
         $locale = Cookie::get('locale');
-        //try to get the label
-        $label = $graph->label($uri, $locale);
-        //if this fails try alternatives
-        if (!isset($label)) {
-            //get default label in English. This should be configurable on .env
-            $label = $graph->label($uri, 'en');
+        foreach ($label_properties as $property) {
+            if ($label == null) {
+                $label = $graph
+                        ->getLiteral(
+                                $uri,
+                                new \EasyRdf_Resource($property->property),
+                                $locale
+                                );
+            } else {
+                break;
+            }
+            if ($label == null) {
+                //get default label in English. This should be configurable on .env
+                $label = $graph
+                        ->getLiteral(
+                                $uri,
+                                new \EasyRdf_Resource($property->property),
+                                'en'
+                                );
+            }
+            if ($label == null) {
+                //if no english label found try a label in any language
+                $label = $graph
+                        ->getLiteral(
+                                $uri,
+                                new \EasyRdf_Resource($property->property)
+                                );
+            }
         }
-        if (!isset($label)) {
-            //if no english label found try a label in any language
-            $label = $graph->label($uri);
-        }
-        if (!isset($label)) {
-            //if no label found use the resource uri as label
+        if($label == null){
             $label = $uri;
         }
         return $label;
     }
     
     public static function resourceAbstract(\EasyRdf_Graph $graph, $uri) {
-        $abstract_properties = [
-            ['order' => 1, 'property' => "rdfs:comment"],
-            ['order' => 2, 'property' => "http://dbpedia.org/ontology/abstract"],
-        ];
-        // sort alphabetically by name
-        $order = array();
-        foreach ($abstract_properties as $key => $row) {
-            $order[$key] = $row['order'];
-        }
-        array_multisort($order, SORT_ASC, $abstract_properties);
+        $abstract_properties = 
+                \App\AbstractExtractor::where('enabled','=', '1')
+                ->orderBy('priority','asc')
+                ->get();
         $abstract = null;
         $locale = Cookie::get('locale');
         foreach ($abstract_properties as $property) {
             if ($abstract == null) {
-                $abstract = $graph->getLiteral($uri, new \EasyRdf_Resource($property['property']), $locale);
+                $abstract = $graph
+                        ->getLiteral(
+                                $uri,
+                                new \EasyRdf_Resource($property->property),
+                                $locale
+                                );
             } else {
                 break;
             }
             if ($abstract == null) {
                 //get default label in English. This should be configurable on .env
-                $abstract = $graph->getLiteral($uri, new \EasyRdf_Resource($property['property']), 'en');
+                $abstract = $graph
+                        ->getLiteral(
+                                $uri,
+                                new \EasyRdf_Resource($property->property),
+                                'en'
+                                );
             }
             if ($abstract == null) {
                 //if no english label found try a label in any language
-                $abstract = $graph->getLiteral($uri, new \EasyRdf_Resource($property['property']));
+                $abstract = $graph
+                        ->getLiteral(
+                                $uri,
+                                new \EasyRdf_Resource($property->property)
+                                );
             }
         }
         return $abstract;
@@ -173,12 +202,13 @@ trait BrowserTrait
     }
     
     public function getAllImages(\EasyRdf_Graph $graph, $uri) {
-        $image_properties = array(
-            "foaf:depiction",
-        );
+        $image_properties = 
+                \App\ImageExtractor::where('enabled','=','1')
+                ->orderBy('priority','asc')
+                ->get();
         $images = [];
         foreach ($image_properties as $property) {
-            $image = $graph->getResource($uri, new \EasyRdf_Resource($property));
+            $image = $graph->getResource($uri, new \EasyRdf_Resource($property->property));
             if (isset($image)) {
                 array_push($images, $image);
             }
