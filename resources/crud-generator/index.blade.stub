@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container box">
 
     <h1>%%crudNameCap%% <a href="{{ url('/%%routeGroup%%%%viewName%%/create') }}" class="btn btn-primary btn-xs" title="Add New %%modelName%%"><span class="glyphicon glyphicon-plus" aria-hidden="true"/></a></h1>
     <div class="table">

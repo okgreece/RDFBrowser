@@ -90,9 +90,10 @@
 
 
             <div class="form-group">
-                <div class="col-sm-offset-3 col-sm-3">
-                    {!! Form::submit('Create', ['class' => 'btn btn-primary form-control']) !!}
-                </div>
+                <center>
+                    <button type ="button" class="btn btn-danger" data-toggle="modal" data-target="#myModal">Cancel</button>
+                    {!! Form::submit('Create', ['class' => 'btn btn-success']) !!}
+                </center>
             </div>
             {!! Form::close() !!}
 
@@ -107,3 +108,4 @@
     </div>
 </div>
 @endsection
+@include('modals.closeCreate')

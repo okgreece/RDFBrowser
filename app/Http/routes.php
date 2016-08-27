@@ -17,12 +17,17 @@ Route::auth();
 
 Route::get('/admin', 'AdminController@adminPanel')->name('admin');
 
-
 Route::get('/dashboard', 'AdminController@adminPanel')->name('dashboard');
 
-//Route::when('resource/*', 'resource');
 Route::resource('geo-extractor', 'GeoExtractorController');
 
+Route::resource('endpoint', 'EndpointController');
+
+Route::resource('rdfnamespace', 'rdfnamespaceController');
+
+Route::resource('abstract-extractor', 'AbstractExtractorController');
+
+Route::resource('label-extractor', 'LabelExtractorController');
 });
 
 Route::get('/login', 'Auth\LogInController@login')->name('login');
@@ -39,5 +44,3 @@ Route::get('data/{section}', 'DataController@data')->name('data')->where(['secti
 
 Route::get('browser', 'BrowserController@browser')->name('browser');
 
-Route::resource('geo-extractor', 'GeoExtractorController');
-Route::resource('geo-extractor', 'GeoExtractorController');

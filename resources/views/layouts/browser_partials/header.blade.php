@@ -14,7 +14,7 @@
 @show
 @endif
 
-@if(!empty($type))
+@if(!empty($types))
 @section('type')
     @include('layouts.browser_partials.content.type')
 @show

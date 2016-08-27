@@ -3,17 +3,14 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Routing\Redirector;
-use App\Http\Requests;
-use Illuminate\Support\Facades\Log;
 
 class DataController extends Controller {
 
     public function data(Request $request, $resource) {
+        
+        $endpoint = \App\Endpoint::all();
 
-
-        $sparql = new \EasyRdf_Sparql_Client('http://155.207.126.5:8890/sparql');
+        $sparql = new \EasyRdf_Sparql_Client($endpoint[0]->endpoint_url);
 
         $path_parts = pathinfo($resource);
         if (isset($path_parts['extension'])) {

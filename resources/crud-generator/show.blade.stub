@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
+<div class="container box">
 
     <h1>%%modelName%% {{ $%%crudNameSingular%%->%%primaryKey%% }}
         <a href="{{ url('%%routeGroup%%%%viewName%%/' . $%%crudNameSingular%%->%%primaryKey%% . '/edit') }}" class="btn btn-primary btn-xs" title="Edit %%modelName%%"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>

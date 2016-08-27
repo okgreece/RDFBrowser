@@ -168,6 +168,9 @@ return [
         
         //Inverse seeder
        // Orangehill\Iseed\IseedServiceProvider::class,
+        
+        //ENTRUST package
+        Zizaco\Entrust\EntrustServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -232,6 +235,9 @@ return [
         //HTML FORMS
         'Form' => Collective\Html\FormFacade::class,
         'HTML' => Collective\Html\HtmlFacade::class,
+        
+        //ENTRUST Package
+        'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
     ],
 
 ];

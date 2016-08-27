@@ -18,7 +18,8 @@
         "vluzrmos/language-detector": "^1.0",
         "ralouphie/mimey": "^1.0",
         "components/flag-icon-css": "^2.3",
-        "orangehill/iseed": "^2.1"
+        "orangehill/iseed": "^2.1",
+        "zizaco/entrust": "5.2.x-dev"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
