@@ -22,6 +22,7 @@
             <li><a  href="{{ route('dashboard')  }}"><i class='fa fa-home'></i><span>Dashboard</span></a></li>
             <li><a  href="{{ route('geo-extractor.index')  }}"><i class='fa fa-globe'></i><span>GEO Extractors</span></a></li>
             <li><a  href="{{ route('endpoint.index')  }}"><i class='fa fa-database'></i><span>Endpoint</span></a></li>
+            <li><a  href="{{ route('user.index')  }}"><i class='fa fa-database'></i><span>Users</span></a></li>
             <li class="treeview">
                 <a href="#">
                     <i class="fa fa-share"></i> 

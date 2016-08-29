@@ -19,7 +19,7 @@
         "ralouphie/mimey": "^1.0",
         "components/flag-icon-css": "^2.3",
         "orangehill/iseed": "^2.1",
-        "zizaco/entrust": "5.2.x-dev"
+        "zizaco/entrust": "dev-laravel-5"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

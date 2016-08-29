@@ -30,6 +30,10 @@ Route::resource('abstract-extractor', 'AbstractExtractorController');
 Route::resource('label-extractor', 'LabelExtractorController');
 
 Route::resource('image-extractor', 'ImageExtractorController');
+
+Route::resource('user', 'UserController');
+
+
 });
 
 Route::get('/login', 'Auth\LogInController@login')->name('login');
