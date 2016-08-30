@@ -43,7 +43,7 @@ class LabelExtractorController extends Controller
     {
         
         LabelExtractor::create($request->all());
-
+   
         Session::flash('flash_message', 'LabelExtractor added!');
 
         return redirect('label-extractor');

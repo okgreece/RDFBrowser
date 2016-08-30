@@ -31,13 +31,35 @@ function filterGlobal() {
             ).draw();
 }
 $(document).ready(function () {
+    var pagingType = '';
+    console.log(pagingType);
+    if(screen.width>500){
+        pagingType = 'simple_numbers';
+        console.log(pagingType);
+    }
+    else{
+         pagingType = 'simple';
+         console.log(pagingType);
+    }
     var table = $('table.display').DataTable({
         fixedHeader: {header: true},
+        responsive:true,
         pageLength: 50,
+        pagingType: pagingType,
+        scrollX:false,
+        deferRender:false,
         lengthChange: false,
         language: {
             url: "../browser_assets/plugins/datatables/i18n/{{Cookie::get('locale')}}.json"
-        }
+        },
+        columnDefs: [
+            { "width": "30%", "targets":0},
+            { "width": "70%", "targets":1}
+            
+        ],
+       
+        fixedColumns:true,
+        autoWitdh:false
     });
 
     $('input.global_filter').on('keyup click', function () {

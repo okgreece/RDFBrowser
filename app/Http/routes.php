@@ -11,7 +11,7 @@
 |
 */
 
-Route::group(['middleware' => ['web']], function () {
+Route::group(['middlewareGroups' => ['web']], function () {
     //
 Route::auth();
 
@@ -19,26 +19,36 @@ Route::get('/admin', 'AdminController@adminPanel')->name('admin');
 
 Route::get('/dashboard', 'AdminController@adminPanel')->name('dashboard');
 
-Route::resource('geo-extractor', 'GeoExtractorController');
+    
+    Route::resource('geo-extractor', 'GeoExtractorController');
 
-Route::resource('endpoint', 'EndpointController');
+    Route::resource('endpoint', 'EndpointController');
 
-Route::resource('rdfnamespace', 'rdfnamespaceController');
+    Route::resource('rdfnamespace', 'rdfnamespaceController');
 
-Route::resource('abstract-extractor', 'AbstractExtractorController');
+    Route::resource('abstract-extractor', 'AbstractExtractorController');
 
-Route::resource('label-extractor', 'LabelExtractorController');
+    Route::resource('label-extractor', 'LabelExtractorController');
 
-Route::resource('image-extractor', 'ImageExtractorController');
+    Route::resource('image-extractor', 'ImageExtractorController');
 
-Route::resource('user', 'UserController');
+    Route::resource('user', 'UserController');
 
+
+
+
+});
+
+Route::group(['prefix'=>'admin','middleware' => ['web']], function () {
 
 });
 
 Route::get('/login', 'Auth\LogInController@login')->name('login');
 
-Route::get('/register', 'Auth\RegisterController@register')->name('register');
+if(config('app.registration')){
+    Route::get('/register', 'Auth\RegisterController@register')->name('register');
+}
+
 
 Route::get('resource/{section}', 'ResourceController@negotiation')->name('negotiation')->where(['section' => '.*']);
 

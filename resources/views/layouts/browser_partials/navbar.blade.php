@@ -30,7 +30,9 @@
                 </li>
                 @if (Auth::guest())
                 <li><a href="{{ url('/login') }}"><?php echo trans('theme/browser/navbar.login'); ?></a></li>
+                @if(config('app.registration'))
                 <li><a href="{{ url('/register') }}"><?php echo trans('theme/browser/navbar.register'); ?></a></li>
+                @endif
                 @else
                 <!-- User Account Menu -->
                 <li>

@@ -18,7 +18,9 @@
                 <tr>
                     <?php $role =$item->roles()->get()?>
                     <td>{{ $x }}</td>
-                    <td>{{ $item->name }}</td><td>{{ $item->email }}</td><td>{{ $role[0]->display_name }}</td>
+                    <td>{{ $item->name }}</td>
+                    <td>{{ $item->email }}</td>
+                    <td>{{ $role[0]->display_name }}</td>
                     <td>
                         <a href="{{ url('/user/' . $item->id) }}" class="btn btn-success btn-xs" title="View user"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a>
                         <a href="{{ url('/user/' . $item->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit user"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>

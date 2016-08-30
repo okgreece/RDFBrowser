@@ -21,7 +21,8 @@
 <!--    Datatables-->
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.css">
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/fixedheader/3.1.2/css/fixedHeader.dataTables.min.css">
-<!--    Leaflet Map-->
+    <link href="{{ asset('/browser_assets/css/dataTables.bootstrap.css') }}" rel="stylesheet" type="text/css" />
+    <!--    Leaflet Map-->
     <link rel="stylesheet" href="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />    
 
     <!-- Custom styles for this template -->

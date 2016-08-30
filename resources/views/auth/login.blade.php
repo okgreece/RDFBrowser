@@ -16,7 +16,9 @@
         <main class="auth-main">
             <div class="auth-block">
                 <h1>Sign in to RDFBrowser</h1>
+                @if(config('app.registration'))
                 <a href="/register" class="auth-link">New to RDFBrowser? Sign up!</a>
+                @endif
                 <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
                         {{ csrf_field() }}
 

@@ -111,7 +111,13 @@ return [
     'log' => env('APP_LOG', 'single'),
 
     'log_level' => env('APP_LOG_LEVEL', 'debug'),
-
+    
+    /**
+     * Enable or disable user registrations. Currently user groups are not
+     * working properly due to issues with Entrust package and Laravel 5.2. 
+     * Only default admin user can register new users and give them roles.
+     */
+    'registration'=> env('REGISTRATION', false),
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers

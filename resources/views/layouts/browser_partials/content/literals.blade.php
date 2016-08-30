@@ -12,7 +12,7 @@
                 foreach ($literals as $literal) {
                     try {
                         echo '<tr>';
-                        echo '<td class="property"><a href="' . ($rewrite ? '/browser?uri='. $literal["property"] : $literal["property"])  . '">' . ((new \EasyRdf_Resource($literal["property"]))->shorten()?: \App\BrowserTrait::uknownNamespace($literal["property"])) . '</a></td>';
+                        echo '<td class="property"><a class="dont-break-out" href="' . ($rewrite ? '/browser?uri='. $literal["property"] : $literal["property"])  . '">' . ((new \EasyRdf_Resource($literal["property"]))->shorten()?: \App\BrowserTrait::uknownNamespace($literal["property"])) . '</a></td>';
                         echo '<td class="value"><ul>';
                         foreach ($literal["values"] as $value) {
                             echo '<li>';
@@ -61,10 +61,10 @@
                              * Method to handle generic literals, usually rendered as strings
                              */
                             else {
-                                echo '<p class="string">'. $value->getValue(). '</p>';
+                                echo '<p class="string" dont-break-out>'. $value->getValue(). '</p>';
                             }
                             if ($value->getDataTypeUri()) {
-                                echo '<a href="' . $value->getDataTypeUri() . '" class="datatype"> (' . ($value->getDataType()? : $value->getDataTypeUri()) . ')</a>';
+                                echo '<a href="' . $value->getDataTypeUri() . '" class="datatype dont-break-out"> (' . ($value->getDataType()? : $value->getDataTypeUri()) . ')</a>';
                             }
                             echo '</li>';
                         }
