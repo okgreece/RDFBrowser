@@ -63,11 +63,6 @@ scratch. This page gets rid of all links and provides the needed markup only.
             @include('layouts.partials.footer')
 
         </div><!-- ./wrapper -->
-
-
-
-
-
     </body>
     <script>
         $('div.alert').not('.alert-important').delay(3000).fadeOut(350);

@@ -16,14 +16,17 @@ class DataController extends Controller {
 
         $sparql = new \EasyRdf_Sparql_Client($endpoint[0]->endpoint_url);
 
+        
+        
+        
         $path_parts = pathinfo($resource);
         if (isset($path_parts['extension'])) {
             $extension = $path_parts['extension'];
             $resource = $path_parts['filename'];
+            
         }
-
-        $uri = $request->getSchemeAndHttpHost() . '/resource' . '/' . $resource;
-
+        $uri = $this->constructIRI2($request, $resource);
+                        
         $result = $sparql->query('Describe <' . $uri . '>');
 
         if (isset($extension)) {

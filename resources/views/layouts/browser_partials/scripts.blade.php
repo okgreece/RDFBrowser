@@ -16,7 +16,6 @@
 <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.js"></script>
 
 <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/fixedheader/3.1.2/js/dataTables.fixedHeader.min.js"></script>
-
 <!--    Leaflet-->
 <script src="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.js"></script>
 <!--    Lightbox-->
@@ -47,6 +46,7 @@ $(document).ready(function () {
         pageLength: 50,
         pagingType: pagingType,
         scrollX:false,
+        order: [],
         deferRender:false,
         lengthChange: false,
         language: {
@@ -58,7 +58,7 @@ $(document).ready(function () {
             
         ],
        
-        fixedColumns:true,
+        fixedColumns:false,
         autoWitdh:false
     });
 

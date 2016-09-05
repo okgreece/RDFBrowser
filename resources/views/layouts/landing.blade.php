@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="{{Cookie::get('locale')}}">
-<?php App::setLocale(Cookie::get('locale'));?>
+    <?php App::setLocale(Cookie::get('locale')); ?>
     @section('htmlheader')
     @include('layouts.browser_partials.htmlheader')
     @section('scripts')
     @include('layouts.browser_partials.scripts')
     @show
-    
+
     <body data-spy="scroll" data-offset="0" data-target="#navigation">
         @section('navbar')
         @include('layouts.browser_partials.navbar')
@@ -37,6 +37,10 @@
 
             });
         </script>
+        @if(!empty(config('app.google_analytics')))
+            @include('layouts.browser_partials.google_analytics')
+            @show
+        @endif
 
     </body>
 </html>

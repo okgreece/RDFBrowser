@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Support\Facades\Cookie;
+use Illuminate\Http\Request;
 
 trait BrowserTrait
 {
@@ -36,6 +37,32 @@ trait BrowserTrait
         return $uri;
     }
     
+    public static function constructIRI($request, $resource){
+            $route = $request->route()->getName();
+            
+            if($route == 'page'){
+             $path = 'resource';
+            }
+            else if($route == 'page2'){
+                $path = 'ontology';
+            }
+            $uri = $request->getSchemeAndHttpHost() . '/' . $path . '/' . urldecode($resource);
+            return $uri;
+    }
+    
+    
+    public static function constructIRI2($request, $resource){
+            $route = $request->route()->getName();
+            
+            if($route == 'data'){
+             $path = 'resource';
+            }
+            else if($route == 'data2'){
+                $path = 'ontology';
+            }
+            $uri = $request->getSchemeAndHttpHost() . '/' . $path . '/' . urldecode($resource);
+            return $uri;
+    }
     
     /* function to get the label of a resource based on 4 rules by priority:
      * 1)Get the browser locale setting and request this language
@@ -124,6 +151,7 @@ trait BrowserTrait
         }
         return $abstract;
     }
+    
     
     public function getNamedGraph($resource) {
 

@@ -117,7 +117,10 @@ return [
      * working properly due to issues with Entrust package and Laravel 5.2. 
      * Only default admin user can register new users and give them roles.
      */
-    'registration'=> env('REGISTRATION', false),
+    'registration'=> false,
+    
+    
+    'google_analytics'=> null,
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers

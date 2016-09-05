@@ -49,6 +49,7 @@ if(config('app.registration')){
     Route::get('/register', 'Auth\RegisterController@register')->name('register');
 }
 
+Route::get('browser', 'BrowserController@browser')->name('browser');
 
 Route::get('resource/{section}', 'ResourceController@negotiation')->name('negotiation')->where(['section' => '.*']);
 
@@ -58,5 +59,11 @@ Route::get('page/{section}', 'ResourceController@page')->name('page')->where(['s
 
 Route::get('data/{section}', 'DataController@data')->name('data')->where(['section' => '.*']);
 
-Route::get('browser', 'BrowserController@browser')->name('browser');
+Route::get('ontology/{section}', 'ResourceController@negotiation')->name('negotiation')->where(['section' => '.*']);
+
+Route::get('ontology', 'ResourceController@noResource')->name('noResource');
+
+Route::get('page2/{section}', 'ResourceController@page')->name('page2')->where(['section' => '.*']);
+
+Route::get('data2/{section}', 'DataController@data')->name('data2')->where(['section' => '.*']);
 
