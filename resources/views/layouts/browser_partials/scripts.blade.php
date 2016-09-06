@@ -43,7 +43,7 @@ $(document).ready(function () {
     var table = $('table.display').DataTable({
         fixedHeader: {header: true},
         responsive:true,
-        pageLength: 50,
+        pageLength: 20,
         pagingType: pagingType,
         scrollX:false,
         order: [],
