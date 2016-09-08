@@ -28,7 +28,13 @@
                             @else
                             <div class="item">
                                 @endif
-                                <a href="{{ $images[$i] }}" data-toggle="lightbox" data-gallery="images"><img class="carousel-image" src="{{ $images[$i] }}" alt=""></a>
+                                <a href="{{ $images[$i] }}" data-toggle="lightbox" data-gallery="images">
+<!-- used for lazy loading but script causes majr problem
+                                    <img class="carousel-image" src="{{ asset('/browser_assets/img/reload.svg')}}" data-src="{{ $images[$i] }}" alt="">
+-->
+                                    <img class="carousel-image" src="{{ $images[$i] }}" alt="">
+                         
+                                </a>
                                 @endfor
                             </div>
                         </div>
@@ -52,6 +58,6 @@
             <script>
                 $('.carousel').carousel({
                     interval: 3500
-                })
+                });
             </script>
             @endif

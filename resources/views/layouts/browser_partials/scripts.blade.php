@@ -21,6 +21,8 @@
 <!--    Lightbox-->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/4.0.1/ekko-lightbox.min.js"></script> 
 
+<!--Lazy Load Images-->
+<!--<script src="{{ asset('/browser_assets/js/jquery.imglazy.js') }}" type="text/javascript"></script>-->
 <script>
 function filterGlobal() {
     $('.dataTable').DataTable().search(
@@ -73,8 +75,14 @@ $(document).ready(function () {
         }
         $(this).on('click', '.more', listLength, toggleShow);
     });
-});
+    //image loader
+//    $.imgLazy({
+//        effect: 'fadeIn'
+//    });
 
+});
+    
+    
 
 
     function toggleShow(listLength) {

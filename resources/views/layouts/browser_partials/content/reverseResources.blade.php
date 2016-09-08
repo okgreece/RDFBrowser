@@ -1,8 +1,8 @@
-<script>
+<!--<script>
     $(document).ready(function () {
         $('#reverseResourcesT').DataTable();
     });
-</script>
+</script>-->
 <section id="reverseResources">
     <div class="container">
         <table id="reverseResourcesT" class="display" cellspacing="0" width="100%">

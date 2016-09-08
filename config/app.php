@@ -120,7 +120,7 @@ return [
     'registration'=> false,
     
     
-    'google_analytics'=> 'UA-83605051-1',
+    'google_analytics'=> '',
     /*
     |--------------------------------------------------------------------------
     | Autoloaded Service Providers
