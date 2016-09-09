@@ -16,9 +16,6 @@ class DataController extends Controller {
 
         $sparql = new \EasyRdf_Sparql_Client($endpoint[0]->endpoint_url);
 
-        
-        
-        
         $path_parts = pathinfo($resource);
         if (isset($path_parts['extension'])) {
             $extension = $path_parts['extension'];
@@ -26,9 +23,9 @@ class DataController extends Controller {
             
         }
         $uri = $this->constructIRI2($request, $resource);
-                        
+       
         $result = $sparql->query('Describe <' . $uri . '>');
-
+        
         if (isset($extension)) {
             
             $MIME = DataController::getMime($extension);
@@ -39,7 +36,7 @@ class DataController extends Controller {
         $format = \EasyRdf_Format::getFormat($MIME);
 
         $content = $result->serialise($format);
-
+       
         DataController::createFile($content, $MIME, $resource);
 
         exit;

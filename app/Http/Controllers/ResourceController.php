@@ -50,10 +50,15 @@ class ResourceController extends Controller {
         if (!isset($uri)) {
             
             $uri = $this->constructIRI($request, $resource);
+            $graph = \EasyRdf_Graph::newAndLoad($uri);
+        }
+        else{
+            logger($uri);
+            $graph = \EasyRdf_Graph::newAndLoad($uri);
         }
         
         $this->setNamespaces();        
-        $graph = \EasyRdf_Graph::newAndLoad($uri);
+        $uri = rawurldecode($uri);
         $label = $this->label($graph, $uri);
         if (!empty($graph->resources())) {
             $types = $graph->typesAsResources($uri);

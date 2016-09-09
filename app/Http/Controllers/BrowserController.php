@@ -10,11 +10,10 @@ class BrowserController extends Controller
     
     public function browser(Request $request) {
         $uri = $request->input('uri');
-        
+        $encoded_uri = $this->encode_iri($uri);
         $this->setNamespaces();
-        
-        $graph = \EasyRdf_Graph::newAndLoad($uri);
-        
+       
+        $graph = \EasyRdf_Graph::newAndLoad($encoded_uri);
         $label = $this->label($graph, $uri);
         if (!empty($graph->resources())) {
             $types = $graph->typesAsResources($uri);

@@ -46,10 +46,18 @@ trait BrowserTrait
             else if($route == 'page2'){
                 $path = 'ontology';
             }
-            $uri = $request->getSchemeAndHttpHost() . '/' . $path . '/' . urldecode($resource);
+            $uri = $request->getSchemeAndHttpHost() . '/' . $path . '/' . rawurlencode($resource);
             return $uri;
     }
     
+    public function encode_iri($iri) {
+        $dirname = pathinfo($iri, PATHINFO_DIRNAME) . '/';
+        $local = mb_substr($iri, mb_strlen($dirname));
+        $filename = rawurlencode($local);
+        $encoded_uri = $dirname . $filename;
+        logger($encoded_uri);
+        return $encoded_uri;
+    }
     
     public static function constructIRI2($request, $resource){
             $route = $request->route()->getName();
@@ -60,7 +68,7 @@ trait BrowserTrait
             else if($route == 'data2'){
                 $path = 'ontology';
             }
-            $uri = $request->getSchemeAndHttpHost() . '/' . $path . '/' . urldecode($resource);
+            $uri = $request->getSchemeAndHttpHost() . '/' . $path . '/' . rawurldecode($resource);
             return $uri;
     }
     
@@ -158,10 +166,11 @@ trait BrowserTrait
         $endpoint = \App\Endpoint::all();
 
         $sparql = new \EasyRdf_Sparql_Client($endpoint[0]->endpoint_url);
-
-        $result = $sparql->query('select distinct ?g where {Graph ?g {<' . $resource . '> ?p ?o}}');
-
+        
+        $result = $sparql->query('select distinct ?g where {Graph ?g {<' . rawurldecode($resource) . '> ?p ?o}}');
+        logger($result[0]->g);
         return $result[0]->g;
+        
     }
     
     public function getAllLiterals(\EasyRdf_Graph $graph, $resource) {
