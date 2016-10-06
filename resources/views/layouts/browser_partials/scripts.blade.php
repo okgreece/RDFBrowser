@@ -49,7 +49,7 @@ $(document).ready(function () {
         pagingType: pagingType,
         scrollX:false,
         order: [],
-        deferRender:false,
+        deferRender:true,
         lengthChange: false,
         language: {
             url: "../browser_assets/plugins/datatables/i18n/{{Cookie::get('locale')}}.json"

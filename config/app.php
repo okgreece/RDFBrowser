@@ -180,6 +180,9 @@ return [
         
         //ENTRUST package
         Zizaco\Entrust\EntrustServiceProvider::class,
+        
+        //ADMIN LTE
+        //Acacha\AdminLTETemplateLaravel\Providers\AdminLTETemplateServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -236,6 +239,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         //my Aliases
+        //'AdminLTE' => Acacha\AdminLTETemplateLaravel\Facades\AdminLTE::class,
         //Debug Bar
         'Debugbar' => Barryvdh\Debugbar\Facade::class,
         //JWT Auth
