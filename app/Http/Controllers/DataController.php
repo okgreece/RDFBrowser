@@ -13,19 +13,25 @@ class DataController extends Controller {
         $this->setNamespaces();
         
         $endpoint = \App\Endpoint::all();
-
         $sparql = new \EasyRdf_Sparql_Client($endpoint[0]->endpoint_url);
 
         $path_parts = pathinfo($resource);
         if (isset($path_parts['extension'])) {
             $extension = $path_parts['extension'];
-            $resource = $path_parts['filename'];
-            
+            logger($path_parts);
+            if(!empty($path_parts['dirname'])){
+                $resource = $path_parts['dirname'] . '/' .$path_parts['filename'];
+            }
+            else{
+                $resource = $path_parts['filename'];
+            }                    
         }
         $uri = $this->constructIRI2($request, $resource);
-       
-        $result = $sparql->query('Describe <' . $uri . '>');
         
+        $query = 'DESCRIBE <' . $uri . '>';
+        $result = $sparql->query($query);
+   
+        //dd($result);
         if (isset($extension)) {
             
             $MIME = DataController::getMime($extension);
@@ -34,7 +40,8 @@ class DataController extends Controller {
         }
 
         $format = \EasyRdf_Format::getFormat($MIME);
-
+        //echo $result;
+       
         $content = $result->serialise($format);
        
         DataController::createFile($content, $MIME, $resource);

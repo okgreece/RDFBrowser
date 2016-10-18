@@ -8,7 +8,7 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
         "barryvdh/laravel-debugbar": "^2.2",
-        "easyrdf/easyrdf": "^0.9.1",
+        "easyrdf/easyrdf" : "^0.9.1",
         "ml/json-ld": "^1.0",
         "willdurand/negotiation": "^2.0",
         "tymon/jwt-auth": "^0.5.9",
@@ -19,7 +19,8 @@
         "ralouphie/mimey": "^1.0",
         "components/flag-icon-css": "^2.3",
         "orangehill/iseed": "^2.1",
-        "zizaco/entrust": "dev-laravel-5"
+        "zizaco/entrust": "dev-laravel-5",
+        "barryvdh/laravel-ide-helper": "^2.2"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

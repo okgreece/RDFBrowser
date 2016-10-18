@@ -46,11 +46,11 @@ trait BrowserTrait
             else if($route == 'page2'){
                 $path = 'ontology';
             }
-            $uri = $request->getSchemeAndHttpHost() . '/' . $path . '/' . rawurlencode($resource);
+            $uri = $request->getSchemeAndHttpHost() . '/' . $path . '/' . BrowserTrait::encode_iri($resource);
             return $uri;
     }
     
-    public function encode_iri($iri) {
+    public static function encode_iri($iri) {
         $dirname = pathinfo($iri, PATHINFO_DIRNAME) . '/';
         $local = mb_substr($iri, mb_strlen($dirname));
         $filename = rawurlencode($local);
