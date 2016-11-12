@@ -13,6 +13,8 @@
 
 <script src="{{ asset('/browser_assets/js/scrolling-nav.js') }}" type="text/javascript"></script>
 
+<script src="{{ asset('/browser_assets/js/entity-labels.js') }}" type="text/javascript"></script>
+
 <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.12/js/jquery.dataTables.js"></script>
 
 <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/fixedheader/3.1.2/js/dataTables.fixedHeader.min.js"></script>
@@ -31,6 +33,11 @@ function filterGlobal() {
             $('#global_smart').prop('checked')
             ).draw();
 }
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
 $(document).ready(function () {
     var pagingType = '';
     console.log(pagingType);
@@ -75,10 +82,10 @@ $(document).ready(function () {
         }
         $(this).on('click', '.more', listLength, toggleShow);
     });
-    //image loader
-//    $.imgLazy({
-//        effect: 'fadeIn'
-//    });
+    
+//    labels(".resource");
+//    console.log("labels loaded");
+//    
 
 });
     

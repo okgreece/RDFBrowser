@@ -28,10 +28,23 @@ class DataController extends Controller {
         }
         $uri = $this->constructIRI2($request, $resource);
         
-        $query = 'DESCRIBE <' . $uri . '>';
-        $result = $sparql->query($query);
-   
-        //dd($result);
+        //create queries
+        $direct_query = 'select ?s ?p ?o where {?s ?p ?o . values ?s { <' . $uri . '>}.} ';
+        $direct_result = $sparql->query($direct_query);
+        $reverse_query = 'select ?s ?p ?o where {?s ?p ?o . values ?o { <' . $uri . '>}.} ';
+        $reverse_result = $sparql->query($reverse_query);
+        
+        //construct the graph
+        $graph = new \EasyRdf_Graph;
+        foreach($direct_result as $triple){
+            $graph->add($triple->s, $triple->p, $triple->o);
+            
+        }
+        foreach($reverse_result as $triple){
+            $graph->add($triple->s, $triple->p, $triple->o);
+            
+        }
+        //get the format
         if (isset($extension)) {
             
             $MIME = DataController::getMime($extension);
@@ -40,12 +53,10 @@ class DataController extends Controller {
         }
 
         $format = \EasyRdf_Format::getFormat($MIME);
-        //echo $result;
-       
-        $content = $result->serialise($format);
-       
+        //serialize the graph
+        $content = $graph->serialise($format);
+        //create and send the file
         DataController::createFile($content, $MIME, $resource);
-
         exit;
     }
     

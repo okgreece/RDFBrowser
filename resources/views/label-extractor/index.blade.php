@@ -3,7 +3,7 @@
 @section('content')
 <div class="container box">
 
-    <h1>Labelextractor <a href="{{ url('/label-extractor/create') }}" class="btn btn-primary btn-xs" title="Add New LabelExtractor"><span class="glyphicon glyphicon-plus" aria-hidden="true"/></a></h1>
+    <h1>Label Extractor <a href="{{ url('/label-extractor/create') }}" class="btn btn-primary btn-xs" title="Add New LabelExtractor"><span class="glyphicon glyphicon-plus" aria-hidden="true"/></a></h1>
     <div class="table">
         <table class="table table-bordered table-striped table-hover">
             <thead>

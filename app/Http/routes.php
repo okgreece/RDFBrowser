@@ -51,6 +51,8 @@ if(config('app.registration')){
 
 Route::get('browser', 'BrowserController@browser')->name('browser');
 
+Route::post('getLabel', 'BrowserController@getLabel')->name('getLabel');
+
 Route::get('resource/{section}', 'ResourceController@negotiation')->name('negotiation')->where(['section' => '.*']);
 
 Route::get('resource', 'ResourceController@noResource')->name('noResource');

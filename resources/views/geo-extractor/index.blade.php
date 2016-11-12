@@ -3,7 +3,7 @@
 @section('content')
 <div class="container box">
 
-    <h1>Geoextractor <a href="{{ url('/geo-extractor/create') }}" class="btn btn-primary btn-xs" title="Add New GeoExtractor"><span class="glyphicon glyphicon-plus" aria-hidden="true"/></a></h1>
+    <h1>Geo Extractor <a href="{{ url('/geo-extractor/create') }}" class="btn btn-primary btn-xs" title="Add New GeoExtractor"><span class="glyphicon glyphicon-plus" aria-hidden="true"/></a></h1>
     <div class="table">
         <table class="table table-bordered table-striped table-hover">
             <thead>

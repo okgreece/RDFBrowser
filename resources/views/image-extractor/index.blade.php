@@ -3,7 +3,7 @@
 @section('content')
 <div class="container box">
 
-    <h1>Imageextractor <a href="{{ url('/image-extractor/create') }}" class="btn btn-primary btn-xs" title="Add New ImageExtractor"><span class="glyphicon glyphicon-plus" aria-hidden="true"/></a></h1>
+    <h1>Image Extractor <a href="{{ url('/image-extractor/create') }}" class="btn btn-primary btn-xs" title="Add New ImageExtractor"><span class="glyphicon glyphicon-plus" aria-hidden="true"/></a></h1>
     <div class="table">
         <table class="table table-bordered table-striped table-hover">
             <thead>

@@ -109,5 +109,6 @@ class LabelExtractorController extends Controller
         Session::flash('flash_message', 'LabelExtractor deleted!');
 
         return redirect('label-extractor');
-    }
+    } 
+    
 }

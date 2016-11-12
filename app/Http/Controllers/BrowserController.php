@@ -45,4 +45,16 @@ class BrowserController extends Controller
             ]);
         }
     }
+    
+    public function getLabel(Request $request)
+    {
+        $uri = $request->get("uri");
+        $uri = explode("=", $uri);
+        $encoded_uri = $this->encode_iri($uri[1]);
+        $this->setNamespaces();
+        logger($uri[1]);
+        $graph = \EasyRdf_Graph::newAndLoad($encoded_uri);
+        $label = $this->label($graph, $uri);
+        return $label;
+    }
 }

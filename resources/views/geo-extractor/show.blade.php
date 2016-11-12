@@ -3,7 +3,7 @@
 @section('content')
 <div class="container box">
 
-    <h1>GeoExtractor {{ $geoextractor->id }}
+    <h1>Geo Extractor {{ $geoextractor->id }}
         <a href="{{ url('geo-extractor/' . $geoextractor->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit GeoExtractor"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
         {!! Form::open([
             'method'=>'DELETE',
