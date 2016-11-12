@@ -3,12 +3,20 @@
         <h3>
             <?php echo trans('theme/browser/dumps.data');?>:
             <br />
-            <a href="<?php echo url('/data/' . $resource . '.csv'); ?>">CSV</a> 
+            <?php if(\Request::route()->getName() == "page2"){
+                $modifier = "2";
+            }
+            else{
+                $modifier  = "";
+            }
+            ?>
+            <a href="<?php echo url('/data'. $modifier .'/' . $resource . '.csv'); ?>">CSV</a> 
             | RDF (
-            <a href="<?php echo url('/data/' . $resource . '.nt'); ?>">N-Triples</a> ::
-            <a href="<?php echo url('/data/' . $resource . '.n3'); ?>">N3/Turtle</a> ::
-            <a href="<?php echo url('/data/' . $resource . '.json'); ?>">JSON</a> ::
-            <a href="<?php echo url('/data/' . $resource . '.rdf'); ?>">XML</a> )
+            <a href="<?php echo url('/data'. $modifier .'/' . $resource . '.nt'); ?>">N-Triples</a> ::
+            <a href="<?php echo url('/data'. $modifier .'/' . $resource . '.n3'); ?>">N3/Turtle</a> ::
+            <a href="<?php echo url('/data'. $modifier .'/' . $resource . '.json'); ?>">JSON</a> ::
+            <a href="<?php echo url('/data'. $modifier .'/' . $resource . '.rdf'); ?>">XML</a> )
         </h3>
     </div> 
+    
 </section>
