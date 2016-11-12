@@ -67,6 +67,7 @@ class ResourceController extends Controller {
             $literals = $this->getAllLiterals($graph, $uri);
             $resources = $this->getAllResources($graph, $uri);
             $reverseResources = $this->getAllReverseResources($graph, $uri);
+            $bnodes = $this->getAllBNodes($graph);
             $images = $this->getAllImages($graph, $uri);
             $map = $this->getGEO($graph, $uri);
             return view('index', [
@@ -82,6 +83,7 @@ class ResourceController extends Controller {
                 'reverseResources' => $reverseResources,
                 'images' => $images,
                 'map' => $map,
+                'bnodes' => $bnodes,
                 'rewrite' => false,
             ]);
         } else {

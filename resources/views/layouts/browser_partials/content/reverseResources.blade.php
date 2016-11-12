@@ -21,7 +21,14 @@
                         echo '<td class="value"><ul class="term-list">';
                         foreach ($myResource["values"] as $value) {
                             echo '<li class="term-item">';
-                            echo '<a class="resource dont-break-out" href="' . ($rewrite ? '/browser?uri='. $value->getUri(): $value->getUri()) . '">' . ($value->shorten()?: $value->getUri()) . '</a>';
+                            if($value->isBNode()){
+                              // $key = array_search($value->getBNodeId(), array_column($bnodes, 'bnode'));
+                              //  echo '<a href="#popover" title="Blank Node Information" data-toggle="popover" data-trigger="focus" data-content=\''.  view('layouts.browser_partials.content.popover', ["bnode" => $bnodes[$key]]) .'\'>_:'.$value->getBNodeId().'</a>';
+                            }
+                            else{
+                                echo '<a class="resource dont-break-out" href="' . ($rewrite ? '/browser?uri='. $value->getUri(): $value->getUri()) . '">' . ($value->shorten()?: $value->getUri()) . '</a>';
+                            }
+                            
                             echo '</li>';
                         }
                         echo '</ul></td>';

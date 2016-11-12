@@ -70,6 +70,7 @@ $(document).ready(function () {
         fixedColumns:false,
         autoWitdh:false
     });
+    $('[data-toggle="popover"]').popover({html:true});
 
     $('input.global_filter').on('keyup click', function () {
         filterGlobal();

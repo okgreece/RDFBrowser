@@ -215,6 +215,32 @@ trait BrowserTrait
         return $resources;
     }
     
+    public function getAllBNodes(\EasyRdf_Graph $graph) {
+        $bnodes = $graph->resources();
+        $bnodes_array = array();
+        foreach ($bnodes as $bnode) {
+            try {
+                if($bnode->isBNode()){
+                    $bnode_properties = $graph->propertyUris($bnode);
+                     $element = array();
+                    foreach($bnode_properties as $property){
+                        $values = $graph->all($bnode, new \EasyRdf_Resource($property));
+                        array_push($element, ['property' => $property, 
+                                              'value' => $values]);
+                        
+                    }
+                    array_push($bnodes_array, ['bnode' => $bnode->getBNodeId(), 'properties' => $element]);
+                }
+            } catch (\Exception $ex) {
+                $element = ['property' => $reverseProperty,
+                    'values' => "Fault found: " . $ex];
+                array_push($resources, $element);
+            }
+        }
+        
+        return $bnodes_array;
+    }
+    
     public function getAllReverseResources(\EasyRdf_Graph $graph, $resource) {
         $properties = $graph->reversePropertyUris($resource);
 
