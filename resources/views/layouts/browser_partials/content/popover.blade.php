@@ -14,7 +14,20 @@
                 echo '<a href="' .$value. '">' . $newValue . '</a>';
             }
             else{
-                $newValue = $value;
+                if(is_bool($value->getValue())){
+                    if($value->getValue()){
+                        echo '<p class="boolean booleanTrue">TRUE</p>';
+                    }
+                    else{
+                        echo '<p class="boolean booleanFalse">FALSE</p>';
+                    }
+                }
+                else{
+                    echo $value;
+                }
+                if ($value->getDataTypeUri()) {
+                    echo '<a href="' . $value->getDataTypeUri() . '" class="datatype dont-break-out"> (' . ($value->getDataType()? : $value->getDataTypeUri()) . ')</a>';
+                }
             }
         ?>
         
