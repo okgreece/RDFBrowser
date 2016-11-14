@@ -4,10 +4,10 @@
 <div class="container box">
 
     <h1>Abstract Extractor {{ $abstractextractor->id }}
-        <a href="{{ url('abstract-extractor/' . $abstractextractor->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit AbstractExtractor"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
+        <a href="{{ url('/RDFBrowser/abstract-extractor/' . $abstractextractor->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit AbstractExtractor"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
         {!! Form::open([
             'method'=>'DELETE',
-            'url' => ['abstractextractor', $abstractextractor->id],
+            'url' => ['RDFBrowser/abstractextractor', $abstractextractor->id],
             'style' => 'display:inline'
         ]) !!}
             {!! Form::button('<span class="glyphicon glyphicon-trash" aria-hidden="true"/>', array(

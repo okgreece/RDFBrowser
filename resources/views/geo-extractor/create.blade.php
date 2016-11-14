@@ -10,7 +10,7 @@
         </div>
 
         <div class="box-body">
-            {!! Form::open(['url' => '/geo-extractor', 'class' => 'form-horizontal']) !!}
+            {!! Form::open(['url' => 'RDFBrowser/geo-extractor', 'class' => 'form-horizontal']) !!}
 
             <div class="form-group {{ $errors->has('title') ? 'has-error' : ''}}">
                 {!! Form::label('title', 'Title', ['class' => 'col-sm-3 control-label']) !!}

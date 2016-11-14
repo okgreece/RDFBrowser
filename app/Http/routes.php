@@ -11,35 +11,85 @@
 |
 */
 
-Route::group(['middlewareGroups' => ['web']], function () {
+Route::group(['prefix'=>'RDFBrowser' ,'middlewareGroups' => ['web']], function () {
     //
-Route::auth();
+
 
 Route::get('/admin', 'AdminController@adminPanel')->name('admin');
 
 Route::get('/dashboard', 'AdminController@adminPanel')->name('dashboard');
 
     
-    Route::resource('geo-extractor', 'GeoExtractorController');
+    Route::resource('geo-extractor', 'GeoExtractorController', 
+            array('names' => array ('create' => 'geo-extractor.create',
+                                    'show' => 'geo-extractor.show',
+                                    'index'=> 'geo-extractor.index',
+                                    'store' => 'geo-extractor.store',
+                                    'update' => 'geo-extractor.update',
+                                    'edit' => 'geo-extractor.edit',
+                                    'destroy' => 'geo-extractor.destroy')));
 
-    Route::resource('endpoint', 'EndpointController');
+    Route::resource('endpoint', 'EndpointController', 
+            array('names' => array ('create' => 'endpoint.create',
+                                    'show' => 'endpoint.show',
+                                    'index'=> 'endpoint.index',
+                                    'store' => 'endpoint.store',
+                                    'update' => 'endpoint.update',
+                                    'edit' => 'endpoint.edit',
+                                    'destroy' => 'endpoint.destroy')));
 
-    Route::resource('rdfnamespace', 'rdfnamespaceController');
+    Route::resource('rdfnamespace', 'rdfnamespaceController', 
+            array('names' => array ('create' => 'rdfnamespace.create',
+                                    'show' => 'rdfnamespace.show',
+                                    'index'=> 'rdfnamespace.index',
+                                    'store' => 'rdfnamespace.store',
+                                    'update' => 'rdfnamespace.update',
+                                    'edit' => 'rdfnamespace.edit',
+                                    'destroy' => 'rdfnamespace.destroy')));
 
-    Route::resource('abstract-extractor', 'AbstractExtractorController');
+    Route::resource('abstract-extractor', 'AbstractExtractorController', 
+            array('names' => array ('create' => 'abstract-extractor.create',
+                                    'show' => 'abstract-extractor.show',
+                                    'index'=> 'abstract-extractor.index',
+                                    'store' => 'abstract-extractor.store',
+                                    'update' => 'abstract-extractor.update',
+                                    'edit' => 'abstract-extractor.edit',
+                                    'destroy' => 'abstract-extractor.destroy')));
 
-    Route::resource('label-extractor', 'LabelExtractorController');
+    Route::resource('label-extractor', 'LabelExtractorController', 
+            array('names' => array ('create' => 'label-extractor.create',
+                                    'show' => 'label-extractor.show',
+                                    'index'=> 'label-extractor.index',
+                                    'store' => 'label-extractor.store',
+                                    'update' => 'label-extractor.update',
+                                    'edit' => 'label-extractor.edit',
+                                    'destroy' => 'label-extractor.destroy')));
 
-    Route::resource('image-extractor', 'ImageExtractorController');
+    Route::resource('image-extractor', 'ImageExtractorController', 
+            array('names' => array ('create' => 'image-extractor.create',
+                                    'show' => 'image-extractor.show',
+                                    'index'=> 'image-extractor.index',
+                                    'store' => 'image-extractor.store',
+                                    'update' => 'image-extractor.update',
+                                    'edit' => 'image-extractor.edit',
+                                    'destroy' => 'image-extractor.destroy')));
 
-    Route::resource('user', 'UserController');
+    Route::resource('user', 'UserController', 
+            array('names' => array ('create' => 'user.create',
+                                    'show' => 'user.show',
+                                    'index'=> 'user.index',
+                                    'store' => 'user.store',
+                                    'update' => 'user.update',
+                                    'edit' => 'user.edit',
+                                    'destroy' => 'user.destroy')));
 
 
 
 
 });
 
-Route::group(['prefix'=>'admin','middleware' => ['web']], function () {
+Route::group(['middleware' => ['web']], function () {
+    Route::auth();
 
 });
 

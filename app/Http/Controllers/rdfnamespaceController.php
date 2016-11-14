@@ -46,7 +46,7 @@ class rdfnamespaceController extends Controller
 
         Session::flash('flash_message', 'rdfnamespace added!');
 
-        return redirect('rdfnamespace');
+        return redirect('RDFBrowser/rdfnamespace');
     }
 
     /**
@@ -92,7 +92,7 @@ class rdfnamespaceController extends Controller
 
         Session::flash('flash_message', 'rdfnamespace updated!');
 
-        return redirect('rdfnamespace');
+        return redirect('RDFBrowser/rdfnamespace');
     }
 
     /**
@@ -108,6 +108,6 @@ class rdfnamespaceController extends Controller
 
         Session::flash('flash_message', 'rdfnamespace deleted!');
 
-        return redirect('rdfnamespace');
+        return redirect('RDFBrowser/rdfnamespace');
     }
 }

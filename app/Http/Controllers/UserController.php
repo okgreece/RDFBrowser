@@ -64,7 +64,7 @@ class UserController extends Controller {
         $user->attachRole(\App\Role::find($request->input('role')));
         Session::flash('flash_message', 'User added!');
 
-        return redirect('user');
+        return redirect('RDFBrowser/user');
     }
 
     /**
@@ -125,7 +125,7 @@ class UserController extends Controller {
         
         Session::flash('flash_message', 'User updated!');
 
-        return redirect('user');
+        return redirect('RDFBrowser/user');
     }
 
     /**
@@ -140,7 +140,7 @@ class UserController extends Controller {
 
         Session::flash('flash_message', 'User deleted!');
 
-        return redirect('user');
+        return redirect('RDFBrowser/user');
     }
 
 }

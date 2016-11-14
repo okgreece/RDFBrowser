@@ -9,7 +9,7 @@
         <div class="box-body">
             {!! Form::model($user, [
                 'method' => 'PATCH',
-                'url' => ['/user', $user->id],
+                'url' => ['RDFBrowser/user', $user->id],
                 'class' => 'form-horizontal'
             ]) !!}
 

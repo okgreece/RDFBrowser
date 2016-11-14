@@ -4,10 +4,10 @@
 <div class="container box">
 
     <h1>RDF Namespace {{ $rdfnamespace->id }}
-        <a href="{{ url('rdfnamespace/' . $rdfnamespace->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit rdfnamespace"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
+        <a href="{{ url('RDFBrowser/rdfnamespace/' . $rdfnamespace->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit rdfnamespace"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
         {!! Form::open([
             'method'=>'DELETE',
-            'url' => ['rdfnamespace', $rdfnamespace->id],
+            'url' => ['RDFBrowser/rdfnamespace', $rdfnamespace->id],
             'style' => 'display:inline'
         ]) !!}
             {!! Form::button('<span class="glyphicon glyphicon-trash" aria-hidden="true"/>', array(

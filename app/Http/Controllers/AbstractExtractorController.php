@@ -46,7 +46,7 @@ class AbstractExtractorController extends Controller
 
         Session::flash('flash_message', 'AbstractExtractor added!');
 
-        return redirect('abstract-extractor');
+        return redirect('RDFBrowser/abstract-extractor');
     }
 
     /**
@@ -92,7 +92,7 @@ class AbstractExtractorController extends Controller
 
         Session::flash('flash_message', 'AbstractExtractor updated!');
 
-        return redirect('abstract-extractor');
+        return redirect('RDFBrowser/abstract-extractor');
     }
 
     /**
@@ -108,6 +108,6 @@ class AbstractExtractorController extends Controller
 
         Session::flash('flash_message', 'AbstractExtractor deleted!');
 
-        return redirect('abstract-extractor');
+        return redirect('RDFBrowser/abstract-extractor');
     }
 }

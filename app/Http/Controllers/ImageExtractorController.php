@@ -46,7 +46,7 @@ class ImageExtractorController extends Controller
 
         Session::flash('flash_message', 'ImageExtractor added!');
 
-        return redirect('image-extractor');
+        return redirect('RDFBrowser/image-extractor');
     }
 
     /**
@@ -92,7 +92,7 @@ class ImageExtractorController extends Controller
 
         Session::flash('flash_message', 'ImageExtractor updated!');
 
-        return redirect('image-extractor');
+        return redirect('RDFBrowser/image-extractor');
     }
 
     /**
@@ -108,6 +108,6 @@ class ImageExtractorController extends Controller
 
         Session::flash('flash_message', 'ImageExtractor deleted!');
 
-        return redirect('image-extractor');
+        return redirect('RDFBrowser/image-extractor');
     }
 }

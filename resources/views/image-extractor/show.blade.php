@@ -4,10 +4,10 @@
 <div class="container box">
 
     <h1>ImageExtractor {{ $imageextractor->id }}
-        <a href="{{ url('image-extractor/' . $imageextractor->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit ImageExtractor"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
+        <a href="{{ url('RDFBrowser/image-extractor/' . $imageextractor->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit ImageExtractor"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
         {!! Form::open([
             'method'=>'DELETE',
-            'url' => ['imageextractor', $imageextractor->id],
+            'url' => ['/RDFBrowser/imageextractor', $imageextractor->id],
             'style' => 'display:inline'
         ]) !!}
             {!! Form::button('<span class="glyphicon glyphicon-trash" aria-hidden="true"/>', array(

@@ -3,7 +3,7 @@
 @section('content')
 <div class="container box">
 
-    <h1>Image Extractor <a href="{{ url('/image-extractor/create') }}" class="btn btn-primary btn-xs" title="Add New ImageExtractor"><span class="glyphicon glyphicon-plus" aria-hidden="true"/></a></h1>
+    <h1>Image Extractor <a href="{{ url('/RDFBrowser/image-extractor/create') }}" class="btn btn-primary btn-xs" title="Add New ImageExtractor"><span class="glyphicon glyphicon-plus" aria-hidden="true"/></a></h1>
     <div class="table">
         <table class="table table-bordered table-striped table-hover">
             <thead>
@@ -19,11 +19,11 @@
                     <td>{{ $x }}</td>
                     <td>{{ $item->property }}</td><td>{{ $item->priority }}</td><td>{{ $item->enabled }}</td>
                     <td>
-                        <a href="{{ url('/image-extractor/' . $item->id) }}" class="btn btn-success btn-xs" title="View ImageExtractor"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a>
-                        <a href="{{ url('/image-extractor/' . $item->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit ImageExtractor"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
+                        <a href="{{ url('/RDFBrowser/image-extractor/' . $item->id) }}" class="btn btn-success btn-xs" title="View ImageExtractor"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a>
+                        <a href="{{ url('/RDFBrowser/image-extractor/' . $item->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit ImageExtractor"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
                         {!! Form::open([
                             'method'=>'DELETE',
-                            'url' => ['/image-extractor', $item->id],
+                            'url' => ['/RDFBrowser/image-extractor', $item->id],
                             'style' => 'display:inline'
                         ]) !!}
                             {!! Form::button('<span class="glyphicon glyphicon-trash" aria-hidden="true" title="Delete ImageExtractor" />', array(

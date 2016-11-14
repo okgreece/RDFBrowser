@@ -3,7 +3,7 @@
 @section('content')
 <div class="container box">
 
-    <h1>Abstract Extractor <a href="{{ url('/abstract-extractor/create') }}" class="btn btn-primary btn-xs" title="Add New AbstractExtractor"><span class="glyphicon glyphicon-plus" aria-hidden="true"/></a></h1>
+    <h1>Abstract Extractor <a href="{{ url('/RDFBrowser/abstract-extractor/create') }}" class="btn btn-primary btn-xs" title="Add New AbstractExtractor"><span class="glyphicon glyphicon-plus" aria-hidden="true"/></a></h1>
     <div class="table">
         <table class="table table-bordered table-striped table-hover">
             <thead>
@@ -18,11 +18,11 @@
                 <tr>
                     <td>{{ $item->property }}</td><td>{{ $item->priority }}</td><td>{{ $item->enabled }}</td>
                     <td>
-                        <a href="{{ url('/abstract-extractor/' . $item->id) }}" class="btn btn-success btn-xs" title="View AbstractExtractor"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a>
-                        <a href="{{ url('/abstract-extractor/' . $item->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit AbstractExtractor"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
+                        <a href="{{ url('/RDFBrowser/abstract-extractor/' . $item->id) }}" class="btn btn-success btn-xs" title="View AbstractExtractor"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a>
+                        <a href="{{ url('/RDFBrowser/abstract-extractor/' . $item->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit AbstractExtractor"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
                         {!! Form::open([
                             'method'=>'DELETE',
-                            'url' => ['/abstract-extractor', $item->id],
+                            'url' => ['/RDFBrowser/abstract-extractor', $item->id],
                             'style' => 'display:inline'
                         ]) !!}
                             {!! Form::button('<span class="glyphicon glyphicon-trash" aria-hidden="true" title="Delete AbstractExtractor" />', array(

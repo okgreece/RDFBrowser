@@ -9,7 +9,7 @@
         <div class="box-body">
             {!! Form::model($imageextractor, [
                 'method' => 'PATCH',
-                'url' => ['/image-extractor', $imageextractor->id],
+                'url' => ['/RDFBrowser/image-extractor', $imageextractor->id],
                 'class' => 'form-horizontal'
             ]) !!}
 

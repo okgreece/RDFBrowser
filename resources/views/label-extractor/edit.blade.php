@@ -9,7 +9,7 @@
         <div class="box-body">
             {!! Form::model($labelextractor, [
                 'method' => 'PATCH',
-                'url' => ['/label-extractor', $labelextractor->id],
+                'url' => ['RDFBrowser/label-extractor', $labelextractor->id],
                 'class' => 'form-horizontal'
             ]) !!}
 

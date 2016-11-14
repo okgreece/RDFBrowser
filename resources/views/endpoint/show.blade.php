@@ -4,10 +4,10 @@
 <div class="container box">
 
     <h1>Endpoint
-        <a href="{{ url('endpoint/' . $endpoint->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit Endpoint"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
+        <a href="{{ url('RDFBrowser/endpoint/' . $endpoint->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit Endpoint"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
         {!! Form::open([
             'method'=>'DELETE',
-            'url' => ['endpoint', $endpoint->id],
+            'url' => ['RDFBrowser/endpoint', $endpoint->id],
             'style' => 'display:inline'
         ]) !!}
             {!! Form::button('<span class="glyphicon glyphicon-trash" aria-hidden="true"/>', array(

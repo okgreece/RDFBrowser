@@ -46,7 +46,7 @@ class LabelExtractorController extends Controller
    
         Session::flash('flash_message', 'LabelExtractor added!');
 
-        return redirect('label-extractor');
+        return redirect('RDFBrowser/label-extractor');
     }
 
     /**
@@ -92,7 +92,7 @@ class LabelExtractorController extends Controller
 
         Session::flash('flash_message', 'LabelExtractor updated!');
 
-        return redirect('label-extractor');
+        return redirect('RDFBrowser/label-extractor');
     }
 
     /**
@@ -108,7 +108,7 @@ class LabelExtractorController extends Controller
 
         Session::flash('flash_message', 'LabelExtractor deleted!');
 
-        return redirect('label-extractor');
+        return redirect('RDFBrowser/label-extractor');
     } 
     
 }

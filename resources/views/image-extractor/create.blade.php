@@ -9,7 +9,7 @@
         </div>
         <div class="box-body">
 
-            {!! Form::open(['url' => '/image-extractor', 'class' => 'form-horizontal']) !!}
+            {!! Form::open(['url' => '/RDFBrowser/image-extractor', 'class' => 'form-horizontal']) !!}
 
                         <div class="form-group {{ $errors->has('property') ? 'has-error' : ''}}">
                 {!! Form::label('property', 'Property', ['class' => 'col-sm-3 control-label']) !!}

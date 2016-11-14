@@ -12,7 +12,7 @@
         <div class="box-body">
             {!! Form::model($geoextractor, [
             'method' => 'PATCH',
-            'url' => ['/geo-extractor', $geoextractor->id],
+            'url' => ['/RDFBrowser/geo-extractor', $geoextractor->id],
             'class' => 'form-horizontal'
             ]) !!}
 

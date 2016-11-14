@@ -3,7 +3,7 @@
 @section('content')
 <div class="container box">
 
-    <h1>RDF Namespaces <a href="{{ url('/rdfnamespace/create') }}" class="btn btn-primary btn-xs" title="Add New rdfnamespace"><span class="glyphicon glyphicon-plus" aria-hidden="true"/></a></h1>
+    <h1>RDF Namespaces <a href="{{ url('RDFBrowser/rdfnamespace/create') }}" class="btn btn-primary btn-xs" title="Add New rdfnamespace"><span class="glyphicon glyphicon-plus" aria-hidden="true"/></a></h1>
     <div class="table">
         <table class="table table-bordered table-striped table-hover">
             <thead>
@@ -18,11 +18,11 @@
                 <tr>
                     <td>{{ $item->prefix }}</td><td>{{ $item->uri }}</td><td>{{ $item->added }}</td>
                     <td>
-                        <a href="{{ url('/rdfnamespace/' . $item->id) }}" class="btn btn-success btn-xs" title="View rdfnamespace"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a>
-                        <a href="{{ url('/rdfnamespace/' . $item->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit rdfnamespace"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
+                        <a href="{{ url('RDFBrowser/rdfnamespace/' . $item->id) }}" class="btn btn-success btn-xs" title="View rdfnamespace"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a>
+                        <a href="{{ url('RDFBrowser/rdfnamespace/' . $item->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit rdfnamespace"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
                         {!! Form::open([
                             'method'=>'DELETE',
-                            'url' => ['/rdfnamespace', $item->id],
+                            'url' => ['RDFBrowser/rdfnamespace', $item->id],
                             'style' => 'display:inline'
                         ]) !!}
                             {!! Form::button('<span class="glyphicon glyphicon-trash" aria-hidden="true" title="Delete rdfnamespace" />', array(

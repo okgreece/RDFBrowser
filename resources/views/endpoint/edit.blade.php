@@ -9,7 +9,7 @@
         <div class="box-body">
             {!! Form::model($endpoint, [
                 'method' => 'PATCH',
-                'url' => ['/endpoint', $endpoint->id],
+                'url' => ['RDFBrowser/endpoint', $endpoint->id],
                 'class' => 'form-horizontal'
             ]) !!}
 

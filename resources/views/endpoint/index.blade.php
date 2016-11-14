@@ -3,7 +3,7 @@
 @section('content')
 <div class="container box">
 
-    <h1>Endpoint <a href="{{ url('/endpoint/create') }}" class="btn btn-primary btn-xs" title="Add New Endpoint"><span class="glyphicon glyphicon-plus" aria-hidden="true"/></a></h1>
+    <h1>Endpoint <a href="{{ url('RDFBrowser/endpoint/create') }}" class="btn btn-primary btn-xs" title="Add New Endpoint"><span class="glyphicon glyphicon-plus" aria-hidden="true"/></a></h1>
     <div class="table">
         <table class="table table-bordered table-striped table-hover">
             <thead>
@@ -21,11 +21,11 @@
                     
                     <td>{{ $item->name }}</td><td>{{ $item->endpoint_url }}</td>
                     <td>
-                        <a href="{{ url('/endpoint/' . $item->id) }}" class="btn btn-success btn-xs" title="View Endpoint"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a>
-                        <a href="{{ url('/endpoint/' . $item->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit Endpoint"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
+                        <a href="{{ url('/RDFBrowser/endpoint/' . $item->id) }}" class="btn btn-success btn-xs" title="View Endpoint"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a>
+                        <a href="{{ url('/RDFBrowser/endpoint/' . $item->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit Endpoint"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
                         {!! Form::open([
                             'method'=>'DELETE',
-                            'url' => ['/endpoint', $item->id],
+                            'url' => ['/RDFBrowser/endpoint', $item->id],
                             'style' => 'display:inline'
                         ]) !!}
                             {!! Form::button('<span class="glyphicon glyphicon-trash" aria-hidden="true" title="Delete Endpoint" />', array(

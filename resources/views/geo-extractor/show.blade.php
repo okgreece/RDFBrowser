@@ -4,10 +4,10 @@
 <div class="container box">
 
     <h1>Geo Extractor {{ $geoextractor->id }}
-        <a href="{{ url('geo-extractor/' . $geoextractor->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit GeoExtractor"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
+        <a href="{{ url('RDFBrowser/geo-extractor/' . $geoextractor->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit GeoExtractor"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
         {!! Form::open([
             'method'=>'DELETE',
-            'url' => ['geoextractor', $geoextractor->id],
+            'url' => ['RDFBrowser/geoextractor', $geoextractor->id],
             'style' => 'display:inline'
         ]) !!}
             {!! Form::button('<span class="glyphicon glyphicon-trash" aria-hidden="true"/>', array(

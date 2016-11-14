@@ -9,7 +9,7 @@
         <div class="box-body">
             {!! Form::model($abstractextractor, [
                 'method' => 'PATCH',
-                'url' => ['/abstract-extractor', $abstractextractor->id],
+                'url' => ['/RDFBrowser/abstract-extractor', $abstractextractor->id],
                 'class' => 'form-horizontal'
             ]) !!}
 

@@ -4,10 +4,10 @@
 <div class="container box">
 
     <h1>LabelExtractor {{ $labelextractor->id }}
-        <a href="{{ url('label-extractor/' . $labelextractor->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit LabelExtractor"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
+        <a href="{{ url('RDFBrowser/label-extractor/' . $labelextractor->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit LabelExtractor"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
         {!! Form::open([
             'method'=>'DELETE',
-            'url' => ['labelextractor', $labelextractor->id],
+            'url' => ['RDFBrowser/labelextractor', $labelextractor->id],
             'style' => 'display:inline'
         ]) !!}
             {!! Form::button('<span class="glyphicon glyphicon-trash" aria-hidden="true"/>', array(

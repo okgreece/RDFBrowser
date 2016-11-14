@@ -9,7 +9,7 @@
         <div class="box-body">
             {!! Form::model($rdfnamespace, [
                 'method' => 'PATCH',
-                'url' => ['/rdfnamespace', $rdfnamespace->id],
+                'url' => ['/RDFBrowser/rdfnamespace', $rdfnamespace->id],
                 'class' => 'form-horizontal'
             ]) !!}
 

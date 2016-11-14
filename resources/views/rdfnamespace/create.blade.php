@@ -9,7 +9,7 @@
         </div>
         <div class="box-body">
 
-            {!! Form::open(['url' => '/rdfnamespace', 'class' => 'form-horizontal']) !!}
+            {!! Form::open(['url' => '/RDFBrowser/rdfnamespace', 'class' => 'form-horizontal']) !!}
 
                         <div class="form-group {{ $errors->has('prefix') ? 'has-error' : ''}}">
                 {!! Form::label('prefix', 'Prefix', ['class' => 'col-sm-3 control-label']) !!}

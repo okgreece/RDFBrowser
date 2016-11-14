@@ -46,7 +46,7 @@ class EndpointController extends Controller
 
         Session::flash('flash_message', 'Endpoint added!');
 
-        return redirect('endpoint');
+        return redirect('RDFBrowser/endpoint');
     }
 
     /**
@@ -92,7 +92,7 @@ class EndpointController extends Controller
 
         Session::flash('flash_message', 'Endpoint updated!');
 
-        return redirect('endpoint');
+        return redirect('RDFBrowser/endpoint');
     }
 
     /**
@@ -108,6 +108,6 @@ class EndpointController extends Controller
 
         Session::flash('flash_message', 'Endpoint deleted!');
 
-        return redirect('endpoint');
+        return redirect('RDFBrowser/endpoint');
     }
 }

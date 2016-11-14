@@ -50,7 +50,7 @@ class GeoExtractorController extends Controller
 
         Session::flash('flash_message', 'GeoExtractor added!');
 
-        return redirect('geo-extractor');
+        return redirect('RDFBrowser/geo-extractor');
     }
 
     /**
@@ -97,7 +97,7 @@ class GeoExtractorController extends Controller
 
         Session::flash('flash_message', 'GeoExtractor updated!');
 
-        return redirect('geo-extractor');
+        return redirect('RDFBrowser/geo-extractor');
     }
 
     /**
@@ -113,7 +113,7 @@ class GeoExtractorController extends Controller
 
         Session::flash('flash_message', 'GeoExtractor deleted!');
 
-        return redirect('geo-extractor');
+        return redirect('RDFBrowser/geo-extractor');
     }
     
 }
