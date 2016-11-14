@@ -1,27 +1,52 @@
-# Laravel PHP Framework
+# RDFBrowser
+A Linked Data content negotiation and publication platform coded in PHP for consumer level applications.
 
-[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
-[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
-[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
+#Installation instructions
+This is an application developed with Laravel MVC PHP Framework. Follow these instructions to succesfully install the app.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
+```sh
+#clone the repo on a folder of your choice, usually /home/$user
 
-Laravel is accessible, yet powerful, providing tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+$ git clone https://github.com/okgreece/RDFBrowser.git
 
-## Official Documentation
+$ cd RDFBrowser
 
-Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
+# build dependencies
+$ composer install
 
-## Contributing
+#copy or move folder on your public folder usually /var/www 
+$ cd ..
+$ cp -r RDFBrowser/ /var/www/RDFBrowser
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
+#...or create a simlink to it
 
-## Security Vulnerabilities
+#on the root folder execute
+$ php artisan key:generate
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+#if you want to test with development server execute
+$ php artisan serve
 
-## License
+#on your browser go to http://localhost:8000/admin
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT).
+Please, take care to make appropriate changes when you use different folders, or if you don't have wright permissions on the public folder. 
+
+Go to http://yourdomain/admin. It will redirect you at the login page. 
+
+Use username : admin@admin.com
+        pass : admin1
+        
+Remember to change these settings after first login.
+
+Then go to Endpoint section. It defaults to DBpedia SPARQL Endpoint as NON working example. You should change at least the URL of your Endpoint to reflect your configuration. 
+
+Enjoy your new Linked Data Application!!!
+
+#Quickstart & Shared Hosting
+
+You can choose the pre-built releases on [Pre-Built Releases and Source Code](https://github.com/okgreece/RDFBrowser/releases/) if you want to quickstart your new app. Just extract the zipped files, change Endpoint AND User Login settings and you are ready to go!
+
+
+#NGINX
+It hasn't been tested yet with nginx server but this guide could be useful :
+[Laravel on NGINX](https://www.digitalocean.com/community/tutorials/how-to-install-laravel-with-an-nginx-web-server-on-ubuntu-14-04)
