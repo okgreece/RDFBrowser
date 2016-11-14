@@ -4,11 +4,17 @@
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "type": "project",
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/skarampatakis/easyrdf"
+        }
+    ],
     "require": {
         "php": ">=5.5.9",
         "laravel/framework": "5.2.*",
         "barryvdh/laravel-debugbar": "^2.2",
-        "easyrdf/easyrdf" : "^0.9.1",
+        "easyrdf/easyrdf" : "dev-okgreece",
         "ml/json-ld": "^1.0",
         "willdurand/negotiation": "^2.0",
         "tymon/jwt-auth": "^0.5.9",
