@@ -87,6 +87,8 @@ Route::auth();
 
 Route::get('/login', 'Auth\LogInController@login')->name('login');
 
+Route::get('/', 'Auth\LogInController@login');
+
 if(config('app.registration')){
     Route::get('/register', 'Auth\RegisterController@register')->name('register');
 }
@@ -119,3 +121,4 @@ Route::get('page2/{section}', 'ResourceController@page')->name('page2')->where([
 
 Route::get('data2/{section}', 'DataController@data')->name('data2')->where(['section' => '.*']);
 
+Route::get('/', 'ResourceController@noResource');
