@@ -18,7 +18,7 @@
     <main class="auth-main">
         <div class="auth-block">
             <h1>Sign up to RDFBrowser</h1><a href="/login" class="auth-link">Already have a RDFBrowser? Sign in!</a>
-            <form class="form-horizontal" role="form" method="POST" action="{{ url('/register') }}">
+            <form class="form-horizontal" role="form" method="POST" action="{{ url('RDFBrowser/register') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">

@@ -29,14 +29,14 @@
                     </div>
                 </li>
                 @if (Auth::guest())
-                <li><a href="{{ url('/login') }}"><?php echo trans('theme/browser/navbar.login'); ?></a></li>
+                <li><a href="{{ url('RDFBrowser/login') }}"><?php echo trans('theme/browser/navbar.login'); ?></a></li>
                 @if(config('app.registration'))
-                <li><a href="{{ url('/register') }}"><?php echo trans('theme/browser/navbar.register'); ?></a></li>
+                <li><a href="{{ url('RDFBrowser/register') }}"><?php echo trans('theme/browser/navbar.register'); ?></a></li>
                 @endif
                 @else
                 <!-- User Account Menu -->
                 <li>
-                    <a href="{{ url('/admin') }}">
+                    <a href="{{ url('RDFBrowser/admin') }}">
                         <span class="hidden-xs">{{ Auth::user()->name }}</span>
                     </a>
                 </li>

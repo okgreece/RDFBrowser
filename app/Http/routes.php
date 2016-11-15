@@ -83,15 +83,7 @@ Route::get('/dashboard', 'AdminController@adminPanel')->name('dashboard');
                                     'edit' => 'user.edit',
                                     'destroy' => 'user.destroy')));
 
-
-
-
-});
-
-Route::group(['middleware' => ['web']], function () {
-    Route::auth();
-
-});
+Route::auth();
 
 Route::get('/login', 'Auth\LogInController@login')->name('login');
 
@@ -100,6 +92,14 @@ if(config('app.registration')){
 }
 
 Route::get('browser', 'BrowserController@browser')->name('browser');
+
+
+});
+
+Route::group(['middleware' => ['web']], function () {
+    
+
+});
 
 Route::post('getLabel', 'BrowserController@getLabel')->name('getLabel');
 

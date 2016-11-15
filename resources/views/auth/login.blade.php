@@ -17,9 +17,9 @@
             <div class="auth-block">
                 <h1>Sign in to RDFBrowser</h1>
                 @if(config('app.registration'))
-                <a href="/register" class="auth-link">New to RDFBrowser? Sign up!</a>
+                <a href="RDFBrowser/register" class="auth-link">New to RDFBrowser? Sign up!</a>
                 @endif
-                <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
+                <form class="form-horizontal" role="form" method="POST" action="{{ url('RDFBrowser/login') }}">
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
@@ -66,7 +66,7 @@
                                     <i class="fa fa-btn fa-sign-in"></i> Login
                                 </button>
 
-                                <a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Your Password?</a>
+                                <a class="btn btn-link" href="{{ url('RDFBrowser/password/reset') }}">Forgot Your Password?</a>
                             </div>
                         </div>
                     </form>
