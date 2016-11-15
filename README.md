@@ -50,3 +50,21 @@ You can choose the pre-built releases on [Pre-Built Releases and Source Code](ht
 #NGINX
 It hasn't been tested yet with nginx server but this guide could be useful :
 [Laravel on NGINX](https://www.digitalocean.com/community/tutorials/how-to-install-laravel-with-an-nginx-web-server-on-ubuntu-14-04)
+
+#Docker
+This is a first attemp to dockerize the application. [Laradock](https://github.com/LaraDock/laradock) is used for this purpose, as a submodule.
+to install Laradock along with RDFBrowser clone the repo with the following command.
+```bash
+git clone --recursive -j8 https://github.com/okgreece/RDFBrowser.git
+```
+This command will clone both the RDFBrowser and Laradock. 
+
+Next step is to set up the environment. 
+
+```bash
+#get inside the folder
+cd laradock
+
+#run docker-compose to get nginx
+docker-compose up -d nginx
+```
