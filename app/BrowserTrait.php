@@ -173,7 +173,7 @@ trait BrowserTrait
         
     }
     
-    public function getAllLiterals(\EasyRdf_Graph $graph, $resource) {
+    public function getAllLiteralsOld(\EasyRdf_Graph $graph, $resource) {
         $properties = $graph->propertyUris($resource);
         $literals = array();
         $element = array();
@@ -194,16 +194,23 @@ trait BrowserTrait
         return $literals;
     }
     
-    public function getAllResources(\EasyRdf_Graph $graph, $resource) {
+    public function getAllLiterals(\EasyRdf_Graph $graph, $resource) {
         $properties = $graph->propertyUris($resource);
         $resources = array();
         $element = array();
         foreach ($properties as $property) {
             try {
-                $resourceValues = $graph->allResources($resource, new \EasyRdf_Resource($property));
+                $resourceValues = $graph->allLiterals($resource, new \EasyRdf_Resource($property));
                 if (!empty($resourceValues)) {
+                    $values = [];
+                    foreach($resourceValues as $resourceValue){
+                        $dataType = $resourceValue->getDatatypeUri();
+                        $value = $resourceValue->getValue();
+                        $lang = $resourceValue->getLang();
+                        array_push($values, ["type" => "literal", "value" => $value, "lang" => $lang, "datatype" => $dataType]);
+                    }
                     $element = ['property' => $property,
-                        'values' => $resourceValues];
+                        'values' => $values];
                     array_push($resources, $element);
                 }
             } catch (\Exception $ex) {
@@ -215,49 +222,72 @@ trait BrowserTrait
         return $resources;
     }
     
-    public function getAllBNodes(\EasyRdf_Graph $graph) {
-        $bnodes = $graph->resources();
-        $bnodes_array = array();
-        foreach ($bnodes as $bnode) {
-            try {
-                if($bnode->isBNode()){
-                    $bnode_properties = $graph->propertyUris($bnode);
-                     $element = array();
-                    foreach($bnode_properties as $property){
-                        $values = $graph->all($bnode, new \EasyRdf_Resource($property));
-                        array_push($element, ['property' => $property, 
-                                              'value' => $values]);
-                        
-                    }
-                    array_push($bnodes_array, ['bnode' => $bnode->getBNodeId(), 'properties' => $element]);
-                }
-            } catch (\Exception $ex) {
-                $element = ['property' => $reverseProperty,
-                    'values' => "Fault found: " . $ex];
-                array_push($resources, $element);
-            }
-        }
-        
-        return $bnodes_array;
-    }
-    
-    public function getAllReverseResources(\EasyRdf_Graph $graph, $resource) {
-        $properties = $graph->reversePropertyUris($resource);
-
+    public function getAllResources(\EasyRdf_Graph $graph, $resource) {
+        $properties = $graph->propertyUris($resource);
         $resources = array();
         $element = array();
         foreach ($properties as $property) {
             try {
-                $reverseProperty = '^' . $property;
-                $resourceValues = $graph->allResources($resource, new \EasyRdf_Resource($reverseProperty));
+                $resourceValues = $graph->allResources($resource, new \EasyRdf_Resource($property));
                 if (!empty($resourceValues)) {
+                    $values = [];
+                    foreach($resourceValues as $resourceValue){
+                        $type = $resourceValue->isBNode() ? "bnode" : "resource";
+                        $value = $resourceValue->isBNode() ? $resourceValue->getBNodeId() : $resourceValue->getUri();
+                        array_push($values, ["type" => $type, "value" => $value]);
+                    }
                     $element = ['property' => $property,
-                        'values' => $resourceValues];
+                        'values' => $values];
                     array_push($resources, $element);
                 }
             } catch (\Exception $ex) {
-                $element = ['property' => $reverseProperty,
-                    'values' => "Fault found: " . $ex];
+                $element = ['property' => $property,
+                    'values' => "Fault found: "];
+                array_push($resources, $element);
+            }
+        }
+        return $resources;
+    }
+    
+    public static function getBNodeDescription(\EasyRdf_Graph $graph, $bnodeID) {
+        $resource = $graph->resource("_:". $bnodeID);
+        //dd($graph->dump($resource));
+        $description = [];
+        $bnode_properties = $graph->propertyUris($resource);
+        foreach($bnode_properties as $property){
+            $values = $graph->all($resource, new \EasyRdf_Resource($property));
+            array_push($description, 
+                    [
+                        'property' => $property, 
+                        'value' => $values
+                    ]
+                    );                        
+            }
+                
+        return view('layouts.browser_partials.content.popover', ["descriptions" => $description]);
+    }
+    
+    public function getAllReverseResources(\EasyRdf_Graph $graph, $resource) {
+        $properties = $graph->reversePropertyUris($resource);
+        $resources = array();
+        $element = array();
+        foreach ($properties as $property) {
+            try {
+                $resourceValues = $graph->allResources($resource, new \EasyRdf_Resource('^'. $property));
+                if (!empty($resourceValues)) {
+                    $values = [];
+                    foreach($resourceValues as $resourceValue){
+                        $type = $resourceValue->isBNode() ? "bnode" : "resource";
+                        $value = $resourceValue->isBNode() ? $resourceValue->getBNodeId() : $resourceValue->getUri();
+                        array_push($values, ["type" => $type, "value" => $value]);
+                    }
+                    $element = ['property' => $property,
+                        'values' => $values];
+                    array_push($resources, $element);
+                }
+            } catch (\Exception $ex) {
+                $element = ['property' => $property,
+                    'values' => "Fault found: "];
                 array_push($resources, $element);
             }
         }
@@ -288,7 +318,6 @@ trait BrowserTrait
             } else {
                 $data = $this->singleExtractor($graph, $uri, $extractor);
             }
-
             if ($data != null) {
                 break;
             }

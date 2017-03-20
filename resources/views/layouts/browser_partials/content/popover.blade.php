@@ -1,4 +1,4 @@
-@foreach($bnode["properties"] as $property)
+@foreach($descriptions as $property)
 <div class="popover-content">
     <div class="popover-property">
         <?php $resource_property = new \EasyRdf_Resource($property["property"]);?>
@@ -33,6 +33,7 @@
         
     </li>
     @endforeach
-    </ul></div>
+    </ul>
+    </div>
 </div>
 @endforeach

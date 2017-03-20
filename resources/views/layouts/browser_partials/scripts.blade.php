@@ -49,55 +49,44 @@ $(document).ready(function () {
          pagingType = 'simple';
          console.log(pagingType);
     }
-    var table = $('table.display').DataTable({
-        fixedHeader: {header: true},
-        responsive:true,
-        pageLength: 20,
-        pagingType: pagingType,
-        scrollX:false,
-        order: [],
-        deferRender:true,
-        lengthChange: false,
-        language: {
-            url: "../browser_assets/plugins/datatables/i18n/{{Cookie::get('locale')}}.json"
-        },
-        columnDefs: [
-            { "width": "30%", "targets":0},
-            { "width": "70%", "targets":1}
-            
-        ],
-       
-        fixedColumns:false,
-        autoWitdh:false
-    });
-    $('[data-toggle="popover"]').popover({html:true});
-
+//    var table = $('table.display').DataTable({
+//        fixedHeader: {header: true},
+//        responsive:true,
+//        pageLength: 20,
+//        pagingType: pagingType,
+//        scrollX:false,
+//        order: [],
+//        deferRender:true,
+//        lengthChange: false,
+//        language: {
+//            url: "../browser_assets/plugins/datatables/i18n/{{Cookie::get('locale')}}.json"
+//        },
+//        columnDefs: [
+//            { "width": "30%", "targets":0},
+//            { "width": "70%", "targets":1}
+//            
+//        ],
+//       
+//        fixedColumns:false,
+//        autoWitdh:false
+//    });
+    
     $('input.global_filter').on('keyup click', function () {
         filterGlobal();
     });
-    $('ul.term-list').each(function () {
-        var listLength = $(this).find('li').length;
-        if ( listLength > 3) {
-            $('li', this).eq(2).nextAll().hide().addClass('toggleable');
-            $(this).append('<li class="more">{{trans('theme/browser/datatable.more')}}('+listLength+')</li>');
-        }
-        $(this).on('click', '.more', listLength, toggleShow);
-    });
-    
-//    labels(".resource");
-//    console.log("labels loaded");
-//    
 
 });
-    
-    
-
-
-    function toggleShow(listLength) {
-        var opened = $(this).hasClass('less');
-        var more = '{!!trans('theme/browser/datatable.more')!!}(' + listLength.data+')';
+    function toggleShow(event, length) {
+        var opened = $(event.target).hasClass('less');
+        console.log(event.target.parentElement);
+        var more = '{!!trans('theme/browser/datatable.more')!!}(' +length+')';
         var less = '{!!trans('theme/browser/datatable.less')!!}';
-        $(this).text(opened ? more : less).toggleClass('less', !opened);
-        $(this).siblings('li.toggleable').slideToggle();
+        $(event.target).text(opened ? more : less).toggleClass('less', !opened);
+        $(event.target).siblings('li.toggleable').slideToggle();
+    }
+    
+    function myPopover(event){
+        $(event.target).popover({html:true});
+        $(event.target).popover('show');
     }
 </script>

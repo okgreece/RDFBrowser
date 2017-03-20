@@ -164,7 +164,7 @@ return [
         Barryvdh\Debugbar\ServiceProvider::class,
         
         //JWT - auth
-        Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
+        #Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
 
         //CRUD
         Appzcoder\CrudGenerator\CrudGeneratorServiceProvider::class,
@@ -194,6 +194,9 @@ return [
         
         //IDE helpers
         Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
+        
+        //datatables
+        Yajra\Datatables\DatatablesServiceProvider::class,
 
     ],
 

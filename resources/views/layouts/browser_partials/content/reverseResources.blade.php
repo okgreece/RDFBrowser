@@ -1,44 +1,35 @@
-<!--<script>
-    $(document).ready(function () {
-        $('#reverseResourcesT').DataTable();
-    });
-</script>-->
 <section id="reverseResources">
     <div class="container">
-        <table id="reverseResourcesT" class="display" cellspacing="0" width="100%">
-            <thead>
-                <tr>            
-                    <th>{{ trans('theme/browser/datatable.property')}}</th>
-                    <th>{{ trans('theme/browser/datatable.value')}}</th>
-                </tr>
-            </thead>    
-            <tbody>
-                <?php
-                foreach ($reverseResources as $myResource) {
-                    try {
-                        echo '<tr>';
-                        echo '<td class="property">Is <a class="dont-break-out" href="' . ($rewrite ? '/browser?uri='. $myResource["property"]  :$myResource["property"]) . '">' . ((new \EasyRdf_Resource($myResource["property"]))->shorten()?: \App\BrowserTrait::uknownNamespace($myResource["property"])) . '</a> of</td>';
-                        echo '<td class="value"><ul class="term-list">';
-                        foreach ($myResource["values"] as $value) {
-                            echo '<li class="term-item">';
-                            if($value->isBNode()){
-                              // $key = array_search($value->getBNodeId(), array_column($bnodes, 'bnode'));
-                              //  echo '<a href="#popover" title="Blank Node Information" data-toggle="popover" data-trigger="focus" data-content=\''.  view('layouts.browser_partials.content.popover', ["bnode" => $bnodes[$key]]) .'\'>_:'.$value->getBNodeId().'</a>';
-                            }
-                            else{
-                                echo '<a class="resource dont-break-out" href="' . ($rewrite ? '/browser?uri='. $value->getUri(): $value->getUri()) . '">' . ($value->shorten()?: $value->getUri()) . '</a>';
-                            }
-                            
-                            echo '</li>';
-                        }
-                        echo '</ul></td>';
-                        echo '</tr>';
-                    } catch (Exception $ex) {
-                        dd($ex);
-                    }
-                }
-                ?>
-            </tbody>
-        </table>
+        @include('layouts.browser_partials.content.table', ["id" => 'reversed-resources-table'])
     </div>
 </section>
+<script>    
+$(function (){    
+    $('#reversed-resources-table').DataTable({       
+        fixedHeader: {header: true},
+        responsive:true,
+        scrollX:false,
+        deferRender:true,
+        columnDefs: [
+            { "width": "30%", "targets":0},
+            { "width": "70%", "targets":1}
+            
+        ],
+       
+        fixedColumns:false,
+        autoWitdh:false,
+        processing: true,
+        serverSide: true,
+        ajax: {
+            "url" : '{!! route('ajax.reversedResource') !!}',
+            "type" : "GET",
+            "data" : {resource:'{{$resource}}', rewrite:'{{$rewrite ? "true" : "false"}}'},
+        },
+        columns: [
+            {data: 'property', name: 'propery', className: "property"},
+            {data: 'value', name: 'value', className: "value"},
+           // {data: 'action', name: 'action', orderable: false, searchable: false}
+        ],
+    });
+});  
+</script>

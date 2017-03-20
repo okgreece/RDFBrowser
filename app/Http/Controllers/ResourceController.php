@@ -45,7 +45,7 @@ class ResourceController extends Controller {
 
     public function page(Request $request, $resource) {
         //get the url
-        $uri = $request->session()->get('uri');
+        $uri = $request->session()->get('url');
         
         if (!isset($uri)) {
             
@@ -64,26 +64,17 @@ class ResourceController extends Controller {
             $types = $graph->typesAsResources($uri);
             $namedGraph = $this->getNamedGraph($uri);
             $abstract = $this->resourceAbstract($graph, $uri);
-            $literals = $this->getAllLiterals($graph, $uri);
-            $resources = $this->getAllResources($graph, $uri);
-            $reverseResources = $this->getAllReverseResources($graph, $uri);
-            $bnodes = $this->getAllBNodes($graph);
             $images = $this->getAllImages($graph, $uri);
             $map = $this->getGEO($graph, $uri);
             return view('index', [
-                'resource' => $resource,
-                'graph' => $graph,
+                'resource' => $uri,
                 'label' => $label,
                 'uri' => $uri,
                 'namedGraph' => $namedGraph,
                 'abstract' => $abstract,
                 'types' => $types,
-                'literals' => $literals,
-                'resources' => $resources,
-                'reverseResources' => $reverseResources,
                 'images' => $images,
                 'map' => $map,
-                'bnodes' => $bnodes,
                 'rewrite' => false,
             ]);
         } else {

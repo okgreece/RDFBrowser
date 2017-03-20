@@ -121,4 +121,10 @@ Route::get('page2/{section}', 'ResourceController@page')->name('page2')->where([
 
 Route::get('data2/{section}', 'DataController@data')->name('data2')->where(['section' => '.*']);
 
+Route::get('ajax/resource', 'BrowserController@resources')->name('ajax.resource');
+
+Route::get('ajax/reversedResource', 'BrowserController@reverseResources')->name('ajax.reversedResource');
+
+Route::get('ajax/literal', 'BrowserController@literals')->name('ajax.literal');
+
 Route::get('/', 'ResourceController@noResource');
