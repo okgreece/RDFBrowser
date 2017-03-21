@@ -29,8 +29,11 @@ class DataController extends Controller {
         $uri = $this->constructIRI2($request, $resource);
         
         //create queries
+        
         $direct_query = 'select ?s ?p ?o where {?s ?p ?o . values ?s { <' . $uri . '>}.} ';
         $direct_result = $sparql->query($direct_query);
+
+        
         $reverse_query = 'select ?s ?p ?o where {?s ?p ?o . values ?o { <' . $uri . '>}.} ';
         $reverse_result = $sparql->query($reverse_query);
         $bnode_query = 'select ?bnode ?p2 ?value where {?s ?p ?bnode . ?bnode ?p2 ?value . values ?s { <' . $uri . '>}. filter isBlank(?bnode)} ';
