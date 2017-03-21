@@ -10,12 +10,12 @@
                 $modifier  = "";
             }
             ?>
-            <a href="<?php echo url('/data'. $modifier .'/' . $resource . '.csv'); ?>">CSV</a> 
+            <a href="<?php echo url('/data'. $modifier .'/' . $uriPart . '.csv'); ?>">CSV</a> 
             | RDF (
-            <a href="<?php echo url('/data'. $modifier .'/' . $resource . '.nt'); ?>">N-Triples</a> ::
-            <a href="<?php echo url('/data'. $modifier .'/' . $resource . '.n3'); ?>">N3/Turtle</a> ::
-            <a href="<?php echo url('/data'. $modifier .'/' . $resource . '.json'); ?>">JSON</a> ::
-            <a href="<?php echo url('/data'. $modifier .'/' . $resource . '.rdf'); ?>">XML</a> )
+            <a href="<?php echo url('/data'. $modifier .'/' . $uriPart . '.nt'); ?>">N-Triples</a> ::
+            <a href="<?php echo url('/data'. $modifier .'/' . $uriPart . '.n3'); ?>">N3/Turtle</a> ::
+            <a href="<?php echo url('/data'. $modifier .'/' . $uriPart . '.json'); ?>">JSON</a> ::
+            <a href="<?php echo url('/data'. $modifier .'/' . $uriPart . '.rdf'); ?>">XML</a> )
         </h3>
     </div> 
     

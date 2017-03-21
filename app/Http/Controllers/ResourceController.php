@@ -70,6 +70,7 @@ class ResourceController extends Controller {
                 'resource' => $uri,
                 'label' => $label,
                 'uri' => $uri,
+                'uriPart' => $resource,
                 'namedGraph' => $namedGraph,
                 'abstract' => $abstract,
                 'types' => $types,
