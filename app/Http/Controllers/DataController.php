@@ -12,9 +12,9 @@ class DataController extends Controller {
         
         $this->setNamespaces();
         
-        $endpoint = \App\Endpoint::all();
-        $sparql = new \EasyRdf_Sparql_Client($endpoint[0]->endpoint_url);
-
+        $endpoint = \App\Endpoint::first();
+        //dd($endpoint);
+        $sparql = new \EasyRdf_Sparql_Client($endpoint->endpoint_url);
         $path_parts = pathinfo($resource);
         if (isset($path_parts['extension'])) {
             $extension = $path_parts['extension'];

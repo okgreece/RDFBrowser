@@ -19,7 +19,7 @@ trait BrowserTrait
         foreach ($namespaces as $namespace){
             \EasyRdf_Namespace::set($namespace->prefix, $namespace->uri);
         }
-        return 0;
+        return;
     }
     
     public static function uknownNamespace($uri){
@@ -163,13 +163,14 @@ trait BrowserTrait
     
     public function getNamedGraph($resource) {
 
-        $endpoint = \App\Endpoint::all();
+        $endpoint = \App\Endpoint::first();
 
-        $sparql = new \EasyRdf_Sparql_Client($endpoint[0]->endpoint_url);
+        $sparql = new \EasyRdf_Sparql_Client($endpoint->endpoint_url);
         
         $result = $sparql->query('select distinct ?g where {Graph ?g {<' . rawurldecode($resource) . '> ?p ?o}}');
-        logger($result[0]->g);
-        return $result[0]->g;
+        
+        $response = isset($result[0]) ? $result[0]->g : "none"; 
+        return $response;
         
     }
     

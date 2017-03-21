@@ -53,7 +53,7 @@ class ResourceController extends Controller {
             $graph = \EasyRdf_Graph::newAndLoad($uri);
         }
         else{
-            logger($uri);
+            
             $graph = \EasyRdf_Graph::newAndLoad($uri);
         }
         

@@ -53,6 +53,7 @@ class BrowserController extends Controller
     }
        
     public function resources() {
+        $this->setNamespaces();   
         $resource = request()->resource;
         
         $graph = Cache::get($resource) ? : $this->cacheGraph($resource);        
