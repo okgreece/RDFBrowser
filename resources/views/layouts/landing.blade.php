@@ -2,29 +2,29 @@
 <html lang="{{Cookie::get('locale')}}">
     <?php App::setLocale(Cookie::get('locale')); ?>
     @section('htmlheader')
-    @include('layouts.browser_partials.htmlheader')
+        @include('layouts.browser_partials.htmlheader')
     @section('scripts')
-    @include('layouts.browser_partials.scripts')
+        @include('layouts.browser_partials.scripts')
     @show
     <body data-spy="scroll" data-offset="0" data-target="#navigation">
         @section('navbar')
         @include('layouts.browser_partials.navbar')
         @show
 
-        @include('layouts.browser_partials.header')
+            @include('layouts.browser_partials.header')
 
-        @include('layouts.browser_partials.content.literals', ["rewrite" => $rewrite])
+            @include('layouts.browser_partials.content.literals', ["rewrite" => $rewrite])
         
-        @include('layouts.browser_partials.content.resources', ["rewrite" => $rewrite])
+            @include('layouts.browser_partials.content.resources', ["rewrite" => $rewrite])
         
-        @include('layouts.browser_partials.content.reverseResources', ["rewrite" => $rewrite])
+            @include('layouts.browser_partials.content.reverseResources', ["rewrite" => $rewrite])
 
         @section('dumps')
-        @include('layouts.browser_partials.content.dumps')
+            @include('layouts.browser_partials.content.dumps')
         @show
 
         @section('footer')
-        @include('layouts.browser_partials.footer')
+            @include('layouts.browser_partials.footer')
         @show
 
         <script>
