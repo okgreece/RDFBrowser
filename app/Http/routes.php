@@ -19,6 +19,8 @@ Route::get('/admin', 'AdminController@adminPanel')->name('admin');
 
 Route::get('/dashboard', 'AdminController@adminPanel')->name('dashboard');
 
+
+
     
     Route::resource('geo-extractor', 'GeoExtractorController', 
             array('names' => array ('create' => 'geo-extractor.create',
@@ -102,6 +104,8 @@ Route::group(['middleware' => ['web']], function () {
     
 
 });
+
+Route::get('/sparql', 'EndpointController@sparql')->name('sparql');
 
 Route::post('getLabel', 'BrowserController@getLabel')->name('getLabel');
 

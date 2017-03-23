@@ -13,6 +13,4 @@ return [
 
     'data' => 'Download Data in Format',
     'external' => 'Visit the orginal Resource'
-    
-
 ];

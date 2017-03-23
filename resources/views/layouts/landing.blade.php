@@ -10,19 +10,13 @@
         @section('navbar')
         @include('layouts.browser_partials.navbar')
         @show
-
-            @include('layouts.browser_partials.header')
-
-            @include('layouts.browser_partials.content.literals', ["rewrite" => $rewrite])
-        
-            @include('layouts.browser_partials.content.resources', ["rewrite" => $rewrite])
-        
-            @include('layouts.browser_partials.content.reverseResources', ["rewrite" => $rewrite])
-
-        @section('dumps')
-            @include('layouts.browser_partials.content.dumps')
+        @section('content')
+            
         @show
 
+        @section('dumps')
+        @show
+        
         @section('footer')
             @include('layouts.browser_partials.footer')
         @show

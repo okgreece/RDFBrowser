@@ -265,6 +265,14 @@ button.close{
 
 }
 
+thead{
+    background-color: mediumaquamarine;
+}
+
+a.resource-link{
+    font-weight: 500;
+}
+
 .fixedHeader-floating{
  padding-top: 50px;   
 }

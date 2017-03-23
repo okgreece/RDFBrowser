@@ -4,21 +4,19 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
 use App\Endpoint;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Session;
 
-class EndpointController extends Controller
-{
+class EndpointController extends Controller {
+
     /**
      * Display a listing of the resource.
      *
      * @return void
      */
-    public function index()
-    {
+    public function index() {
         $endpoint = Endpoint::paginate(15);
 
         return view('endpoint.index', compact('endpoint'));
@@ -29,8 +27,7 @@ class EndpointController extends Controller
      *
      * @return void
      */
-    public function create()
-    {
+    public function create() {
         return view('endpoint.create');
     }
 
@@ -39,9 +36,8 @@ class EndpointController extends Controller
      *
      * @return void
      */
-    public function store(Request $request)
-    {
-        
+    public function store(Request $request) {
+
         Endpoint::create($request->all());
 
         Session::flash('flash_message', 'Endpoint added!');
@@ -56,8 +52,7 @@ class EndpointController extends Controller
      *
      * @return void
      */
-    public function show($id)
-    {
+    public function show($id) {
         $endpoint = Endpoint::findOrFail($id);
 
         return view('endpoint.show', compact('endpoint'));
@@ -70,8 +65,7 @@ class EndpointController extends Controller
      *
      * @return void
      */
-    public function edit($id)
-    {
+    public function edit($id) {
         $endpoint = Endpoint::findOrFail($id);
 
         return view('endpoint.edit', compact('endpoint'));
@@ -84,9 +78,8 @@ class EndpointController extends Controller
      *
      * @return void
      */
-    public function update($id, Request $request)
-    {
-        
+    public function update($id, Request $request) {
+
         $endpoint = Endpoint::findOrFail($id);
         $endpoint->update($request->all());
 
@@ -102,12 +95,32 @@ class EndpointController extends Controller
      *
      * @return void
      */
-    public function destroy($id)
-    {
+    public function destroy($id) {
         Endpoint::destroy($id);
 
         Session::flash('flash_message', 'Endpoint deleted!');
 
         return redirect('RDFBrowser/endpoint');
     }
+
+    public function sparql() {
+        return view('sparql');
+    }
+
+    public function result() {
+        if (isset($_REQUEST['endpoint']) and isset($_REQUEST['query'])) {
+            $sparql = new \EasyRdf_Sparql_Client($_REQUEST['endpoint']);
+            try {
+                $results = $sparql->query($_REQUEST['query']);
+                if (isset($_REQUEST['text'])) {
+                    print "<pre>" . htmlspecialchars($results->dump('text')) . "</pre>";
+                } else {
+                    print $results->dump('html');
+                }
+            } catch (Exception $e) {
+                print "<div class='error'>" . $e->getMessage() . "</div>\n";
+            }
+        }
+    }
+
 }
