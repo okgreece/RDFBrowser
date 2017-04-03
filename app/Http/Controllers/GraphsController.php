@@ -41,11 +41,12 @@ class GraphsController extends Controller
     public function store(Request $request)
     {
         
-        Graph::create($request->all());
+        $graph = Graph::create($request->all());
 
+        $triples = $this->loadRDF($graph->id);
         Session::flash('flash_message', 'Graph added!');
 
-        return redirect('graphs');
+        return redirect('RDFBrowser/graphs');
     }
 
     /**
@@ -88,10 +89,10 @@ class GraphsController extends Controller
         
         $graph = Graph::findOrFail($id);
         $graph->update($request->all());
+        $triples = $this->loadRDF($id);
+        Session::flash('flash_message', 'Graph updated! ' . $triples . 'new triples added!');
 
-        Session::flash('flash_message', 'Graph updated!');
-
-        return redirect('graphs');
+        return redirect('RDFBrowser/graphs');
     }
 
     /**
@@ -103,10 +104,31 @@ class GraphsController extends Controller
      */
     public function destroy($id)
     {
-        Graph::destroy($id);
+        $endpoint = new EndpointController;
+        
+        $store = $endpoint->endpointSetup();
+        
+        $store->query('DELETE FROM <' . \App\Graph::find($id)->graph_name . '>');
 
+        Graph::destroy($id);
+        
+        
         Session::flash('flash_message', 'Graph deleted!');
 
-        return redirect('graphs');
+        return redirect('RDFBrowser/graphs');
+    }
+    
+    public function loadRDF($id){
+        try{
+            ini_set('max_execution_time', 600);
+            $graph = \App\Graph::find($id);
+            $file = file_get_contents($graph->graph->path());
+            $endpoint = new EndpointController();
+            $store = $endpoint->endpointSetup();
+            $store->insert($file, $graph->graph_name);
+           
+        } catch (Exception $ex) {
+            dd($ex);
+        }
     }
 }

@@ -19,8 +19,8 @@
                     <td>{{ $x }}</td>
                     <td>{{ $item->graph_name }}</td>
                     <td>
-                        <a href="{{ url('/admin/graphs/' . $item->id) }}" class="btn btn-success btn-xs" title="View Graph"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a>
-                        <a href="{{ url('/admin/graphs/' . $item->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit Graph"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
+                        <a href="{{ url('/RDFBrowser/graphs/' . $item->id) }}" class="btn btn-success btn-xs" title="View Graph"><span class="glyphicon glyphicon-eye-open" aria-hidden="true"/></a>
+                        <a href="{{ url('/RDFBrowser/graphs/' . $item->id . '/edit') }}" class="btn btn-primary btn-xs" title="Edit Graph"><span class="glyphicon glyphicon-pencil" aria-hidden="true"/></a>
                         {!! Form::open([
                             'method'=>'DELETE',
                             'url' => ['/RDFBrowser/graphs', $item->id],

@@ -20,7 +20,16 @@ Route::get('/admin', 'AdminController@adminPanel')->name('admin');
 Route::get('/dashboard', 'AdminController@adminPanel')->name('dashboard');
 
 
-    Route::resource('/graphs', 'GraphsController');
+   
+    
+    Route::resource('graphs', 'GraphsController', 
+            array('names' => array ('create' => 'graphs.create',
+                                    'show' => 'graphs.show',
+                                    'index'=> 'graphs.index',
+                                    'store' => 'graphs.store',
+                                    'update' => 'graphs.update',
+                                    'edit' => 'graphs.edit',
+                                    'destroy' => 'graphs.destroy')));
     
     Route::resource('geo-extractor', 'GeoExtractorController', 
             array('names' => array ('create' => 'geo-extractor.create',
