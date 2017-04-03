@@ -3,12 +3,13 @@
     <?php App::setLocale(Cookie::get('locale')); ?>
     @section('htmlheader')
         @include('layouts.browser_partials.htmlheader')
+    @show
     @section('scripts')
         @include('layouts.browser_partials.scripts')
     @show
     <body data-spy="scroll" data-offset="0" data-target="#navigation">
         @section('navbar')
-        @include('layouts.browser_partials.navbar')
+            
         @show
         @section('content')
             

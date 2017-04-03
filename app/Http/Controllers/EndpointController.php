@@ -8,6 +8,7 @@ use App\Endpoint;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
 use Session;
+use ARC2;
 
 class EndpointController extends Controller {
 
@@ -104,7 +105,7 @@ class EndpointController extends Controller {
     }
 
     public function sparql() {
-        return view('sparql');
+        return view('sparql', ["label" => "SPARQL Endpoint"]);
     }
 
     public function result() {
@@ -121,6 +122,49 @@ class EndpointController extends Controller {
                 print "<div class='error'>" . $e->getMessage() . "</div>\n";
             }
         }
+    }
+
+    public function endpointSetup() {
+        
+        $config = array(
+            /* db */
+            'db_host' => env('ARC2_ENDPOINT_HOST'), /* optional, default is localhost */
+            'db_name' => env('ARC2_ENDPOINT_DATABASE'),
+            'db_user' => env('ARC2_ENDPOINT_USERNAME'),
+            'db_pwd' => env('ARC2_ENDPOINT_PASSWORD'),
+            /* store name */
+            'store_name' => env('ARC2_ENDPOINT_DATABASE'),
+            /* endpoint */
+            'endpoint_features' => array(
+                'select',
+                'construct',
+                'ask',
+                'describe',
+                'load',
+                'insert',
+                'delete',
+                'dump' /* dump is a special command for streaming SPOG export */
+            ),
+            'endpoint_timeout' => 60, /* not implemented in ARC2 preview */
+            'endpoint_read_key' => '', /* optional */
+            'endpoint_write_key' => 'REPLACE_THIS_WITH_SOME_KEY', /* optional, but without one, everyone can write! */
+            'endpoint_max_limit' => 10000, /* optional */
+        );
+
+        /* instantiation */
+        $endpoint = \ARC2::getStoreEndpoint($config);
+        if (!$endpoint->isSetUp()) {
+            $endpoint->setUp(); /* create MySQL tables */
+        }
+        
+        return $endpoint;
+        
+    }
+    
+    public function sparql2(){
+        /* request handling */
+        $endpoint = $this->endpointSetup();
+        $endpoint->go();
     }
 
 }

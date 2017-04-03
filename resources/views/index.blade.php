@@ -1,5 +1,9 @@
 @extends('layouts.landing')
 
+@section('navbar')
+    @include('layouts.browser_partials.navbar')
+@endsection
+
 @section('content')
     @include('layouts.browser_partials.header')
     @include('layouts.browser_partials.content.literals', ["rewrite" => $rewrite])

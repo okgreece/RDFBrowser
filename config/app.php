@@ -197,6 +197,9 @@ return [
         
         //datatables
         Yajra\Datatables\DatatablesServiceProvider::class,
+        
+        //stapler
+       Codesleeve\LaravelStapler\Providers\L5ServiceProvider::class,
 
     ],
 

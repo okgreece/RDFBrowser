@@ -20,7 +20,7 @@ Route::get('/admin', 'AdminController@adminPanel')->name('admin');
 Route::get('/dashboard', 'AdminController@adminPanel')->name('dashboard');
 
 
-
+    Route::resource('/graphs', 'GraphsController');
     
     Route::resource('geo-extractor', 'GeoExtractorController', 
             array('names' => array ('create' => 'geo-extractor.create',
@@ -107,6 +107,8 @@ Route::group(['middleware' => ['web']], function () {
 
 Route::get('/sparql', 'EndpointController@sparql')->name('sparql');
 
+Route::get('/sparql2', 'EndpointController@sparql2')->name('sparql2');
+
 Route::post('getLabel', 'BrowserController@getLabel')->name('getLabel');
 
 Route::get('resource/{section}', 'ResourceController@negotiation')->name('negotiation')->where(['section' => '.*']);
@@ -132,3 +134,4 @@ Route::get('ajax/reversedResource', 'BrowserController@reverseResources')->name(
 Route::get('ajax/literal', 'BrowserController@literals')->name('ajax.literal');
 
 Route::get('/', 'ResourceController@noResource');
+
