@@ -51,12 +51,23 @@ trait BrowserTrait
     }
     
     public static function encode_iri($iri) {
-        $dirname = pathinfo($iri, PATHINFO_DIRNAME) . '/';
-        $local = mb_substr($iri, mb_strlen($dirname));
+        $dirname = BrowserTrait::dirname($iri);
+        //$local = mb_substr($iri, mb_strlen($dirname));
+        $local = pathinfo($iri, PATHINFO_FILENAME);
         $filename = rawurlencode($local);
         $encoded_uri = $dirname . $filename;
-        logger($encoded_uri);
         return $encoded_uri;
+    }
+    
+    public static function dirname($iri){
+        
+        if (pathinfo($iri, PATHINFO_DIRNAME) != ".") {
+            $dirname = pathinfo($iri, PATHINFO_DIRNAME) . '/';
+        }
+        else {
+            $dirname = "";
+        }
+        return $dirname;        
     }
     
     public static function constructIRI2($request, $resource){
@@ -68,7 +79,7 @@ trait BrowserTrait
             else if($route == 'data2'){
                 $path = 'ontology';
             }
-            $uri = $request->getSchemeAndHttpHost() . '/' . $path . '/' . rawurldecode($resource);
+            $uri = $request->getSchemeAndHttpHost() . '/' . $path . '/' . $resource;
             return $uri;
     }
     

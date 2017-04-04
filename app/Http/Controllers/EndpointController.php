@@ -140,15 +140,17 @@ class EndpointController extends Controller {
                 'construct',
                 'ask',
                 'describe',
-                'load',
-                'insert',
-                'delete',
+                //'load',
+                //'insert',
+                //'delete',
                 'dump' /* dump is a special command for streaming SPOG export */
             ),
-            'endpoint_timeout' => 60, /* not implemented in ARC2 preview */
+            'endpoint_timeout' => 600, /* not implemented in ARC2 preview */
             'endpoint_read_key' => '', /* optional */
             'endpoint_write_key' => 'REPLACE_THIS_WITH_SOME_KEY', /* optional, but without one, everyone can write! */
-            'endpoint_max_limit' => 10000, /* optional */
+            'endpoint_max_limit' => 1000000, /* optional */
+            'max_errors' => 100,
+            'store_strip_mb_comp_str' => true,
         );
 
         /* instantiation */
@@ -164,7 +166,17 @@ class EndpointController extends Controller {
     public function sparql2(){
         /* request handling */
         $endpoint = $this->endpointSetup();
-        $endpoint->go();
+        $endpoint->handleRequest(0);
+        $headers = $endpoint->headers;
+        $result = $endpoint->result;
+        $length = strlen($result);
+        foreach ($headers as $header){
+            header($header);
+        }
+        header('Content-Length: ' . $length);
+       
+        echo $result;
+        exit;
     }
 
 }

@@ -30,35 +30,28 @@ class DataController extends Controller {
         
         //create queries
         
-        $direct_query = 'select ?s ?p ?o where {?s ?p ?o . values ?s { <' . $uri . '>}.} ';
+        $direct_query = 'SELECT ?p ?o WHERE {<' . $uri . '> ?p ?o . }';
         $direct_result = $sparql->query($direct_query);
-
         
-        $reverse_query = 'select ?s ?p ?o where {?s ?p ?o . values ?o { <' . $uri . '>}.} ';
+        $reverse_query = 'select ?s ?p where {?s ?p <' . $uri . '> } ';
         $reverse_result = $sparql->query($reverse_query);
-        $bnode_query = 'select ?bnode ?p2 ?value where {?s ?p ?bnode . ?bnode ?p2 ?value . values ?s { <' . $uri . '>}. filter isBlank(?bnode)} ';
+        $bnode_query = 'select ?bnode ?p2 ?value where {<' . $uri . '> ?p ?bnode . ?bnode ?p2 ?value .  filter isBlank(?bnode)} ';
         $bnode_result = $sparql->query($bnode_query);
-//        $rbnode_query = 'select ?bnode ?p2 ?value where {?bnode ?p ?s. ?bnode ?p2 ?value . values ?s { <' . $uri . '>}. filter isBlank(?bnode)} ';
-//        $rbnode_result = $sparql->query($rbnode_query);
-//        
-        //construct the graph
+
         $graph = new \EasyRdf_Graph;
         foreach($direct_result as $triple){
-            $graph->add($triple->s, $triple->p, $triple->o);
+            $graph->add(new \EasyRdf_Resource($uri), $triple->p, $triple->o);
             
         }
         foreach($reverse_result as $triple){
-            $graph->add($triple->s, $triple->p, $triple->o);
+            $graph->add($triple->s, $triple->p, new \EasyRdf_Resource($uri));
             
         }
         foreach($bnode_result as $triple){
             $graph->add($triple->bnode, $triple->p2, $triple->value);
             
         }
-//        foreach($rbnode_result as $triple){
-//            $graph->add($triple->bnode, $triple->p2, $triple->value);
-//            
-//        }
+
         //get the format
         if (isset($extension)) {
             

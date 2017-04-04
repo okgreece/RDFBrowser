@@ -40,12 +40,10 @@ class GraphsController extends Controller
      */
     public function store(Request $request)
     {
-        
+       
         $graph = Graph::create($request->all());
-
         $triples = $this->loadRDF($graph->id);
         Session::flash('flash_message', 'Graph added!');
-
         return redirect('RDFBrowser/graphs');
     }
 
@@ -125,8 +123,8 @@ class GraphsController extends Controller
             $file = file_get_contents($graph->graph->path());
             $endpoint = new EndpointController();
             $store = $endpoint->endpointSetup();
-            $store->insert($file, $graph->graph_name);
-           
+            $log = $store->insert($file, $graph->graph_name);
+            logger(var_dump($log));
         } catch (Exception $ex) {
             dd($ex);
         }

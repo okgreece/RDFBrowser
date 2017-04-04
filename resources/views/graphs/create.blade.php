@@ -14,7 +14,7 @@
                             'method' => 'POST',
                             'files' => true
                             ]) !!}
-
+            
             <div class="form-group {{ $errors->has('graph_name') ? 'has-error' : ''}}">
                 {!! Form::label('graph_name', 'Graph Name', ['class' => 'col-md-4 control-label']) !!}
                 <div class="col-md-6">

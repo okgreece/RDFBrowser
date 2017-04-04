@@ -46,7 +46,6 @@ class ResourceController extends Controller {
     public function page(Request $request, $resource) {
         //get the url
         $uri = $request->session()->get('url');
-        
         if (!isset($uri)) {
             
             $uri = $this->constructIRI($request, $resource);
@@ -56,10 +55,9 @@ class ResourceController extends Controller {
             
             $graph = \EasyRdf_Graph::newAndLoad($uri);
         }
-        
         $this->setNamespaces();        
-        $uri = rawurldecode($uri);
-        $label = $this->label($graph, $uri);
+        $decoded_uri = rawurldecode($uri);
+        $label = $this->label($graph, $decoded_uri);
         if (!empty($graph->resources())) {
             $types = $graph->typesAsResources($uri);
             $namedGraph = $this->getNamedGraph($uri);

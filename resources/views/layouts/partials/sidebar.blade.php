@@ -18,11 +18,9 @@
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu">
             <li class="header">Main Menu</li>
-            <!-- Optionally, you can add icons to the links -->
-<!--            <li><a  href="{{ route('dashboard')  }}"><i class='fa fa-home'></i><span>Dashboard</span></a></li>-->
             <li><a  href="{{ route('geo-extractor.index')  }}"><i class='fa fa-globe'></i><span>GEO Extractors</span></a></li>
             <li><a  href="{{ route('endpoint.index')  }}"><i class='fa fa-database'></i><span>Endpoint</span></a></li>
-            <li><a  href="{{ route('graphs.index')  }}"><i class='fa fa-database'></i><span>Graphs</span></a></li>
+            <li><a  href="{{ route('graphs.index')  }}"><i class='fa fa-upload'></i><span>Graphs</span></a></li>
             <li><a  href="{{ route('user.index')  }}"><i class='fa fa-users'></i><span>Users</span></a></li>
             <li class="treeview">
                 <a href="#">

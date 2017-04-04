@@ -56,9 +56,9 @@ class BrowserController extends Controller
         $this->setNamespaces();   
         $resource = request()->resource;
         
-        $graph = Cache::get($resource) ? : $this->cacheGraph($resource);        
-        session()->put("resource", $resource);
-        $values = collect($this->getAllResources($graph, $resource));      
+        $graph = Cache::get($resource) ? : $this->cacheGraph($resource); 
+        session()->put("resource", urldecode($resource));
+        $values = collect($this->getAllResources($graph, urldecode($resource)));      
         return Datatables::of($values)
                         ->addColumn('property', function($value) {                            
                             return view('layouts.browser_partials.templates.property', 
@@ -88,8 +88,8 @@ class BrowserController extends Controller
         $this->setNamespaces();   
         $resource = request()->resource;
         $graph = Cache::get($resource) ? : $this->cacheGraph($resource);        
-        session()->put("resource", $resource);
-        $values = collect($this->getAllReverseResources($graph, $resource));      
+        session()->put("resource", urldecode($resource));
+        $values = collect($this->getAllReverseResources($graph, urldecode($resource)));      
         return Datatables::of($values)
                         ->addColumn('property', function($value) {                            
                             return view('layouts.browser_partials.templates.property', 
@@ -119,8 +119,8 @@ class BrowserController extends Controller
         $this->setNamespaces();   
         $resource = request()->resource;
         $graph = Cache::get($resource) ? : $this->cacheGraph($resource);        
-        session()->put("resource", $resource);
-        $values = collect($this->getAllLiterals($graph, $resource));      
+        session()->put("resource", urldecode($resource));
+        $values = collect($this->getAllLiterals($graph, urldecode($resource)));      
         return Datatables::of($values)
                         ->addColumn('property', function($value) {                            
                             return view('layouts.browser_partials.templates.property', 
