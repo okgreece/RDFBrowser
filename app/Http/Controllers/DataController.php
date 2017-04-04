@@ -19,7 +19,7 @@ class DataController extends Controller {
         if (isset($path_parts['extension'])) {
             $extension = $path_parts['extension'];
             logger($path_parts);
-            if(!empty($path_parts['dirname'])){
+            if($path_parts['dirname'] != '.'){
                 $resource = $path_parts['dirname'] . '/' .$path_parts['filename'];
             }
             else{
@@ -122,7 +122,7 @@ class DataController extends Controller {
     }
 
     public function createFile($content, $MIME, $resource) {
-
+        
         $length = strlen($content);
 
         $extension = \EasyRdf_Format::getFormat($MIME)->getDefaultExtension();
