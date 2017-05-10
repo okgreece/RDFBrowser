@@ -45,7 +45,7 @@ class ResourceController extends Controller {
 
     public function page(Request $request, $resource) {
         //get the url
-        $uri = $request->session()->get('url');
+        $uri = $request->session()->get('uri');
         if (!isset($uri)) {
             
             $uri = $this->constructIRI($request, $resource);
