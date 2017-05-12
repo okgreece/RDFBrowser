@@ -14,7 +14,6 @@ class BrowserController extends Controller
     
     public function browser(Request $request) {
         $uri = $request->input('uri');
-        logger($uri);
         $encoded_uri = $this->encode_iri($uri);
         
         $this->setNamespaces();        
