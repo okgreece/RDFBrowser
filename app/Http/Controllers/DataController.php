@@ -7,18 +7,27 @@ use Illuminate\Http\Request;
 class DataController extends Controller {
     
     use \App\BrowserTrait;
+    
+    private static $extensions = [
+        "rdf",
+        "nt",
+        "csv",
+        "ttl",
+        "n3",
+        "json",
+        "xml",
+        "html"
+    ];
 
     public function data(Request $request, $resource) {
         
         $this->setNamespaces();
         
         $endpoint = \App\Endpoint::first();
-        //dd($endpoint);
         $sparql = new \EasyRdf_Sparql_Client($endpoint->endpoint_url);
         $path_parts = pathinfo($resource);
-        if (isset($path_parts['extension'])) {
+        if (isset($path_parts['extension']) && in_array($path_parts['extension'], self::$extensions)) {
             $extension = $path_parts['extension'];
-            logger($path_parts);
             if($path_parts['dirname'] != '.'){
                 $resource = $path_parts['dirname'] . '/' .$path_parts['filename'];
             }

@@ -14,7 +14,9 @@ class BrowserController extends Controller
     
     public function browser(Request $request) {
         $uri = $request->input('uri');
+        logger($uri);
         $encoded_uri = $this->encode_iri($uri);
+        
         $this->setNamespaces();        
         $graph = Cache::get($encoded_uri) ? : $this->cacheGraph($encoded_uri);
         $label = $this->label($graph, $uri);
