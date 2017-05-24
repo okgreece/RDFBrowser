@@ -3,6 +3,14 @@ A Linked Data content negotiation and publication platform coded in PHP for cons
 
 #Installation instructions
 This is an application developed with Laravel MVC PHP Framework. Follow these instructions to succesfully install the app.
+Server requirements:
+
+   - PHP >= 5.6.4
+   - OpenSSL PHP Extension
+   - PDO PHP Extension
+   - Mbstring PHP Extension
+   - Tokenizer PHP Extension
+   - XML PHP Extension
 
 ```sh
 #clone the repo on a folder of your choice, usually /home/$user
