@@ -37,8 +37,17 @@ class ResourceController extends Controller {
     
 
     public function noResource() {
-        $type = "You have not provided a valid resource. Please try again";
-        return $type;
+        //$type = "You have not provided a valid resource. Please try again";
+        if(env("APP_DOMAIN_PAGE")){
+            return view("landing.index", [
+                "label" => "Label"
+            ]);
+        }
+        else{
+            $redirect = env("APP_DOMAIN_REDIRECT");
+            return redirect($redirect, 302);
+        }
+        
     }
     
     
