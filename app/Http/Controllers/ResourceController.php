@@ -56,40 +56,35 @@ class ResourceController extends Controller {
         //get the url
         $uri = $request->session()->get('uri');
         if (!isset($uri)) {
-            
             $uri = $this->constructIRI($request, $resource);
-            $graph = \EasyRdf_Graph::newAndLoad($uri);
         }
-        else{
-            
+        try {
             $graph = \EasyRdf_Graph::newAndLoad($uri);
+        } catch (\EasyRdf_Http_Exception $ex) {
+            return response()->view('errors.noResource', [
+                'label'=> $uri,
+            ], 404);
         }
         $this->setNamespaces();        
         $decoded_uri = rawurldecode($uri);
         $label = $this->label($graph, $decoded_uri);
-        if (!empty($graph->resources())) {
-            $types = $graph->typesAsResources($uri);
-            $namedGraph = $this->getNamedGraph($uri);
-            $abstract = $this->resourceAbstract($graph, $uri);
-            $images = $this->getAllImages($graph, $uri);
-            $map = $this->getGEO($graph, $uri);
-            return view('index', [
-                'resource' => $uri,
-                'label' => $label,
-                'uri' => $uri,
-                'uriPart' => $resource,
-                'namedGraph' => $namedGraph,
-                'abstract' => $abstract,
-                'types' => $types,
-                'images' => $images,
-                'map' => $map,
-                'rewrite' => false,
-            ]);
-        } else {
-            return view('errors.noResource', [
-                'label'=> $label,
-            ]);
-        }
+        $types = $graph->typesAsResources($uri);
+        $namedGraph = $this->getNamedGraph($uri);
+        $abstract = $this->resourceAbstract($graph, $uri);
+        $images = $this->getAllImages($graph, $uri);
+        $map = $this->getGEO($graph, $uri);
+        return view('index', [
+            'resource' => $uri,
+            'label' => $label,
+            'uri' => $uri,
+            'uriPart' => $resource,
+            'namedGraph' => $namedGraph,
+            'abstract' => $abstract,
+            'types' => $types,
+            'images' => $images,
+            'map' => $map,
+            'rewrite' => false,
+        ]);
     }
 
 }

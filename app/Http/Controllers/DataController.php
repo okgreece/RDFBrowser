@@ -70,10 +70,12 @@ class DataController extends Controller {
         }
 
         $format = \EasyRdf_Format::getFormat($MIME);
+        //set status
+        $status = $graph->isEmpty() ? 404 : 200 ;
         //serialize the graph
         $content = $graph->serialise($format);
         //create and send the file
-        DataController::createFile($content, $MIME, $resource);
+        DataController::createFile($content, $MIME, $resource, $status);
         exit;
     }
     
@@ -130,11 +132,13 @@ class DataController extends Controller {
         return $type;
     }
 
-    public function createFile($content, $MIME, $resource) {
+    public function createFile($content, $MIME, $resource, $status) {
         
         $length = strlen($content);
 
         $extension = \EasyRdf_Format::getFormat($MIME)->getDefaultExtension();
+        
+        http_response_code($status);
 
         header('Connection: Keep-Alive');
 
@@ -143,11 +147,11 @@ class DataController extends Controller {
         header('Content-Disposition: inline; filename=' . $resource . '.' . $extension);
 
         header('Accept-Ranges: bytes');
-
+        
         header('Content-Type: ' . $MIME);
 
         header('Content-Length: ' . $length);
-
+        
         echo $content;
 
         exit;
