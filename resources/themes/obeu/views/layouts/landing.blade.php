@@ -38,7 +38,7 @@
                                 @include('layouts.browser_partials.browser_header')
                             @else
                             <span>
-                                <h1>@yield('title', 'KPI App')</h1>
+                                <h1>@yield('title', 'Title')</h1>
                                 <p>@yield('subtitle', 'Subtitle')</p>                            
                             </span>
                             @endif
