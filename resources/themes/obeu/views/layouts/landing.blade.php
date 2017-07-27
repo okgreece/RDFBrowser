@@ -42,8 +42,6 @@
                                 <p>@yield('subtitle', 'Subtitle')</p>                            
                             </span>
                             @endif
-                            
-
                     </div>
                 </div>
             </div>
