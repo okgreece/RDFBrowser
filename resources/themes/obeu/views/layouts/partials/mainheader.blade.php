@@ -4,9 +4,9 @@
     <!-- Logo -->
     <a href="{{ url('RDFBrowser/dashboard') }}" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini" style="font-size:10px"><b>OKF</b>GR</span>
+        <span class="logo-mini" style="font-size:10px"><b>OK</b>GR</span>
         <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>RDFBrowser </b>OKFGR</span>
+        <span class="logo-lg"><b>RDFBrowser </b>OKGR</span>
     </a>
 
     <!-- Header Navbar -->

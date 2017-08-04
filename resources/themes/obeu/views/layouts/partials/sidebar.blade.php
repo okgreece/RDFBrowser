@@ -18,7 +18,6 @@
         <!-- Sidebar Menu -->
         <ul class="sidebar-menu">
             <li class="header">Main Menu</li>
-            <li><a  href="{{ route('geo-extractor.index')  }}"><i class='fa fa-globe'></i><span>GEO Extractors</span></a></li>
             <li><a  href="{{ route('endpoint.index')  }}"><i class='fa fa-database'></i><span>Endpoint</span></a></li>
             <li><a  href="{{ route('graphs.index')  }}"><i class='fa fa-upload'></i><span>Graphs</span></a></li>
             <li><a  href="{{ route('user.index')  }}"><i class='fa fa-users'></i><span>Users</span></a></li>
@@ -36,12 +35,21 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
+                            <li><a href="{{ route('geo-extractor.index')  }}"><i class='fa fa-circle-o'></i> GEO Extractors</a></li>
                             <li><a href="{{ route('label-extractor.index')}}"><i class="fa fa-circle-o"></i> Label Extractor</a></li>
                             <li><a href="{{ route('abstract-extractor.index')}}"><i class="fa fa-circle-o"></i> Abstract Extractor</a></li>
                             <li><a href="{{ route('image-extractor.index')}}"><i class="fa fa-circle-o"></i> Image Extractor</a></li>
                         </ul>
                     </li>
-                    
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-list"></i>
+                    <span>Landing Page<i class="fa fa-angle-left pull-right"></i></span>
+                </a>
+                <ul class="treeview-menu">
+                    <li><a href="{{ route('RDFBrowser.resource-classes.index')}}"><i class="fa fa-circle-o"></i> Resource Classes</a></li>
                 </ul>
             </li>
         </ul><!-- /.sidebar-menu -->

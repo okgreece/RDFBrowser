@@ -94,9 +94,13 @@ Route::get('/dashboard', 'AdminController@adminPanel')->name('dashboard');
                                     'edit' => 'user.edit',
                                     'destroy' => 'user.destroy')));
 
+    Route::resource('resource-classes', 'ResourceClassesController');
+
 Route::auth();
 
 Route::get('/login', 'Auth\LogInController@login')->name('login');
+
+Route::get('/logout', 'Auth\AuthController@logout')->name('logout');
 
 Route::get('/', 'Auth\LogInController@login');
 
@@ -113,6 +117,8 @@ Route::group(['middleware' => ['web']], function () {
     
 
 });
+
+Route::get('browse/{id}', 'ResourceController@browse')->name('browse');
 
 Route::get('/sparql', 'EndpointController@sparql')->name('sparql');
 
@@ -143,4 +149,3 @@ Route::get('ajax/reversedResource', 'BrowserController@reverseResources')->name(
 Route::get('ajax/literal', 'BrowserController@literals')->name('ajax.literal');
 
 Route::get('/', 'ResourceController@noResource');
-
