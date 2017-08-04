@@ -91,3 +91,16 @@ php artisan view:clear
 ```
 
 Enjoy your new theme!
+
+# Landing Page
+You are hungry for resources. You don't know what to look for. You prefer to follow your nose to explore Knowledge. RDFBrowser can help you on this task
+
+RDFBrowser makes it easy to publish an inventory of resources you would like to show. Through the Admin panel go to the "Landing Page". You can define as many as you want RDF class types to show. You can also define the pagination limit.
+
+Then for each class type, a new element is created on the landing page, hosted on your domain. 
+
+Click on any of the types. RDFBrowser will show you all the instances belong to the requested class. 
+
+In next update an autocomplete search bar will be added, and also pictures for classes, if available.
+
+* Important: if you are updating the RDFBrowser, please run again ```php artisan migrate``` to include the latest database schema changes. 
