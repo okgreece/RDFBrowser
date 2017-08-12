@@ -32,14 +32,12 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title', 'RDFBrowser') - RDFBrowser || openbudgets.eu </title>
-    <!-- Styles -->
-    <script  src="https://code.jquery.com/jquery-1.12.4.min.js"  integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="  crossorigin="anonymous"></script>
-    <link href="//fonts.googleapis.com/css?family=Cabin:400,400i,600,700" rel="stylesheet"> 
     <script>
         window.Laravel = {!! json_encode([
             'csrfToken' => csrf_token(),
         ]) !!};
     </script>
+    <script  src="https://code.jquery.com/jquery-1.12.4.min.js"  integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ="  crossorigin="anonymous"></script>
     <link href="{{ asset('/browser_assets/css/datatable-browser.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('/browser_assets/css/admin/obeu.css') }}" rel="stylesheet" type="text/css" />
     <link href="{{ asset('/browser_assets/css/flag-icon.css') }}" rel="stylesheet" type="text/css" />
@@ -47,11 +45,12 @@
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.12/css/jquery.dataTables.css">
     <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/fixedheader/3.1.2/css/fixedHeader.dataTables.min.css">
     <!--    Leaflet Map-->
-    <link rel="stylesheet" href="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />    
-    <link rel="stylesheet" href="http://okfnlabs.org/openbudgets.github.io/css/main.css">
-    <script src="http://okfnlabs.org/openbudgets.github.io/js/vendor/modernizr-2.8.3.min.js"></script>
-    <script src="http://okfnlabs.org/openbudgets.github.io/js/plugins.js"></script>
-    <script src="http://okfnlabs.org/openbudgets.github.io/js/main.js"></script>
+    <link rel="stylesheet" href="https://npmcdn.com/leaflet@1.0.0-rc.3/dist/leaflet.css" />
+    <link href="//fonts.googleapis.com/css?family=Cabin:400,400i,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="{{asset("theme/" . env("APP_THEME") . "/css/main.css")}}">
+    <script src="{{asset("theme/" . env("APP_THEME") . "/js/vendor/modernizr-2.8.3.min.js")}}"></script>
+    <script src="{{asset("theme/" . env("APP_THEME") . "/js/plugins.js")}}"></script>
+    <script src="{{asset("theme/" . env("APP_THEME") . "/js/main.js")}}"></script>
     <script src="https://unpkg.com/isotope-layout@3/dist/isotope.pkgd.min.js"></script>
     @include('layouts.browser_partials.scripts')
 </head>
