@@ -9,7 +9,7 @@
     </div>
     @endif
 
-    <form class="form-horizontal" role="form" method="POST" action="{{ url('/password/email') }}">
+    <form class="form-horizontal" role="form" method="POST" action="{{ url('RDFBrowser/password/email') }}">
         {{ csrf_field() }}
 
         <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
