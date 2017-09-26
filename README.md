@@ -74,6 +74,9 @@ MAIL_ENCRYPTION=tls
 ```
 where you have to change just the MAIL_USERNAME and MAIL_PASSWORD. The latter is the APP password you had created earlier. Restart your App and check your settings. 
 
+# NoCAPTCHA
+RDFBrowser uses Google's NoCAPTCHA service to handle bots. Please consider https://developers.google.com/recaptcha/ in order to create valid keys.
+
 # Themes
 If you want to use a theme different by the default, deploy your theme on resources/themes folder. 
 
