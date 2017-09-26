@@ -59,23 +59,20 @@ You can choose the pre-built releases on [Pre-Built Releases and Source Code](ht
 It hasn't been tested yet with nginx server but this guide could be useful :
 [Laravel on NGINX](https://www.digitalocean.com/community/tutorials/how-to-install-laravel-with-an-nginx-web-server-on-ubuntu-14-04)
 
-# Docker
-This is a first attemp to dockerize the application. [Laradock](https://github.com/LaraDock/laradock) is used for this purpose, as a submodule.
-to install Laradock along with RDFBrowser clone the repo with the following command.
-```bash
-git clone --recursive -j8 https://github.com/okgreece/RDFBrowser.git
+# E-mail 
+RDFBrowser uses e-mail to sent reset password links. Thus, in order for this to work you have to configure the mailing function. Laravel offers a large set of options. The easiest one is to use Google's SMTP servers. Thus all e-mails will be sent using your personal account or one you may create especially for your deployment. 
+
+In order to use Gmail SMTP servers go to (Gmail)[https://security.google.com/settings/security/apppasswords] and create an app password. This way you will not have to worry about giving your password or problems if you have set up 2-step verification.
+After you have created the APP password go to your .env file and use a similar entry as below.
 ```
-This command will clone both the RDFBrowser and Laradock. 
-
-Next step is to set up the environment. 
-
-```bash
-#get inside the folder
-cd laradock
-
-#run docker-compose to get nginx
-docker-compose up -d nginx
+MAIL_DRIVER=smtp
+MAIL_HOST=smtp.gmail.com
+MAIL_PORT=587
+MAIL_USERNAME=myemail@gmail.com
+MAIL_PASSWORD=app_password
+MAIL_ENCRYPTION=tls
 ```
+where you have to change just the MAIL_USERNAME and MAIL_PASSWORD. The latter is the APP password you had created earlier. Restart your App and check your settings. 
 
 # Themes
 If you want to use a theme different by the default, deploy your theme on resources/themes folder. 

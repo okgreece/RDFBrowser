@@ -29,7 +29,8 @@
         "barryvdh/laravel-ide-helper": "^2.2",
         "yajra/laravel-datatables-oracle": "^6.0",
         "semsol/arc2": "^2.3",
-        "codesleeve/laravel-stapler": "^1.0"
+        "codesleeve/laravel-stapler": "^1.0",
+        "arcanedev/no-captcha": "3.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

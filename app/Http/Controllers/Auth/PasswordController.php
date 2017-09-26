@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\ResetsPasswords;
 
 class PasswordController extends Controller
@@ -28,5 +29,23 @@ class PasswordController extends Controller
     public function __construct()
     {
         $this->middleware($this->guestMiddleware());
+    }
+    
+    protected function validateSendResetLinkEmail(Request $request)
+    {
+        $this->validate($request, [
+            'email' => 'required|email',
+            'g-recaptcha-response' => 'required|captcha'
+            ]);
+    }
+    
+    protected function getResetValidationRules()
+    {
+        return [
+            'token' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|confirmed|min:6',
+            'g-recaptcha-response' => 'required|captcha'
+        ];
     }
 }

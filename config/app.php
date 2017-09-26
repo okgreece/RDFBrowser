@@ -199,7 +199,10 @@ return [
         Yajra\Datatables\DatatablesServiceProvider::class,
         
         //stapler
-       Codesleeve\LaravelStapler\Providers\L5ServiceProvider::class,
+        Codesleeve\LaravelStapler\Providers\L5ServiceProvider::class,
+        
+        //no captcha
+        Arcanedev\NoCaptcha\NoCaptchaServiceProvider::class,
 
     ],
 
@@ -260,6 +263,9 @@ return [
         
         //ENTRUST Package
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
+        
+        //no captcha
+        'Captcha' => Arcanedev\NoCaptcha\Facades\NoCaptcha::class,
     ],
 
 ];
