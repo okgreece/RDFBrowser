@@ -21,5 +21,6 @@ class DatabaseSeeder extends Seeder
         $this->call('LabelExtractorsTableSeeder');
         $this->call('ResourceClassesTableSeeder');
        
+        $this->call(EndpointsTableSeeder::class);
     }
 }
