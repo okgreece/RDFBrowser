@@ -176,7 +176,7 @@ return [
         Vluzrmos\LanguageDetector\Providers\LanguageDetectorServiceProvider::class,
         
         //Inverse seeder
-       // Orangehill\Iseed\IseedServiceProvider::class,
+        Orangehill\Iseed\IseedServiceProvider::class,
         
         //ENTRUST package
         Zizaco\Entrust\EntrustServiceProvider::class,

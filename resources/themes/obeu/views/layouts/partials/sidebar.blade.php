@@ -19,6 +19,7 @@
         <ul class="sidebar-menu">
             <li class="header">Main Menu</li>
             <li><a  href="{{ route('endpoint.index')  }}"><i class='fa fa-database'></i><span>Endpoint</span></a></li>
+            <li><a  href="{{ route('RDFBrowser.redirect.index')  }}"><i class='fa fa-random'></i><span>Redirect</span></a></li>
             <li><a  href="{{ route('graphs.index')  }}"><i class='fa fa-upload'></i><span>Graphs</span></a></li>
             <li><a  href="{{ route('user.index')  }}"><i class='fa fa-users'></i><span>Users</span></a></li>
             <li class="treeview">

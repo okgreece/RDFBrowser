@@ -20,7 +20,7 @@ Route::get('/admin', 'AdminController@adminPanel')->name('admin');
 Route::get('/dashboard', 'AdminController@adminPanel')->name('dashboard');
 
 
-   
+    Route::resource('redirect', 'RedirectController');
     
     Route::resource('graphs', 'GraphsController', 
             array('names' => array ('create' => 'graphs.create',

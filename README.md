@@ -43,8 +43,9 @@ Go to http://yourdomain/admin. It will redirect you at the login page.
 
 Use username : admin@admin.com
         pass : admin1
-        
+
 Remember to change these settings after first login.
+You can also change the default Admin credentials by editing the related variables on the .env file. It is recommended to do so.        
 
 Then go to Endpoint section. It defaults to DBpedia SPARQL Endpoint as NON working example. You should change at least the URL of your Endpoint to reflect your configuration. 
 

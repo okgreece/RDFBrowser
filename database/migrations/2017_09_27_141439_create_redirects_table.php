@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 
-class CreateEndpointsTable extends Migration
+class CreateRedirectsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -11,14 +11,15 @@ class CreateEndpointsTable extends Migration
      * @return void
      */
     public function up()
-    {        
-        Schema::create('endpoints', function(Blueprint $table) {
+    {
+        Schema::create('redirects', function(Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-            $table->string('endpoint_url');
-            $table->boolean('local');
+            $table->string('root');
+            $table->string('type');
+            $table->boolean('enabled');
+            $table->text('html');
+            $table->text('data');
             $table->timestamps();
-            $table->softDeletes();
         });
     }
 
@@ -29,6 +30,6 @@ class CreateEndpointsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('endpoints');
+        Schema::drop('redirects');
     }
 }
