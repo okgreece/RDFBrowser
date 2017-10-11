@@ -76,7 +76,7 @@ $permission = [
 ];
 
     foreach ($permission as $key => $value) {
-        Permission::create($value);
+        Permission::firstOrCreate($value);
     }
 }
 }

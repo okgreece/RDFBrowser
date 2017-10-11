@@ -11,16 +11,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call('UsersTableSeeder');
-        $this->call('GeoExtractorsTableSeeder');
         $this->call('PermissionTableSeeder');
         $this->call('RoleTableSeeder');
+        $this->call('UsersTableSeeder');
+        $this->call('GeoExtractorsTableSeeder');
         $this->call('RdfnamespacesTableSeeder');
         $this->call('AbstractExtractorsTableSeeder');
         $this->call('ImageExtractorsTableSeeder');
         $this->call('LabelExtractorsTableSeeder');
         $this->call('ResourceClassesTableSeeder');
-       
-        $this->call(EndpointsTableSeeder::class);
+        $this->call('EndpointsTableSeeder');
     }
 }
