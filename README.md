@@ -111,3 +111,4 @@ In next update an autocomplete search bar will be added, and also pictures for c
 (YASGUI)[https://github.com/OpenTriply/YASGUI] was added as a SPARQL GUI to offer a better experience. Till now, a CORS enabled SPARQL endpoint is needed in order to work properly. To enable this follow the instructions:
 * Virtuoso :(Cross-Origin Resource Sharing (CORS) enabling a Virtuoso SPARQL Endpoint
 )[http://vos.openlinksw.com/owiki/wiki/VOS/VirtTipsAndTricksCORsEnableSPARQLURLs]
+* GraphDB : (Workbench Configuration)[http://graphdb.ontotext.com/documentation/standard/workbench-user-interface.html#id2]
