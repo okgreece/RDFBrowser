@@ -105,3 +105,9 @@ Click on any of the types. RDFBrowser will show you all the instances belong to 
 In next update an autocomplete search bar will be added, and also pictures for classes, if available.
 
 * Important: if you are updating the RDFBrowser, please run again ```php artisan migrate``` to include the latest database schema changes. 
+
+# SPARQL GUI
+
+(YASGUI)[https://github.com/OpenTriply/YASGUI] was added as a SPARQL GUI to offer a better experience. Till now, a CORS enabled SPARQL endpoint is needed in order to work properly. To enable this follow the instructions:
+* Virtuoso :(Cross-Origin Resource Sharing (CORS) enabling a Virtuoso SPARQL Endpoint
+)[http://vos.openlinksw.com/owiki/wiki/VOS/VirtTipsAndTricksCORsEnableSPARQLURLs]
