@@ -33,19 +33,25 @@ class PasswordController extends Controller
     
     protected function validateSendResetLinkEmail(Request $request)
     {
-        $this->validate($request, [
+        $validators = [
             'email' => 'required|email',
-            'g-recaptcha-response' => 'required|captcha'
-            ]);
+            ];
+        if(config('app.captcha')){
+            array_add($validators, 'g-recaptcha-response', 'required|captcha');
+        }
+        $this->validate($request, $validators);
     }
     
     protected function getResetValidationRules()
     {
-        return [
+        $validators = [
             'token' => 'required',
             'email' => 'required|email',
             'password' => 'required|confirmed|min:6',
-            'g-recaptcha-response' => 'required|captcha'
         ];
+        if(config('app.captcha')){
+            array_add($validators, 'g-recaptcha-response', 'required|captcha');
+        }
+        return $validators;
     }
 }

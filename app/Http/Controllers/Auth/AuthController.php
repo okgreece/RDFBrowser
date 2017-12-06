@@ -50,20 +50,27 @@ class AuthController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
+        $validators = [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|min:6|confirmed',
-            'g-recaptcha-response' => 'required|captcha'
-        ]);
+        ];
+        if(config('app.captcha')){
+            array_add($validators, 'g-recaptcha-response', 'required|captcha');
+        }
+        return Validator::make($data, $validators );
     }
     
     protected function validateLogin(Request $request)
     {
-        $this->validate($request, [
-            $this->loginUsername() => 'required', 'password' => 'required',
-            'g-recaptcha-response' => 'required|captcha'
-        ]);
+        $validators = [
+            $this->loginUsername() => 'required',
+            'password' => 'required'        
+        ];
+        if(config('app.captcha')){
+            array_add($validators, 'g-recaptcha-response', 'required|captcha');
+        }
+        $this->validate($request, $validators);
     }
 
     /**
