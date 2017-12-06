@@ -206,6 +206,8 @@ return [
         //no captcha
         Arcanedev\NoCaptcha\NoCaptchaServiceProvider::class,
 
+        //CORS proxy
+        //Elfo404\LaravelCORSProxy\CORSProxyServiceProvider::class,
     ],
 
     /*

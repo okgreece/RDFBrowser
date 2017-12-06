@@ -63,7 +63,7 @@ It hasn't been tested yet with nginx server but this guide could be useful :
 # E-mail 
 RDFBrowser uses e-mail to sent reset password links. Thus, in order for this to work you have to configure the mailing function. Laravel offers a large set of options. The easiest one is to use Google's SMTP servers. Thus all e-mails will be sent using your personal account or one you may create especially for your deployment. 
 
-In order to use Gmail SMTP servers go to (Gmail)[https://security.google.com/settings/security/apppasswords] and create an app password. This way you will not have to worry about giving your password or problems if you have set up 2-step verification.
+In order to use Gmail SMTP servers go to [Gmail](https://security.google.com/settings/security/apppasswords) and create an app password. This way you will not have to worry about giving your password or problems if you have set up 2-step verification.
 After you have created the APP password go to your .env file and use a similar entry as below.
 ```
 MAIL_DRIVER=smtp
@@ -105,3 +105,10 @@ Click on any of the types. RDFBrowser will show you all the instances belong to 
 In next update an autocomplete search bar will be added, and also pictures for classes, if available.
 
 * Important: if you are updating the RDFBrowser, please run again ```php artisan migrate``` to include the latest database schema changes. 
+
+# SPARQL GUI
+
+[YASGUI](https://github.com/OpenTriply/YASGUI) was added as a SPARQL GUI to offer a better experience. Till now, a CORS enabled SPARQL endpoint is needed in order to work properly. To enable this follow the instructions:
+* Virtuoso :[Cross-Origin Resource Sharing (CORS) enabling a Virtuoso SPARQL Endpoint
+](http://vos.openlinksw.com/owiki/wiki/VOS/VirtTipsAndTricksCORsEnableSPARQLURLs)
+* GraphDB : [Workbench Configuration](http://graphdb.ontotext.com/documentation/standard/workbench-user-interface.html#id2)
