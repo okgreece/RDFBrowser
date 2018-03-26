@@ -66,12 +66,14 @@ class ResourceController extends Controller {
         $page = isset(request()->page) ? (int) request()->page : 1;
         $offset = isset(request()->page) ? (($page-1) * $limit) +1 : 1;
         $query = 'SELECT distinct ?resource ?label WHERE {?resource a <'. $class->classUrl .'> .'
-                .'OPTIONAL {?resource rdfs:label ?label .}}'
+                .'OPTIONAL {?resource rdfs:label ?label .}'
+                .'FILTER(lang(?label) = "'. \App::getLocale() . '")}'
                 .'ORDER BY (?resource)'
                 .'LIMIT '. $limit
                 .'OFFSET ' . $offset;
         $query_count = 'SELECT (count(distinct *) as ?count) WHERE {?resource a <'. $class->classUrl .'> .'
-                        .'OPTIONAL {?resource rdfs:label ?label .}}';
+                        .'OPTIONAL {?resource rdfs:label ?label .}'
+                        .'FILTER(lang(?label) = "'. \App::getLocale() . '")}';
         $count = $sparql->query($query_count)[0]->count->getValue();
         //$total_pages_temp = intdiv($count,  $limit);
         //$last_page = ($count % $limit) === 0 ? $total_pages_temp : $total_pages_temp + 1;
