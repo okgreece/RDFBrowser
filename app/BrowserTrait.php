@@ -52,6 +52,7 @@ trait BrowserTrait
     
     public static function encode_iri($iri) {
         $dirname = BrowserTrait::dirname($iri);
+        //the following is needed in order to work with IRIs
         $local = mb_substr($iri, mb_strlen($dirname));
         //$local = pathinfo($iri, PATHINFO_BASENAME);
         $filename = rawurlencode($local);
