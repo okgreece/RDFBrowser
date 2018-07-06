@@ -55,7 +55,7 @@ class BrowserController extends Controller
        
     public function resources() {
         $this->setNamespaces();   
-        $resource = request()->resource;
+        $resource = rawurldecode(request()->resource);
         
         $graph = Cache::get($resource) ? : $this->cacheGraph($resource); 
         session()->put("resource", urldecode($resource));
@@ -87,7 +87,7 @@ class BrowserController extends Controller
     
     public function reverseResources() {
         $this->setNamespaces();   
-        $resource = request()->resource;
+        $resource = rawurldecode(request()->resource);
         $graph = Cache::get($resource) ? : $this->cacheGraph($resource);        
         session()->put("resource", urldecode($resource));
         $values = collect($this->getAllReverseResources($graph, urldecode($resource)));      
@@ -118,7 +118,7 @@ class BrowserController extends Controller
     
     public function literals() {
         $this->setNamespaces();   
-        $resource = request()->resource;
+        $resource = rawurldecode(request()->resource);
         $graph = Cache::get($resource) ? : $this->cacheGraph($resource);        
         session()->put("resource", urldecode($resource));
         $values = collect($this->getAllLiterals($graph, urldecode($resource)));      

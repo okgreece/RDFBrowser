@@ -15,7 +15,7 @@ class ResourceController extends Controller {
         
         $negotiator = new \Negotiation\Negotiator();
         $header = $request->header('Accept');
-        $priorities = array('application/rdf+xml', 'text/html', 'text/n3', 'application/ld+json', 'text/turtle', 'application/rdf+json', 'application/n-triples');
+        $priorities = array('application/rdf+xml', 'text/html', 'text/n3', 'text/turtle', 'application/rdf+json', 'application/n-triples');
         $mediaType = $negotiator->getBest($header, $priorities);
 
         $type = $mediaType->getValue();
@@ -137,8 +137,10 @@ class ResourceController extends Controller {
         $uri = $this->constructIRI($request, $resource);
         
         try {
-            $graph = \EasyRdf_Graph::newAndLoad($uri);
-        } catch (\EasyRdf_Http_Exception $ex) {
+            $controller = new DataController();
+            $graph = $controller->data($request, $uri, true);
+            
+        } catch (\EasyRdf_Http_Exception $ex) { 
             return response()->view('errors.noResource', [
                 'label'=> $uri,
             ], 404);
@@ -152,7 +154,7 @@ class ResourceController extends Controller {
         $images = $this->getAllImages($graph, $uri);
         $map = $this->getGEO($graph, $uri);
         return view('index', [
-            'resource' => $uri,
+            'resource' => $this->encode_iri($uri),
             'label' => $label,
             'uri' => $uri,
             'uriPart' => $resource,

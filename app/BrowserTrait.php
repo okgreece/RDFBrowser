@@ -46,7 +46,7 @@ trait BrowserTrait
             else if($route == 'page2'){
                 $path = 'ontology';
             }
-            $uri = $request->getSchemeAndHttpHost() . '/' . $path . '/' . BrowserTrait::encode_iri($resource);
+            $uri = $request->getSchemeAndHttpHost() . '/' . $path . '/' . $resource;
             return $uri;
     }
     

@@ -3,11 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Cache;
 
 class DataController extends Controller {
-    
+
     use \App\BrowserTrait;
-    
+
     private static $extensions = [
         "rdf",
         "nt",
@@ -19,51 +20,57 @@ class DataController extends Controller {
         "html"
     ];
 
-    public function data(Request $request, $resource) {
-        
+    public function data(Request $request, $resource, $internal = false) {
+
         $this->setNamespaces();
-        
+
         $endpoint = \App\Endpoint::first();
         $sparql = new \EasyRdf_Sparql_Client($endpoint->endpoint_url);
-        $path_parts = pathinfo($resource);
-        if (isset($path_parts['extension']) && in_array($path_parts['extension'], self::$extensions)) {
-            $extension = $path_parts['extension'];
-            if($path_parts['dirname'] != '.'){
-                $resource = $path_parts['dirname'] . '/' .$path_parts['filename'];
+        if (!$internal) {
+            $path_parts = pathinfo($resource);
+            if (isset($path_parts['extension']) && in_array($path_parts['extension'], self::$extensions)) {
+                $extension = $path_parts['extension'];
+                if ($path_parts['dirname'] != '.') {
+                    $resource = $path_parts['dirname'] . '/' . $path_parts['filename'];
+                } else {
+                    $resource = $path_parts['filename'];
+                }
             }
-            else{
-                $resource = $path_parts['filename'];
-            }                    
+            $uri = $this->constructIRI2($request, $resource);
         }
-        $uri = $this->constructIRI2($request, $resource);
-        
+        else{
+            $uri = $resource;
+        }
+
+
         //create queries
-        
+
         $direct_query = 'SELECT ?p ?o WHERE {<' . $uri . '> ?p ?o . }';
         $direct_result = $sparql->query($direct_query);
-        
+
         $reverse_query = 'select ?s ?p where {?s ?p <' . $uri . '> } ';
         $reverse_result = $sparql->query($reverse_query);
         $bnode_query = 'select ?bnode ?p2 ?value where {<' . $uri . '> ?p ?bnode . ?bnode ?p2 ?value .  filter isBlank(?bnode)} ';
         $bnode_result = $sparql->query($bnode_query);
 
         $graph = new \EasyRdf_Graph;
-        foreach($direct_result as $triple){
+        foreach ($direct_result as $triple) {
             $graph->add(new \EasyRdf_Resource($uri), $triple->p, $triple->o);
-            
         }
-        foreach($reverse_result as $triple){
+        foreach ($reverse_result as $triple) {
             $graph->add($triple->s, $triple->p, new \EasyRdf_Resource($uri));
-            
         }
-        foreach($bnode_result as $triple){
+        foreach ($bnode_result as $triple) {
             $graph->add($triple->bnode, $triple->p2, $triple->value);
-            
         }
 
+        if($internal){
+            Cache::put($uri, $graph, 100);
+            return $graph;
+        }
         //get the format
         if (isset($extension)) {
-            
+
             $MIME = DataController::getMime($extension);
         } else {
             $MIME = DataController::getContentType($request);
@@ -71,16 +78,16 @@ class DataController extends Controller {
 
         $format = \EasyRdf_Format::getFormat($MIME);
         //set status
-        $status = $graph->isEmpty() ? 404 : 200 ;
+        $status = $graph->isEmpty() ? 404 : 200;
         //serialize the graph
         $content = $graph->serialise($format);
         //create and send the file
         DataController::createFile($content, $MIME, $resource, $status);
         exit;
     }
-    
-    public function getMIME($extension){
-        switch ($extension){
+
+    public function getMIME($extension) {
+        switch ($extension) {
             case 'rdf':
                 $MIME = 'application/rdf+xml';
                 break;
@@ -91,7 +98,7 @@ class DataController extends Controller {
                 $MIME = 'application/n-triples';
                 break;
             case 'jsonld':
-                $MIME  = 'application/ld+json';
+                $MIME = 'application/ld+json';
                 break;
             case 'ttl':
                 $MIME = 'text/turtle';
@@ -104,8 +111,7 @@ class DataController extends Controller {
                 break;
             default:
                 $MIME = 'application/rdf+xml';
-                
-        }        
+        }
         return $MIME;
     }
 
@@ -133,11 +139,11 @@ class DataController extends Controller {
     }
 
     public function createFile($content, $MIME, $resource, $status) {
-        
+
         $length = strlen($content);
 
         $extension = \EasyRdf_Format::getFormat($MIME)->getDefaultExtension();
-        
+
         http_response_code($status);
 
         header('Connection: Keep-Alive');
@@ -147,11 +153,11 @@ class DataController extends Controller {
         header('Content-Disposition: inline; filename=' . $resource . '.' . $extension);
 
         header('Accept-Ranges: bytes');
-        
+
         header('Content-Type: ' . $MIME);
 
         header('Content-Length: ' . $length);
-        
+
         echo $content;
 
         exit;
