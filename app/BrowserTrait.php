@@ -24,16 +24,19 @@ trait BrowserTrait
     
     public static function uknownNamespace($uri){
         $tempnamespace = new \EasyRdf_Resource($uri);
-        $local = $tempnamespace->localName();
-        
+        $local = $tempnamespace->localName();        
         $namespace = mb_substr($uri, 0, -mb_strlen($local));
         $existing = \App\rdfnamespace::where('uri', '=', $namespace)->get();
-        if($existing->isEmpty()){
-            \App\rdfnamespace::create(['prefix'=>'null',
+        try{
+            if($existing->isEmpty()){
+                \App\rdfnamespace::create(['prefix'=>'null',
                                     'uri'=>$namespace,
                                     'added'=> 0
                                     ]);
-        }
+            }
+        } catch (\Exception $ex) {
+            logger($ex);
+        }        
         return $uri;
     }
     
@@ -69,6 +72,34 @@ trait BrowserTrait
             $dirname = "";
         }
         return $dirname;        
+    }
+    
+    //code taken by https://stackoverflow.com/users/1691517/timo-k%c3%a4hk%c3%b6nen on
+    //https://stackoverflow.com/questions/4451664/make-php-pathinfo-return-the-correct-filename-if-the-filename-is-utf-8
+    function mb_basename($path) {
+        $separator = " qq ";
+        $path = preg_replace("/[^ ]/u", $separator . "\$0" . $separator, $path);
+        $base = basename($path);
+        $base = str_replace($separator, "", $base);
+        return $base;
+    }
+
+    function mb_pathinfo($path, $opt = "") {
+        $separator = " qq ";
+        $path = preg_replace("/[^ ]/u", $separator . "\$0" . $separator, $path);
+        if ($opt == "")
+            $pathinfo = pathinfo($path);
+        else
+            $pathinfo = pathinfo($path, $opt);
+
+        if (is_array($pathinfo)) {
+            $pathinfo2 = $pathinfo;
+            foreach ($pathinfo2 as $key => $val) {
+                $pathinfo[$key] = str_replace($separator, "", $val);
+            }
+        } else if (is_string($pathinfo))
+            $pathinfo = str_replace($separator, "", $pathinfo);
+        return $pathinfo;
     }
     
     public static function constructIRI2($request, $resource){

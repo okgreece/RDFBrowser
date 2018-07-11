@@ -85,46 +85,6 @@ class DataController extends Controller {
         exit;
     }
 
-//    public function multibyte_pathinfo($path) {
-//        $pathinfo = [];
-//        $dirEnd = strrpos($path, '/');
-//        $dotPosition = strrpos($path, '\.');
-//        $pathinfo['basename'] = $dirEnd ? mb_substr($path, $dirEnd) : $path;
-//        $pathinfo['dirname'] = $dirEnd ? mb_substr($path, 0, $dirEnd + 1) : "";
-//        $pathinfo['extension'] = $dotPosition ? mb_substr($path, $dotPosition) : "";
-//        dd($pathinfo['extension']);
-//        $pathinfo['filename'] = $dotPosition ? mb_substr($path, $dirEnd ?: 0, $dotPosition - $dirEnd + 1) : $pathinfo['basename'];
-//        return $pathinfo;
-//    }
-//    
-    //code taken by https://stackoverflow.com/users/1691517/timo-k%c3%a4hk%c3%b6nen on
-    //https://stackoverflow.com/questions/4451664/make-php-pathinfo-return-the-correct-filename-if-the-filename-is-utf-8
-    function mb_basename($path) {
-        $separator = " qq ";
-        $path = preg_replace("/[^ ]/u", $separator . "\$0" . $separator, $path);
-        $base = basename($path);
-        $base = str_replace($separator, "", $base);
-        return $base;
-    }
-
-    function mb_pathinfo($path, $opt = "") {
-        $separator = " qq ";
-        $path = preg_replace("/[^ ]/u", $separator . "\$0" . $separator, $path);
-        if ($opt == "")
-            $pathinfo = pathinfo($path);
-        else
-            $pathinfo = pathinfo($path, $opt);
-
-        if (is_array($pathinfo)) {
-            $pathinfo2 = $pathinfo;
-            foreach ($pathinfo2 as $key => $val) {
-                $pathinfo[$key] = str_replace($separator, "", $val);
-            }
-        } else if (is_string($pathinfo))
-            $pathinfo = str_replace($separator, "", $pathinfo);
-        return $pathinfo;
-    }
-
     public function getMIME($extension) {
         switch ($extension) {
             case 'rdf':
