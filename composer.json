@@ -25,7 +25,8 @@
         "yajra/laravel-datatables-oracle": "^6.0",
         "semsol/arc2": "^2.3",
         "codesleeve/laravel-stapler": "^1.0",
-        "arcanedev/no-captcha": "3.*"
+        "arcanedev/no-captcha": "3.*",
+        "benestar/asparagus": "^0.4.2"
     },
     "require-dev": {
         "tymon/jwt-auth": "^0.5.9",
