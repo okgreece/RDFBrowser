@@ -5,6 +5,7 @@
  * and open the template in the editor.
  */
 ?>
+@if(env("CAPTCHA_ENABLED"))
 <div class="form-group{{ $errors->has('g-recaptcha-response') ? ' has-error' : '' }}">
     <div class="col-md-6 col-md-offset-4">
         {!! Captcha::display() !!}
@@ -16,3 +17,4 @@
     </div>                                
 </div>  
 {!! Captcha::script() !!}
+@endif
