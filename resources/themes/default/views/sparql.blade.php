@@ -18,7 +18,7 @@
             //Uncomment below to change the default endpoint
             //Note: If you've already opened the YASGUI page before, you should first clear your
             //local-storage cache before you will see the changes taking effect
-            yasqe: {sparql: {endpoint: '{{env("DEFAULT_ENDPOINT")}}'}},
+            yasqe: {sparql: {endpoint: '{{env("DEFAULT_ENDPOINT")}}', reqMethod: 'GET'}},
         });
     </script>
     {{--@include('endpoint.sparql_form')--}}
