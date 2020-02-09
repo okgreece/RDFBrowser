@@ -125,6 +125,7 @@ Route::get('browse/{id}', 'ResourceController@browse')->name('browse');
 Route::get('/sparql', 'EndpointController@sparql')->name('sparql');
 
 Route::get('/proxy/{name}/{path}', 'ProxyController@proxy')->name('proxy');
+Route::post('/proxy/{name}/{path}', 'ProxyController@proxy')->name('proxy');
 
 Route::get('/sparql2', 'EndpointController@sparql2')->name('sparql2');
 
