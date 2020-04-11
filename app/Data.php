@@ -18,7 +18,7 @@ class Data
         $this->endpoint = \App\Endpoint::first()->endpoint_url;
         $this->directQuery = $this->getDirectQuery();
         $this->reverseQuery = $this->getReverseQuery();
-        $this->bnodeQuery = $this->getBnodeQuery();
+    //    $this->bnodeQuery = $this->getBnodeQuery();
         $this->graph = $this->setGraph();
     }
     
@@ -52,7 +52,7 @@ class Data
     
     private function getDirectQuery(){
         
-        
+
         $sparql = new \EasyRdf_Sparql_Client($this->endpoint);
         $query = new QueryBuilder();
         $query->select("?p", "?o")
@@ -91,9 +91,9 @@ class Data
         foreach ($this->reverseQuery as $triple) {
             $graph->add($triple->s, $triple->p, new \EasyRdf_Resource($this->uri));
         }
-        foreach ($this->bnodeQuery as $triple) {
-            $graph->add($triple->bnode, $triple->p2, $triple->value);
-        }
+//        foreach ($this->bnodeQuery as $triple) {
+//            $graph->add($triple->bnode, $triple->p2, $triple->value);
+//        }
 
         Cache::put($this->uri, $graph, 100);
         

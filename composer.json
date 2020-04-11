@@ -26,7 +26,8 @@
         "semsol/arc2": "^2.3",
         "codesleeve/laravel-stapler": "^1.0",
         "arcanedev/no-captcha": "3.*",
-        "benestar/asparagus": "^0.4.2"
+        "benestar/asparagus": "^0.4.2",
+        "guzzlehttp/guzzle": "^6.5"
     },
     "require-dev": {
         "tymon/jwt-auth": "^0.5.9",

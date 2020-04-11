@@ -49,6 +49,8 @@ Route::get('/dashboard', 'AdminController@adminPanel')->name('dashboard');
                                     'edit' => 'endpoint.edit',
                                     'destroy' => 'endpoint.destroy')));
 
+    Route::resource('proxy', 'ProxyController');
+
     Route::resource('rdfnamespace', 'rdfnamespaceController', 
             array('names' => array ('create' => 'rdfnamespace.create',
                                     'show' => 'rdfnamespace.show',
@@ -121,6 +123,9 @@ Route::group(['middleware' => ['web']], function () {
 Route::get('browse/{id}', 'ResourceController@browse')->name('browse');
 
 Route::get('/sparql', 'EndpointController@sparql')->name('sparql');
+
+Route::get('/proxy/{name}/{path}', 'ProxyController@proxy')->name('proxy');
+Route::post('/proxy/{name}/{path}', 'ProxyController@proxy')->name('proxy');
 
 Route::get('/sparql2', 'EndpointController@sparql2')->name('sparql2');
 
